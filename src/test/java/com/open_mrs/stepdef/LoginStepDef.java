@@ -7,7 +7,7 @@ import io.cucumber.java.en.*;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
-public class LoginStepDef {
+public class LoginStepDef {   // HICHAM BRANCH
 
     WebDriver driver = DriverHelper.getDriver();
     LoginPage loginpage = new LoginPage(driver);
