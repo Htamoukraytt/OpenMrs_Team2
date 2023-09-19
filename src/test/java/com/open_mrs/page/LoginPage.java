@@ -13,6 +13,19 @@ import java.time.Duration;
 
 public class LoginPage {
 
+
+    // HICHAM BRANCH
+ /*
+     THIS IS MY BRANCH PLEAS DO NOT TOUCH
+     THANK YOU
+
+
+
+  */
+
+
+
+
   // Cons
     public LoginPage(WebDriver driver) {
         PageFactory.initElements(driver,this);
