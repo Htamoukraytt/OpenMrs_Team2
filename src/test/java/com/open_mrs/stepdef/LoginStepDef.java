@@ -9,8 +9,10 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginStepDef {
 
+    // mustapha
     WebDriver driver = DriverHelper.getDriver();
     LoginPage loginpage = new LoginPage(driver);
+
 
 
     @Given("user navigates to the application")
