@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginStepDef {
 
-    // mustapha ha
+    // mustapha hal
     WebDriver driver = DriverHelper.getDriver();
     LoginPage loginpage = new LoginPage(driver);
 
