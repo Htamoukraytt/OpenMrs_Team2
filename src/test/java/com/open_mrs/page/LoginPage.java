@@ -24,8 +24,6 @@ public class LoginPage {
   */
 
 
-
-
   // Cons
     public LoginPage(WebDriver driver) {
         PageFactory.initElements(driver,this);

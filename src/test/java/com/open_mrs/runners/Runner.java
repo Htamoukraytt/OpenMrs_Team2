@@ -9,10 +9,10 @@ import org.junit.runner.RunWith;
 
         features ="/Users/htamoukraytt/IdeaProjects/OPEN-MRS/src/test/resources/Ui_festures",
         glue = "com/open_mrs/stepdef",
-        dryRun = true,
-        tags ="Regression",
+        dryRun = false,
+        //tags ="Regression",
+       // plugin = {"pretty","html:target/uiReport.html","rerun:target/uiFailedTests.txt","json:target/cucumber-reports/cucumber.json"}
         plugin = {"pretty","html:target/uiReport.html","rerun:target/uiFailedTests.txt","json:target/cucumber-reports/cucumber.json"}
-
 )
 
 public class Runner {

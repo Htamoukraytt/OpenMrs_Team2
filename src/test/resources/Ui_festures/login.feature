@@ -1,5 +1,4 @@
 
-@Smoke @Regression
 Feature: TESTING LOGIN FUNCTIONALITY
 
 
