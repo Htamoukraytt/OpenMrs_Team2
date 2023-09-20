@@ -28,6 +28,11 @@ public class LoginStepDef {
         loginpage.loginLocation(location);
     }
 
+    @When("user chooses the Laboratory location")
+    public void user_chooses_the_laboratory_location() {
+    loginpage.chooseLaboratoryLocation();
+    }
+
     @When("user clicks Login")
     public void user_clicks_login() {
         loginpage.clickLogin();
