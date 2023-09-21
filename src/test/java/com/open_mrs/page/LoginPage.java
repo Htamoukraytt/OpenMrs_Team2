@@ -76,6 +76,9 @@ public class LoginPage {
                Assert.assertTrue(false); break;
        }
    }
+   public void chooseLaboratoryLocation(){
+         LaboratoryOption.click();
+   }
 
    public void clickLogin(){
        LogInButton.click();
