@@ -62,7 +62,7 @@ public class RegisterPatientPage {
     @FindBy(xpath = "//div[@class='logo']")
     WebElement homePage;
 
-    //elements:
+            //  vivian elements:
     @FindBy(xpath = "//input[@type='checkbox']")
     private WebElement undefinedPatientBox;
     @FindBy(xpath = "//select[@name='gender']")
@@ -131,7 +131,6 @@ public class RegisterPatientPage {
 
     }
 
-
    // method for phone number
 
     public void insertPhoneNumber(String phoneNumber1) throws InterruptedException {
@@ -140,19 +139,17 @@ public class RegisterPatientPage {
     }
 
 
-    // method click confirm
+     // method click confirm
     public void clickConfirm() throws InterruptedException {
          confirmButton.click();
          Thread.sleep(500);
     }
 
 
-
                      // VIVIAN methods:
     public void checkUndefinedPatientBox(){
         undefinedPatientBox.click();
     }
-
     public void validatePatientName(String firstName, String lastName){
         Assert.assertEquals(firstName,BrowsersUtils.getText(givenName));
         Assert.assertEquals(lastName, BrowsersUtils.getText(familyName1)); // unknown
