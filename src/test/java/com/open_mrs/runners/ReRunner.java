@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
 
         features = "/Users/htamoukraytt/IdeaProjects/OPEN-MRS/src/test/resources/Ui_festures",
-        glue = "com.open_mrs.stepdef",
+        glue = "com/open_mrs/stepdef",
         dryRun = false,
         plugin = {"pretty","html:target/uiReport.html","rerun:target/uiFailedTests.txt","json:target/cucumber-reports/cucumber.json"}
 

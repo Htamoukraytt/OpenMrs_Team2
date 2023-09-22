@@ -1,5 +1,6 @@
 package com.open_mrs.stepdef;
 
+import com.open_mrs.page.HomePage;
 import com.open_mrs.page.LoginPage;
 import com.utils.ConfigReader;
 import com.utils.DriverHelper;
@@ -9,8 +10,22 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginStepDef {
 
+
+    // HICHAM BRANCH
+ /*
+     THIS IS MY BRANCH PLEAS DO NOT TOUCH
+     THANK YOU
+
+
+
+  */
+
+
+
     WebDriver driver = DriverHelper.getDriver();
     LoginPage loginpage = new LoginPage(driver);
+
+
 
 
     @Given("user navigates to the application")
@@ -52,4 +67,6 @@ public class LoginStepDef {
     public void userValidatesTheLoginWasNotSuccessfullyInvalidUsernamePasswordPleaseTryAgain(String errorMessage) {
         Assert.assertEquals(errorMessage,loginpage.validateNegativeLogin(driver));
     }
+
+
 }

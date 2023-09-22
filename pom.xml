@@ -70,7 +70,7 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <projectName>OpenMRS-Cucumber-Report</projectName>
+                            <projectName>OPEN-MRS-Cucumber-Report</projectName>
                             <skip>false</skip>
                             <outputDirectory>reports/html-reports</outputDirectory>
                             <inputDirectory>target/cucumber-reports</inputDirectory>
