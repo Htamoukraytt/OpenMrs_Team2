@@ -6,6 +6,7 @@ import com.open_mrs.page.RegisterPatientPage;
 import com.utils.DriverHelper;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 
 public class RegisterStepDef {
@@ -53,8 +54,19 @@ public class RegisterStepDef {
     @And("user clicks confirm")
     public void userClicksConfirm() throws InterruptedException {
         register.clickConfirm();
-
     }
 
 
+    // vivian's Snippets
+
+    @When("user checks the Unidentified patient box")
+    public void user_checks_the_unidentified_patient_box() {
+        register.checkUndefinedPatientBox();
+    }
+
+    // updated
+    @Then("user validates patients firstName and lastName are both UNKNOWN , {string} , {string}")
+    public void userValidatesPatientsFirstNameAndLastNameAreBothUNKNOWNUNKNOWNUNKNOWN(String expectedName , String expectedLastName) {
+       register.validatePatientName(expectedName,expectedLastName);
+    }
 }

@@ -1,5 +1,7 @@
 package com.open_mrs.page;
 
+import com.utils.BrowsersUtils;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -56,14 +58,28 @@ public class RegisterPatientPage {
     @FindBy(xpath = "//div[@class='float-sm-right']//span")
     WebElement customerID;
 
-
-
      // Home Page
     @FindBy(xpath = "//div[@class='logo']")
     WebElement homePage;
 
+    //elements:
+    @FindBy(xpath = "//input[@type='checkbox']")
+    private WebElement undefinedPatientBox;
+    @FindBy(xpath = "//select[@name='gender']")
+    private  WebElement genderOptions;
+//    @FindBy(css = "#next-button")        DUPLICATED
+//    private WebElement nextButton;
+//    @FindBy(css = "#submit")             DUPLICATED
+//    private WebElement confirmButton;
+    @FindBy(css = ".PersonName-givenName")
+    private  WebElement givenName;
+     @FindBy(css = ".PersonName-familyName")
+    private WebElement familyName1;
 
 
+
+
+           // HICHAM'S METHOD
 
     // method for name and familyName
     public void insertFullName(String givenName , String lastName){
@@ -72,12 +88,10 @@ public class RegisterPatientPage {
     }
 
 
-
     // method for next button
     public void clickNext(){
         nextButton.click();
     }
-
 
 
     // insert Gender
@@ -89,7 +103,6 @@ public class RegisterPatientPage {
             default:
                 System.out.println("wrong gender !"); break;
         }
-
         Thread.sleep(500);
     }
 
@@ -132,4 +145,17 @@ public class RegisterPatientPage {
          confirmButton.click();
          Thread.sleep(500);
     }
+
+
+
+                     // VIVIAN methods:
+    public void checkUndefinedPatientBox(){
+        undefinedPatientBox.click();
+    }
+
+    public void validatePatientName(String firstName, String lastName){
+        Assert.assertEquals(firstName,BrowsersUtils.getText(givenName));
+        Assert.assertEquals(lastName, BrowsersUtils.getText(familyName1)); // unknown
+    }
+
 }
