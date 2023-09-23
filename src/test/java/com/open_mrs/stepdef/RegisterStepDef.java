@@ -69,4 +69,9 @@ public class RegisterStepDef {
     public void userValidatesPatientsFirstNameAndLastNameAreBothUNKNOWNUNKNOWNUNKNOWN(String expectedName , String expectedLastName) {
        register.validatePatientName(expectedName,expectedLastName);
     }
+
+    @Then("user validate expected error message , {string} , {string}")
+    public void userValidateExpectedErrorMessage(String expectedErrorForGivenName , String expectedErrorForFamilyName) {
+        register.validateErrorMessage(expectedErrorForGivenName,expectedErrorForFamilyName);
+    }
 }

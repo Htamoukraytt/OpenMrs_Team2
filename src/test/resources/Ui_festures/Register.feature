@@ -61,4 +61,10 @@ Feature:  Testing Register a patient functionality and UNKNOWN patient
 
 
 
+    Scenario: negative Testing of  registering a patient with missing required info
 
+      And  user provides correct info   givenName, '       ', FamilyName  , '       ',
+   # bug fields for given name and family  can take anything as input (numbers symbols )
+      And  user clicks next
+
+      Then user validate expected error message , 'Required' , 'Required'

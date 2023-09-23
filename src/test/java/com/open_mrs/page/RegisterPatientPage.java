@@ -62,6 +62,13 @@ public class RegisterPatientPage {
     @FindBy(xpath = "//div[@class='logo']")
     WebElement homePage;
 
+    @FindBy(xpath = "//input[@name='givenName']/following-sibling::*/following-sibling::*")
+    WebElement errorMessageForGivenName;
+
+    @FindBy(xpath = "//input[@name='familyName']/following-sibling::*/following-sibling::*")
+    WebElement errorMessageForFamilyName;
+
+
             //  vivian elements:
     @FindBy(xpath = "//input[@type='checkbox']")
     private WebElement undefinedPatientBox;
@@ -144,6 +151,14 @@ public class RegisterPatientPage {
          confirmButton.click();
          Thread.sleep(500);
     }
+
+    // validating negative scenario ( required filed )
+
+     public void validateErrorMessage(String expectedErrorForGiven , String expectedErrorForFamily){
+        Assert.assertEquals(expectedErrorForGiven,BrowsersUtils.getText(errorMessageForGivenName));
+        Assert.assertEquals(expectedErrorForFamily,BrowsersUtils.getText(errorMessageForFamilyName));
+
+     }
 
 
                      // VIVIAN methods:
