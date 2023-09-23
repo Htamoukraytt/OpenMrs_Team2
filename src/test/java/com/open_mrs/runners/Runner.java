@@ -6,13 +6,14 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features ="/Users/htamoukraytt/IdeaProjects/OPEN-MRS/src/test/resources/Ui_festures",
+        features ="src/test/resources/Ui_festures",
         glue = "com/open_mrs/stepdef",
         dryRun = false,
-        //tags ="Regression",
+       tags ="@smoke",
 
         plugin = {"pretty","html:target/uiReport.html","rerun:target/uiFailedTests.txt","json:target/cucumber-reports/cucumber.json"}
 )
+
 
 public class Runner {
 

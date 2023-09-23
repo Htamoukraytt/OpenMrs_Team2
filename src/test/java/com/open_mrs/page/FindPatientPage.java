@@ -66,13 +66,22 @@ public class FindPatientPage {
 
 
 
-
-
        return      BrowsersUtils.getText(idResult);  // returning the actual message
-
 
     }
 
+
+    // sabina's methods
+    public void searchForPatient(String id){
+        patient_search.sendKeys(id);
+    }
+
+
+    public String validateTheId() throws InterruptedException {
+        Thread.sleep(500);
+
+        return BrowsersUtils.getText(idResult);
+    }
 
 
 }

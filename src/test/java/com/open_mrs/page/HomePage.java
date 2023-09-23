@@ -14,7 +14,7 @@ public class HomePage {
     }
 
 
-    @FindBy(xpath ="(//a[@type='button'][1]")
+    @FindBy(xpath ="//i[@class='icon-search']")
     WebElement  FindPatientRecord;
 
     @FindBy(xpath ="//a[@type='button'][2]")
