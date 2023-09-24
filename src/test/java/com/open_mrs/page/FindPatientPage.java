@@ -42,9 +42,6 @@ public class FindPatientPage {
 
 
 
-
-
-
     // METHOD TO VALIDATE THAT THE USER IS UNIQUE AFTER WE REGISTER SUCCESSFULLY
 
     public String validateIdIsUnique(WebDriver driver) throws InterruptedException {
