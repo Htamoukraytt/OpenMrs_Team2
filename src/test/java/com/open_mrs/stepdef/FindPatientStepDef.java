@@ -5,6 +5,7 @@ import com.open_mrs.page.HomePage;
 import com.open_mrs.page.LoginPage;
 import com.open_mrs.page.RegisterPatientPage;
 import com.utils.DriverHelper;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -25,13 +26,8 @@ public class FindPatientStepDef {
     }
 
 
-
-
-
-
-
-
-
-
-
+    @And("user searches for {string}")
+    public void userSearchesForUNKNOWN(String idOrName) {
+        find.searchForPatient(idOrName);
+    }
 }

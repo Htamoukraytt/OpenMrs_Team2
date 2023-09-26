@@ -3,27 +3,24 @@
 
 Feature:  Testing Visit functionality for Unidentified Patient
 
-  Background: navigates register patient
+#  Background: navigates register patient
 
-    Given user navigates to the application
-
-    When  user provides correct credentials
-
-    And   user chooses the location 'Laboratory'
-
-    And   user clicks Login
-
-    And  user chooses from home features 'Register a patient'
 
     Scenario: Validation of Start visit and add Past visit functionalities
 
-    Then user clicks on 'Unidentified Patient' checkbox
+      Given user navigates to the application
 
-    And user select Gender and clicks Next and 'Confirm'
+      When  user provides correct credentials
 
-    And user clicks 'Start visit' and 'Confirm'
+      And   user chooses the location 'Laboratory'
 
-   Then user validates 'show contact info' button is visible and available
+      And   user clicks Login
+
+      And  user chooses from home features 'Find Patient Record'
+
+      And  user searches for '100MMW'
+
+      Then user validates 'show contact info' button is visible and available
 
       And user validates 'Merge to another patient' button is visible and available
 
@@ -45,7 +42,7 @@ Feature:  Testing Visit functionality for Unidentified Patient
 
       Then user clicks on Given name of patient
 
-      And clicks 'End Visit'
+      And user clicks 'End Visit' button
 
 
 
