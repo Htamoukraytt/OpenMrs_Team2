@@ -6,7 +6,6 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-
         features ="src/test/resources/Ui_festures",
         glue = "com/open_mrs/stepdef",
         dryRun = false,

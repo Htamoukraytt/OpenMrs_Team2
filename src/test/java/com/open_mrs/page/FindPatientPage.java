@@ -32,7 +32,6 @@ public class FindPatientPage {
     WebElement patient_search;
 
 
-
     @FindBy(xpath = "//div[@class='dataTables_info']")
     WebElement idResult;
 
@@ -80,5 +79,11 @@ public class FindPatientPage {
         return BrowsersUtils.getText(idResult);
     }
 
+
+    // ulan method
+
+    public void searchForPatient(String nameOrId){
+       patient_search.sendKeys(nameOrId,Keys.ENTER);
+    }
 
 }
