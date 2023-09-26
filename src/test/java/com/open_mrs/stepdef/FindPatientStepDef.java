@@ -25,9 +25,20 @@ public class FindPatientStepDef {
         Assert.assertTrue(find.validateIdIsUnique(driver).contains(expectedMessage));
     }
 
+    // sabina's step
+    @And("user provides the id {string}")
+    public void userProvidesTheId(String id ) {
+        find.searchForPatient(id);
 
     @And("user searches for {string}")
     public void userSearchesForUNKNOWN(String idOrName) {
         find.searchForPatient(idOrName);
+
+    }
+
+    @Then("user validates the id is unique , {string}")
+    public void userValidatesTheIdIsUniqueShowingTo(String expectedMessage) throws InterruptedException {
+        Assert.assertTrue(find.validateTheId().contains(expectedMessage));
+
     }
 }

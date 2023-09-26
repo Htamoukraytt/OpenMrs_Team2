@@ -41,9 +41,6 @@ public class FindPatientPage {
 
 
 
-
-
-
     // METHOD TO VALIDATE THAT THE USER IS UNIQUE AFTER WE REGISTER SUCCESSFULLY
 
     public String validateIdIsUnique(WebDriver driver) throws InterruptedException {
@@ -69,6 +66,18 @@ public class FindPatientPage {
 
     }
 
+
+    // sabina's methods
+    public void searchForPatient(String id){
+        patient_search.sendKeys(id);
+    }
+
+
+    public String validateTheId() throws InterruptedException {
+        Thread.sleep(500);
+
+        return BrowsersUtils.getText(idResult);
+    }
 
 
     // ulan method
