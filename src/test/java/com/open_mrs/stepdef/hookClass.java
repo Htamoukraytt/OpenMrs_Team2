@@ -22,7 +22,7 @@ public class hookClass {
       @After
     public void tearDown(Scenario scenario){
          BrowsersUtils.getScreenShotWithCucumber(driver,scenario);
-          //driver.quit();
+          driver.quit();
       }
 
 
