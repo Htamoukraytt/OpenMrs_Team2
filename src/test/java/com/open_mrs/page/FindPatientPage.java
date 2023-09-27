@@ -82,14 +82,12 @@ public class FindPatientPage {
 
     // ulan method
 
-    public void searchForPatient(String nameOrId){
+    public void searchForPatientAndEnter(String nameOrId){
        patient_search.sendKeys(nameOrId,Keys.ENTER);
     }
 
     // ulan method
 
-    public void searchForPatient(String nameOrId){
-       patient_search.sendKeys(nameOrId,Keys.ENTER);
-    }
+
 
 }

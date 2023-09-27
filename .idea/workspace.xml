@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4ee06ab6-c811-455d-92b2-de692df66472" name="Changes" comment="ulan branch 1">
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/open_mrs/page/FindPatientPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/open_mrs/page/FindPatientPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/open_mrs/page/PatientPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/open_mrs/page/PatientPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/open_mrs/page/VisitPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/open_mrs/page/VisitPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/open_mrs/stepdef/FindPatientStepDef.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/open_mrs/stepdef/FindPatientStepDef.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/open_mrs/stepdef/RegisterStepDef.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/open_mrs/stepdef/RegisterStepDef.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/open_mrs/stepdef/VisitStepDef.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/open_mrs/stepdef/VisitStepDef.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/Ui_festures/Visit.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/Ui_festures/Visit.feature" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2VlGdA98CMbTeoGKERyFQXC3qfR" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
+  }
+}]]></component>
+  <component name="RunManager" selected="Cucumber Java.Scenario: Validation of Start visit and add Past visit functionalities">
+    <configuration name="Scenario: Search Bar Functionality for Open MRS website" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+      <option name="CUCUMBER_CORE_VERSION" value="5" />
+      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/Ui_festures/findPatient2.feature" />
+      <option name="GLUE" value="com.open_mrs.stepdef" />
+      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
+      <module name="OPEN-MRS" />
+      <option name="NAME_FILTER" value="^Search Bar Functionality for Open MRS website$" />
+      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Search Bar Functionality for Open MRS website$&quot;" />
+      <option name="SUGGESTED_NAME" value="Scenario: Search Bar Functionality for Open MRS website" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.cucumber.core.cli.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Scenario: Validation of Start visit and add Past visit functionalities" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+      <option name="CUCUMBER_CORE_VERSION" value="5" />
+      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/Ui_festures/Visit.feature" />
+      <option name="GLUE" value="com.open_mrs.stepdef" />
+      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
+      <module name="OPEN-MRS" />
+      <option name="NAME_FILTER" value="^Validation of Start visit and add Past visit functionalities$" />
+      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Validation of Start visit and add Past visit functionalities$&quot;" />
+      <option name="SUGGESTED_NAME" value="Scenario: Validation of Start visit and add Past visit functionalities" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.cucumber.core.cli.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Runner" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="OPEN-MRS" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.open_mrs.runners.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.open_mrs.runners" />
+      <option name="MAIN_CLASS_NAME" value="com.open_mrs.runners.Runner" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Cucumber Java.Scenario: Validation of Start visit and add Past visit functionalities" />
+        <item itemvalue="JUnit.Runner" />
+        <item itemvalue="Cucumber Java.Scenario: Search Bar Functionality for Open MRS website" />
+        <item itemvalue="JUnit.Runner" />
+        <item itemvalue="Cucumber Java.Scenario: Validation of Start visit and add Past visit functionalities" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4ee06ab6-c811-455d-92b2-de692df66472" name="Changes" comment="" />
+      <created>1695403337968</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1695403337968</updated>
+    </task>
+    <task id="LOCAL-00001" summary="ulan branch">
+      <created>1695412796619</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1695412796619</updated>
+    </task>
+    <task id="LOCAL-00002" summary="ulan branch 1">
+      <created>1695491537225</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1695491537225</updated>
+    </task>
+    <task id="LOCAL-00003" summary="ulan branch 1">
+      <created>1695688954087</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1695688954087</updated>
+    </task>
+    <task id="LOCAL-00004" summary="ulan branch 1">
+      <created>1695761883390</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1695761883390</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="ulan branch" />
+    <MESSAGE value="ulan branch 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="ulan branch 1" />
+  </component>
+</project>

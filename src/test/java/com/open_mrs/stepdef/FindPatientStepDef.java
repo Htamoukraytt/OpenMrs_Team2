@@ -28,11 +28,11 @@ public class FindPatientStepDef {
     // sabina's step
     @And("user provides the id {string}")
     public void userProvidesTheId(String id ) {
-        find.searchForPatient(id);
+        find.searchForPatient(id);}
 
     @And("user searches for {string}")
     public void userSearchesForUNKNOWN(String idOrName) {
-        find.searchForPatient(idOrName);
+        find.searchForPatientAndEnter(idOrName);
 
     }
 

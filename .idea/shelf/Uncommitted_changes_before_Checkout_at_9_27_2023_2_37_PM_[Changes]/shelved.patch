@@ -1,0 +1,139 @@
+Index: src/test/java/com/open_mrs/page/PatientPage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.open_mrs.page;\r\n\r\nimport org.openqa.selenium.WebDriver;\r\nimport org.openqa.selenium.WebElement;\r\nimport org.openqa.selenium.support.FindBy;\r\nimport org.openqa.selenium.support.PageFactory;\r\n\r\npublic class PatientPage {\r\n\r\n    public PatientPage(WebDriver driver){\r\n        PageFactory.initElements(driver,this);\r\n    }\r\n\r\n    @FindBy(xpath = \"//div[contains(text(),' Start Visit')]\")\r\n    WebElement startVisitButton;\r\n\r\n    @FindBy(xpath = \"//button[@id='start-visit-with-visittype-confirm']\")\r\n    WebElement confirmButton;\r\n\r\n<<<<<<< HEAD\r\n    @FindBy(xpath = \"//div[contains(text(),'End Visit')]\")\r\n    WebElement endVisitButton;\r\n\r\n    @FindBy(xpath = \"//div[@id='end-visit-dialog']//button[contains(text(),'Yes')]\")\r\n    WebElement YesButton;\r\n\r\n=======\r\n>>>>>>> origin/ulan_branch\r\n\r\n\r\n    public void setStartVisit(){\r\n        startVisitButton.click();\r\n        confirmButton.click();\r\n    }\r\n\r\n\r\n<<<<<<< HEAD\r\npublic void setEndVisitButton(){\r\n        endVisitButton.click();\r\n        YesButton.click();\r\n}\r\n=======\r\n\r\n>>>>>>> origin/ulan_branch\r\n\r\n\r\n\r\n\r\n\r\n\r\n}\r\n
+===================================================================
+diff --git a/src/test/java/com/open_mrs/page/PatientPage.java b/src/test/java/com/open_mrs/page/PatientPage.java
+--- a/src/test/java/com/open_mrs/page/PatientPage.java	
++++ b/src/test/java/com/open_mrs/page/PatientPage.java	
+@@ -17,15 +17,14 @@
+     @FindBy(xpath = "//button[@id='start-visit-with-visittype-confirm']")
+     WebElement confirmButton;
+ 
+-<<<<<<< HEAD
++
+     @FindBy(xpath = "//div[contains(text(),'End Visit')]")
+     WebElement endVisitButton;
+ 
+     @FindBy(xpath = "//div[@id='end-visit-dialog']//button[contains(text(),'Yes')]")
+     WebElement YesButton;
+ 
+-=======
+->>>>>>> origin/ulan_branch
++
+ 
+ 
+     public void setStartVisit(){
+@@ -34,15 +33,11 @@
+     }
+ 
+ 
+-<<<<<<< HEAD
++
+ public void setEndVisitButton(){
+         endVisitButton.click();
+         YesButton.click();
+ }
+-=======
+-
+->>>>>>> origin/ulan_branch
+-
+ 
+ 
+ 
+Index: src/test/java/com/open_mrs/page/VisitPage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.open_mrs.page;\r\n\r\nimport org.junit.Assert;\r\nimport org.openqa.selenium.WebDriver;\r\nimport org.openqa.selenium.WebElement;\r\nimport org.openqa.selenium.support.FindBy;\r\nimport org.openqa.selenium.support.PageFactory;\r\n\r\npublic class VisitPage {\r\n\r\n    public VisitPage(WebDriver driver){\r\n        PageFactory.initElements(driver,this);\r\n    }\r\n\r\n    @FindBy(xpath = \"//span[@id='coreapps-showContactInfo']\")\r\n    WebElement contactInfo;\r\n\r\n    @FindBy(xpath = \"//input[@id='merge-button']\")\r\n    WebElement MergeIntoAnotherPatient;\r\n\r\n    @FindBy(xpath = \"//span[contains(text(),' Actions ')]\")\r\n    WebElement Actions;\r\n\r\n    @FindBy(xpath = \"//a[@class='button task activelist'][1]\")\r\n    WebElement endVisit;\r\n\r\n    @FindBy(xpath = \"//a[@class='button task activelist'][2]\")\r\n    WebElement visitNote;\r\n\r\n    @FindBy(xpath = \"//a[@class='button task activelist'][3]\")\r\n    WebElement  admitToInpatient;\r\n\r\n    @FindBy(xpath = \"//a[@class='button task activelist'][4]\")\r\n    WebElement   captureVitals;\r\n\r\n    @FindBy(xpath = \"//a[@class='button task activelist'][5]\")\r\n    WebElement   attachments;\r\n\r\n    @FindBy(xpath = \"//a[contains(text(),'Add Past Visit')]\")\r\n    WebElement addPastVisit;\r\n\r\n    @FindBy(xpath = \"//span[@id='retrospectiveVisitStartDate-wrapper']//span[@class='add-on']//i[@class='icon-calendar small']\")\r\n    WebElement calenderIcon;\r\n\r\n    @FindBy(xpath = \"/html/body/div[2]/div[3]/table/thead/tr[1]/th[2]\")\r\n    WebElement september;\r\n\r\n    @FindBy(xpath = \"/html/body/div[2]/div[3]/table/tbody/tr[4]/td[7]\")\r\n    WebElement dayOfMonth;\r\n\r\n    //or second //div[2]//div[3]//table//tbody//tr//td[contains(text(),'23')]\r\n\r\n<<<<<<< HEAD\r\n    @FindBy(xpath = \"//div[@class='dialog-content form']//button[@class='confirm right']\")\r\n    WebElement continueButtonCalendar;\r\n\r\n    @FindBy(xpath = \"//span[@class='PersonName-givenName']\")\r\n    WebElement firstName;\r\n\r\n=======\r\n>>>>>>> origin/ulan_branch\r\n\r\n    public void validateButtons(){\r\n\r\n        Assert.assertTrue(contactInfo.isDisplayed()&& contactInfo.isEnabled());\r\n        Assert.assertTrue(MergeIntoAnotherPatient.isDisplayed()&& MergeIntoAnotherPatient.isEnabled());\r\n        Assert.assertTrue(Actions.isDisplayed()&& Actions.isEnabled());\r\n        Assert.assertTrue(endVisit.isDisplayed()&& endVisit.isEnabled());\r\n        Assert.assertTrue(visitNote.isDisplayed()&& visitNote.isEnabled());\r\n        Assert.assertTrue(admitToInpatient.isDisplayed()&& admitToInpatient.isEnabled());\r\n        Assert.assertTrue(captureVitals.isDisplayed()&& captureVitals.isEnabled());\r\n        Assert.assertTrue(attachments.isDisplayed()&& attachments.isEnabled());\r\n\r\n    }\r\n\r\n    public void setAddPastVisit(){\r\n        Actions.click();\r\n        addPastVisit.click();\r\n    }\r\n\r\n\r\n    public void setCalender(){\r\n        calenderIcon.click();\r\n        String month = \"September\";\r\n        String day = \"23\";\r\n\r\n        while (true){\r\n            september.getText();\r\n            if (september.equals(month)){\r\n                september.click();\r\n                break;\r\n            }\r\n        }\r\n\r\n        while(true){\r\n            dayOfMonth.getText();\r\n            if (dayOfMonth.equals(day)){\r\n                dayOfMonth.click();\r\n                break;\r\n            }\r\n        }\r\n<<<<<<< HEAD\r\n        continueButtonCalendar.click();\r\n\r\n    }\r\n\r\npublic void go_to_patient_page(){\r\n        firstName.click();\r\n}\r\n\r\n=======\r\n\r\n    }\r\n\r\n>>>>>>> origin/ulan_branch\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n}\r\n
+===================================================================
+diff --git a/src/test/java/com/open_mrs/page/VisitPage.java b/src/test/java/com/open_mrs/page/VisitPage.java
+--- a/src/test/java/com/open_mrs/page/VisitPage.java	
++++ b/src/test/java/com/open_mrs/page/VisitPage.java	
+@@ -1,5 +1,4 @@
+ package com.open_mrs.page;
+-
+ import org.junit.Assert;
+ import org.openqa.selenium.WebDriver;
+ import org.openqa.selenium.WebElement;
+@@ -50,15 +49,14 @@
+ 
+     //or second //div[2]//div[3]//table//tbody//tr//td[contains(text(),'23')]
+ 
+-<<<<<<< HEAD
++
+     @FindBy(xpath = "//div[@class='dialog-content form']//button[@class='confirm right']")
+     WebElement continueButtonCalendar;
+ 
+     @FindBy(xpath = "//span[@class='PersonName-givenName']")
+     WebElement firstName;
+ 
+-=======
+->>>>>>> origin/ulan_branch
++
+ 
+     public void validateButtons(){
+ 
+@@ -99,7 +97,7 @@
+                 break;
+             }
+         }
+-<<<<<<< HEAD
++
+         continueButtonCalendar.click();
+ 
+     }
+@@ -108,11 +106,10 @@
+         firstName.click();
+ }
+ 
+-=======
+ 
+     }
+ 
+->>>>>>> origin/ulan_branch
++
+ 
+ 
+ 
+@@ -122,4 +119,4 @@
+ 
+ 
+ 
+-}
++
+Index: src/test/java/com/open_mrs/stepdef/VisitStepDef.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.open_mrs.stepdef;\r\n\r\nimport com.open_mrs.page.LoginPage;\r\nimport com.open_mrs.page.PatientPage;\r\nimport com.open_mrs.page.VisitPage;\r\nimport com.utils.DriverHelper;\r\nimport org.openqa.selenium.WebDriver;\r\n\r\npublic class VisitStepDef {\r\n\r\n\r\n    WebDriver driver = DriverHelper.getDriver();\r\nLoginPage logIn= new LoginPage(driver);\r\nPatientPage patientPage= new PatientPage(driver);\r\nVisitPage visitPage= new VisitPage(driver);\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n}\r\n
+===================================================================
+diff --git a/src/test/java/com/open_mrs/stepdef/VisitStepDef.java b/src/test/java/com/open_mrs/stepdef/VisitStepDef.java
+--- a/src/test/java/com/open_mrs/stepdef/VisitStepDef.java	
++++ b/src/test/java/com/open_mrs/stepdef/VisitStepDef.java	
+@@ -1,9 +1,12 @@
+ package com.open_mrs.stepdef;
+ 
++import com.open_mrs.page.FindPatientPage;
+ import com.open_mrs.page.LoginPage;
+ import com.open_mrs.page.PatientPage;
+ import com.open_mrs.page.VisitPage;
+ import com.utils.DriverHelper;
++import io.cucumber.java.en.Then;
++import org.junit.Assert;
+ import org.openqa.selenium.WebDriver;
+ 
+ public class VisitStepDef {
+@@ -14,9 +17,14 @@
+ PatientPage patientPage= new PatientPage(driver);
+ VisitPage visitPage= new VisitPage(driver);
+ 
++ FindPatientPage find=new FindPatientPage(driver);
+ 
+ 
+ 
++    @Then("user validates the id is unique , {string}")
++    public void userValidatesTheIdIsUniqueShowingTo(String expectedMessage) throws InterruptedException {
++        Assert.assertTrue(find.validateTheId().contains(expectedMessage));
++    }
+ 
+ 
+ 
