@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-
+                     // for windows users please use content root ..
         features = "/Users/htamoukraytt/IdeaProjects/OPEN-MRS/src/test/resources/Ui_festures",
         glue = "com/open_mrs/stepdef",
         dryRun = false,
