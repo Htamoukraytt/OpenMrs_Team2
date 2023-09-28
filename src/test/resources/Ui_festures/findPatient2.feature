@@ -1,6 +1,6 @@
 Feature: Testing the search functionality of the website
 
-  @smoke
+
   Scenario: Search Bar Functionality for Open MRS website
 
     Given user navigates to the application

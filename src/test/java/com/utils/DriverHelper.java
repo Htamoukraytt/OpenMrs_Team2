@@ -28,8 +28,8 @@ public class DriverHelper {
     public static WebDriver getDriver(){
         if(driver==null || ((RemoteWebDriver)driver).getSessionId()==null){
            // String browser="chrome"; // **
-
-            switch (ConfigReader.readProperty("browser")){
+               String  browser= System.getProperty("browser","chrome");
+            switch (browser){
 
                 case "chrome":
                     WebDriverManager.chromedriver().setup();

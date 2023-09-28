@@ -6,7 +6,7 @@ import com.open_mrs.page.LoginPage;
 import com.open_mrs.page.RegisterPatientPage;
 import com.utils.DriverHelper;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Then;
+import io.cucumber.java.en.*;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
@@ -25,14 +25,15 @@ public class FindPatientStepDef {
         Assert.assertTrue(find.validateIdIsUnique(driver).contains(expectedMessage));
     }
 
-    // sabina's step
+   //  sabina's step
     @And("user provides the id {string}")
     public void userProvidesTheId(String id ) {
         find.searchForPatient(id);
+    }
 
     @And("user searches for {string}")
     public void userSearchesForUNKNOWN(String idOrName) {
-        find.searchForPatient(idOrName);
+        find.searchForPatientAndClickEnter(idOrName);
 
     }
 

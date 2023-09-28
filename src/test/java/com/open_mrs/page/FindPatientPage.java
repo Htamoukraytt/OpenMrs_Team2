@@ -81,8 +81,7 @@ public class FindPatientPage {
 
 
     // ulan method
-
-    public void searchForPatient(String nameOrId){
+    public void searchForPatientAndClickEnter(String nameOrId){
        patient_search.sendKeys(nameOrId,Keys.ENTER);
     }
 
