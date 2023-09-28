@@ -1,0 +1,43 @@
+Index: src/test/java/com/open_mrs/stepdef/FindPatientStepDef.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.open_mrs.stepdef;\r\n\r\nimport com.open_mrs.page.FindPatientPage;\r\nimport com.open_mrs.page.HomePage;\r\nimport com.open_mrs.page.LoginPage;\r\nimport com.open_mrs.page.RegisterPatientPage;\r\nimport com.utils.DriverHelper;\r\nimport io.cucumber.java.en.And;\r\nimport io.cucumber.java.en.Then;\r\nimport org.junit.Assert;\r\nimport org.openqa.selenium.WebDriver;\r\n\r\npublic class FindPatientStepDef {\r\n\r\n    WebDriver driver = DriverHelper.getDriver();\r\n    LoginPage loginpage = new LoginPage(driver);\r\n    HomePage homePage = new HomePage(driver);\r\n    RegisterPatientPage register = new RegisterPatientPage(driver);\r\n\r\n    FindPatientPage find=new FindPatientPage(driver);\r\n\r\n\r\n    @Then(\"user clicks homepage , find patient , search for id and validates the id is unique , {string}\")\r\n    public void userClicksHomepageFindPatientSearchForIdAndValidatesTheIdIsUnique(String expectedMessage) throws InterruptedException {\r\n        Assert.assertTrue(find.validateIdIsUnique(driver).contains(expectedMessage));\r\n    }\r\n\r\n    // sabina's step\r\n    @And(\"user provides the id {string}\")\r\n    public void userProvidesTheId(String id ) {\r\n        find.searchForPatient(id);\r\n\r\n    @And(\"user searches for {string}\")\r\n    public void userSearchesForUNKNOWN(String idOrName) {\r\n        find.searchForPatient(idOrName);\r\n\r\n    }\r\n\r\n    @Then(\"user validates the id is unique , {string}\")\r\n    public void userValidatesTheIdIsUniqueShowingTo(String expectedMessage) throws InterruptedException {\r\n        Assert.assertTrue(find.validateTheId().contains(expectedMessage));\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/open_mrs/stepdef/FindPatientStepDef.java b/src/test/java/com/open_mrs/stepdef/FindPatientStepDef.java
+--- a/src/test/java/com/open_mrs/stepdef/FindPatientStepDef.java	
++++ b/src/test/java/com/open_mrs/stepdef/FindPatientStepDef.java	
+@@ -28,11 +28,11 @@
+     // sabina's step
+     @And("user provides the id {string}")
+     public void userProvidesTheId(String id ) {
+-        find.searchForPatient(id);
++        find.searchForPatient(id);}
+ 
+     @And("user searches for {string}")
+     public void userSearchesForUNKNOWN(String idOrName) {
+-        find.searchForPatient(idOrName);
++        find.searchForPatientAndEnter(idOrName);
+ 
+     }
+ 
+Index: src/test/java/com/open_mrs/page/FindPatientPage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.open_mrs.page;\r\n\r\nimport com.utils.BrowsersUtils;\r\nimport org.openqa.selenium.Keys;\r\nimport org.openqa.selenium.WebDriver;\r\nimport org.openqa.selenium.WebElement;\r\nimport org.openqa.selenium.support.FindBy;\r\nimport org.openqa.selenium.support.PageFactory;\r\nimport org.openqa.selenium.support.ui.ExpectedConditions;\r\nimport org.openqa.selenium.support.ui.WebDriverWait;\r\n\r\nimport java.time.Duration;\r\n\r\npublic class FindPatientPage {\r\n\r\n    // constructor\r\n    public FindPatientPage(WebDriver driver) {\r\n        PageFactory.initElements(driver,this);\r\n    }\r\n\r\n    // elements from Register page\r\n    @FindBy(xpath = \"//div[@class='float-sm-right']//span\")\r\n    WebElement customerID;\r\n\r\n    @FindBy(xpath = \"//div[@class='logo']\")\r\n    WebElement homePage;\r\n    @FindBy(xpath =\"//a[@type='button'][1]\")\r\n    WebElement  FindPatientRecord;\r\n\r\n    // elements for this page\r\n    @FindBy(xpath =\"//input[@id='patient-search']\")\r\n    WebElement patient_search;\r\n\r\n\r\n    @FindBy(xpath = \"//div[@class='dataTables_info']\")\r\n    WebElement idResult;\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n    // METHOD TO VALIDATE THAT THE USER IS UNIQUE AFTER WE REGISTER SUCCESSFULLY\r\n\r\n    public String validateIdIsUnique(WebDriver driver) throws InterruptedException {\r\n        // storing id\r\n        String id= BrowsersUtils.getText(customerID);\r\n\r\n        homePage.click();     // going to home page\r\n        Thread.sleep(500);\r\n\r\n        FindPatientRecord.click();   // clicking this feature to look up our id we stored\r\n        Thread.sleep(500);\r\n\r\n\r\n         patient_search.sendKeys(id);   // used our stored id\r\n\r\n\r\n        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(20));  // waiting for result how many id\r\n        wait.until(ExpectedConditions.visibilityOf(idResult));\r\n\r\n\r\n\r\n       return      BrowsersUtils.getText(idResult);  // returning the actual message\r\n\r\n    }\r\n\r\n\r\n    // sabina's methods\r\n    public void searchForPatient(String id){\r\n        patient_search.sendKeys(id);\r\n    }\r\n\r\n\r\n    public String validateTheId() throws InterruptedException {\r\n        Thread.sleep(500);\r\n\r\n        return BrowsersUtils.getText(idResult);\r\n    }\r\n\r\n\r\n    // ulan method\r\n\r\n    public void searchForPatient(String nameOrId){\r\n       patient_search.sendKeys(nameOrId,Keys.ENTER);\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/open_mrs/page/FindPatientPage.java b/src/test/java/com/open_mrs/page/FindPatientPage.java
+--- a/src/test/java/com/open_mrs/page/FindPatientPage.java	
++++ b/src/test/java/com/open_mrs/page/FindPatientPage.java	
+@@ -82,7 +82,7 @@
+ 
+     // ulan method
+ 
+-    public void searchForPatient(String nameOrId){
++    public void searchForPatientAndEnter(String nameOrId){
+        patient_search.sendKeys(nameOrId,Keys.ENTER);
+     }
+ 

@@ -1,0 +1,15 @@
+Index: src/test/resources/Ui_festures/findPatient2.feature
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>Feature: Testing the search functionality of the website\r\n\r\n  @smoke\r\n  Scenario: Search Bar Functionality for Open MRS website\r\n\r\n    Given user navigates to the application\r\n\r\n    When  user provides correct credentials\r\n\r\n    And   user chooses the location 'Laboratory'\r\n\r\n    And   user clicks Login\r\n\r\n    And  user chooses from home features 'Find Patient Record'\r\n\r\n    And  user provides the id '100MMW'\r\n\r\n    Then user validates the id is unique , 'Showing 1 to 1'\r\n\r\n\r\n\r\n\r\n\r\n
+===================================================================
+diff --git a/src/test/resources/Ui_festures/findPatient2.feature b/src/test/resources/Ui_festures/findPatient2.feature
+--- a/src/test/resources/Ui_festures/findPatient2.feature	
++++ b/src/test/resources/Ui_festures/findPatient2.feature	
+@@ -1,6 +1,5 @@
+ Feature: Testing the search functionality of the website
+ 
+-  @smoke
+   Scenario: Search Bar Functionality for Open MRS website
+ 
+     Given user navigates to the application
