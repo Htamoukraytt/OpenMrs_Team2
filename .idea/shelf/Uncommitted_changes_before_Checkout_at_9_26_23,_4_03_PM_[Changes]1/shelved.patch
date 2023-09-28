@@ -1,0 +1,1395 @@
+Index: src/test/java/com/open_mrs/stepdef/FindPatientStepDef.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.open_mrs.stepdef;\n\nimport com.open_mrs.page.FindPatientPage;\nimport com.open_mrs.page.HomePage;\nimport com.open_mrs.page.LoginPage;\nimport com.open_mrs.page.RegisterPatientPage;\nimport com.utils.DriverHelper;\nimport io.cucumber.java.en.And;\nimport io.cucumber.java.en.Then;\nimport org.junit.Assert;\nimport org.openqa.selenium.WebDriver;\n\npublic class FindPatientStepDef {\n\n    WebDriver driver = DriverHelper.getDriver();\n    LoginPage loginpage = new LoginPage(driver);\n    HomePage homePage = new HomePage(driver);\n    RegisterPatientPage register = new RegisterPatientPage(driver);\n\n    FindPatientPage find=new FindPatientPage(driver);\n\n\n    @Then(\"user clicks homepage , find patient , search for id and validates the id is unique , {string}\")\n    public void userClicksHomepageFindPatientSearchForIdAndValidatesTheIdIsUnique(String expectedMessage) throws InterruptedException {\n        Assert.assertTrue(find.validateIdIsUnique(driver).contains(expectedMessage));\n    }\n\n    // sabina's step\n    @And(\"user provides the id {string}\")\n    public void userProvidesTheId(String id ) {\n        find.searchForPatient(id);\n\n    @And(\"user searches for {string}\")\n    public void userSearchesForUNKNOWN(String idOrName) {\n        find.searchForPatient(idOrName);\n\n    }\n\n    @Then(\"user validates the id is unique , {string}\")\n    public void userValidatesTheIdIsUniqueShowingTo(String expectedMessage) throws InterruptedException {\n        Assert.assertTrue(find.validateTheId().contains(expectedMessage));\n\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/open_mrs/stepdef/FindPatientStepDef.java b/src/test/java/com/open_mrs/stepdef/FindPatientStepDef.java
+--- a/src/test/java/com/open_mrs/stepdef/FindPatientStepDef.java	
++++ b/src/test/java/com/open_mrs/stepdef/FindPatientStepDef.java	
+@@ -26,19 +26,19 @@
+     }
+ 
+     // sabina's step
+-    @And("user provides the id {string}")
+-    public void userProvidesTheId(String id ) {
+-        find.searchForPatient(id);
+-
+-    @And("user searches for {string}")
+-    public void userSearchesForUNKNOWN(String idOrName) {
+-        find.searchForPatient(idOrName);
+-
+-    }
+-
+-    @Then("user validates the id is unique , {string}")
+-    public void userValidatesTheIdIsUniqueShowingTo(String expectedMessage) throws InterruptedException {
+-        Assert.assertTrue(find.validateTheId().contains(expectedMessage));
+-
+-    }
++//    @And("user provides the id {string}")
++//    public void userProvidesTheId(String id ) throws InterruptedException {
++//        find.searchForPatient(id);
++//
++//    @And("user searches for {string}")
++//    public void userSearchesForUNKNOWN(String idOrName) {
++//        find.searchForPatient(idOrName);
++//
++//    }
++//
++//    @Then("user validates the id is unique , {string}")
++//    public void userValidatesTheIdIsUniqueShowingTo(String expectedMessage) throws InterruptedException {
++//        Assert.assertTrue(find.validateTheId().contains(expectedMessage));
++//
++//    }
+ }
+Index: src/test/java/com/open_mrs/runners/Runner.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.open_mrs.runners;\n\nimport io.cucumber.junit.Cucumber;\nimport io.cucumber.junit.CucumberOptions;\nimport org.junit.runner.RunWith;\n\n@RunWith(Cucumber.class)\n@CucumberOptions(\n        features =\"src/test/resources/Ui_festures\",\n        glue = \"com/open_mrs/stepdef\",\n        dryRun = false,\n        tags =\"Regression\",\n        plugin = {\"pretty\",\"html:target/uiReport.html\",\"rerun:target/uiFailedTests.txt\",\"json:target/cucumber-reports/cucumber.json\"}\n)\n\n\npublic class Runner {\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/open_mrs/runners/Runner.java b/src/test/java/com/open_mrs/runners/Runner.java
+--- a/src/test/java/com/open_mrs/runners/Runner.java	
++++ b/src/test/java/com/open_mrs/runners/Runner.java	
+@@ -6,10 +6,10 @@
+ 
+ @RunWith(Cucumber.class)
+ @CucumberOptions(
+-        features ="src/test/resources/Ui_festures",
++        features ="/Users/htamoukraytt/IdeaProjects/OPEN-MRS/src/test/resources/Ui_festures",
+         glue = "com/open_mrs/stepdef",
+         dryRun = false,
+-        tags ="Regression",
++       // tags =
+         plugin = {"pretty","html:target/uiReport.html","rerun:target/uiFailedTests.txt","json:target/cucumber-reports/cucumber.json"}
+ )
+ 
+Index: src/test/java/com/utils/DriverHelper.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.utils;\n\nimport io.github.bonigarcia.wdm.WebDriverManager;\nimport org.openqa.selenium.WebDriver;\nimport org.openqa.selenium.chrome.ChromeDriver;\nimport org.openqa.selenium.edge.EdgeDriver;\nimport org.openqa.selenium.firefox.FirefoxDriver;\nimport org.openqa.selenium.remote.RemoteWebDriver;\nimport org.openqa.selenium.safari.SafariDriver;\n\nimport java.time.Duration;\n\npublic class DriverHelper {\n\n\n    // encapsulation\n    // special room ...  private room ( no body to see )\n    // nobody can create object from it and manipulate\n    private static WebDriver driver ;\n\n    private  DriverHelper(){  // made the constructor private ==> nobody can create an object\n        // and manipulate my driver from this class\n    }\n\n\n    //-\n    // Method\n    public static WebDriver getDriver(){\n        if(driver==null || ((RemoteWebDriver)driver).getSessionId()==null){\n           // String browser=\"chrome\"; // **\n\n            switch (ConfigReader.readProperty(\"browser\")){\n\n                case \"chrome\":\n                    WebDriverManager.chromedriver().setup();\n                    driver=new ChromeDriver();\n                    break;\n                case \"firefox\":\n                    WebDriverManager.firefoxdriver().setup();\n                    driver=new FirefoxDriver();\n                    break;\n                case \"edge\":\n                    WebDriverManager.edgedriver().setup();\n                    driver=new EdgeDriver();\n                    break;\n                case \"safari\":\n                    WebDriverManager.safaridriver().setup();\n                    driver=new SafariDriver();\n                    break;\n            }\n\n            driver.manage().window().maximize();\n            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));\n            // driver.manage().deleteAllCookies();   // clearing data starts fresh its under suite\n        }\n\n        return  driver;\n    }\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/utils/DriverHelper.java b/src/test/java/com/utils/DriverHelper.java
+--- a/src/test/java/com/utils/DriverHelper.java	
++++ b/src/test/java/com/utils/DriverHelper.java	
+@@ -16,7 +16,7 @@
+     // encapsulation
+     // special room ...  private room ( no body to see )
+     // nobody can create object from it and manipulate
+-    private static WebDriver driver ;
++    private static WebDriver driver ;      // static so we will have one driver only
+ 
+     private  DriverHelper(){  // made the constructor private ==> nobody can create an object
+         // and manipulate my driver from this class
+@@ -71,5 +71,4 @@
+ 
+ 
+ 
+-
+ }
+Index: reports/html-reports/cucumber-html-reports/overview-steps.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html>\r\n<head>\r\n\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\r\n\r\n<script src=\"js/jquery.min.js\"></script>\r\n<script src=\"js/jquery.tablesorter.min.js\"></script>\r\n<script src=\"js/Chart.min.js\"></script>\r\n<script src=\"js/moment.min.js\"></script>\r\n<script src=\"js/bootstrap.min.js\"></script>\r\n\r\n<link rel=\"stylesheet\" href=\"css/bootstrap.min.css\" type=\"text/css\"/>\r\n<link rel=\"stylesheet\" href=\"css/cucumber.css\" type=\"text/css\"/>\r\n<link rel=\"stylesheet\" href=\"css/font-awesome.min.css\"/>\r\n<link rel=\"shortcut icon\" href=\"images/favicon.png\"/>\r\n\r\n<script>\r\n$(document).ready(function() {\r\n    // this will tell tablesorter to try looking for the data-value attribute\r\n    // if present, it'll sort by that instead\r\n    // otherwise, it'll sort by the text content of the table cell\r\n    $(\"#tablesorter\").tablesorter({\r\n        textAttribute: 'data-value',\r\n        // ignores the first row of the header, the 'scenario', 'steps', since\r\n        // sorting those doesn't make sense\r\n        selectorHeaders: '> thead tr:not(.dont-sort) th',\r\n        // use a stable sort\r\n        sortStable: true\r\n    });\r\n});\r\n</script>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n<title>Cucumber Reports (no 1) - Steps Overview</title>\r\n\r\n</head>\r\n<body>\r\n\r\n<nav class=\"navbar navbar-default navbar-fixed-top\" id=\"navigation\">\r\n  <div class=\"container-fluid\">\r\n    <div class=\"collapse navbar-collapse\">\r\n      <p class=\"navbar-text navbar-left\">Cucumber Report</p>\r\n      <ul class=\"nav navbar-nav navbar-right\">\r\n        <li role=\"presentation\" ><a href=\"overview-features.html\">Features</a></li>\r\n        <li role=\"presentation\" ><a href=\"overview-tags.html\">Tags</a></li>\r\n        <li role=\"presentation\"     class=\"active\" ><a href=\"overview-steps.html\">Steps</a></li>\r\n        <li role=\"presentation\" ><a href=\"overview-failures.html\">Failures</a></li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</nav>\r\n\r\n\r\n<div class=\"container-fluid\">\r\n  <div class=\"col-md-5 col-md-offset-1\">\r\n\r\n<table class=\"table table-bordered\" id=\"build-info\">\r\n  <thead>\r\n    <tr>\r\n      <th>Project</th>\r\n        <th>Number</th>\r\n      <th>Date</th>\r\n    </tr>\r\n  </thead>\r\n  <tbody>\r\n    <tr class=\"info\">\r\n      <td>OPEN-MRS-Cucumber-Report</td>\r\n        <td>1</td>\r\n      <td>21 Sep 2023, 20:40</td>\r\n    </tr>\r\n  </tbody>\r\n</table>\r\n\r\n  </div>\r\n  <div class=\"col-md-3 col-md-offset-2\">\r\n  </div>\r\n</div>\r\n\r\n\r\n<div id=\"report-lead\" class=\"container-fluid\">\r\n  <div class=\"col-md-10 col-md-offset-1\">\r\n    <h2>Steps Statistics</h2>\r\n      <p>The following graph shows step statistics for this build. Below list is based on results.\r\n step does not provide information about result then is not listed below.\r\n Additionally @Before and @After are not counted because they are part of the scenarios, not steps.</p>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"container-fluid\" id=\"report\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-10 col-md-offset-1\">\r\n      <table id=\"tablesorter\" class=\"stats-table table-hover\">\r\n\r\n        <thead>\r\n          <tr class=\"header\">\r\n            <th>Implementation</th>\r\n            <th>Occurrences</th>\r\n            <th>Average duration</th>\r\n            <th>Max duration</th>\r\n            <th>Total durations</th>\r\n            <th>Ratio</th>\r\n          </tr>\r\n        </thead>\r\n\r\n        <tbody>\r\n            <tr>\r\n              <td class=\"location\">com.open_mrs.stepdef.FindPatientStepDef.userClicksHomepageFindPatientSearchForIdAndValidatesTheIdIsUnique(java.lang.String)</td>\r\n              <td>1</td>\r\n              <td class=\"duration\" data-value=\"2910205000\">2.910</td>\r\n              <td class=\"duration\" data-value=\"2910205000\">2.910</td>\r\n              <td class=\"duration\" data-value=\"2910205000\">2.910</td>\r\n              <td class=\"passed\">100.00%</td>\r\n            </tr>\r\n            <tr>\r\n              <td class=\"location\">com.open_mrs.stepdef.HomePageStepDef.userChoosesFromHomeFeaturesRegisterAPatient(java.lang.String)</td>\r\n              <td>2</td>\r\n              <td class=\"duration\" data-value=\"1542139000\">1.542</td>\r\n              <td class=\"duration\" data-value=\"1542139000\">1.582</td>\r\n              <td class=\"duration\" data-value=\"3084278000\">3.084</td>\r\n              <td class=\"passed\">100.00%</td>\r\n            </tr>\r\n            <tr>\r\n              <td class=\"location\">com.open_mrs.stepdef.LoginStepDef.userChoosesTheLocationLocation(java.lang.String)</td>\r\n              <td>14</td>\r\n              <td class=\"duration\" data-value=\"26174214\">0.026</td>\r\n              <td class=\"duration\" data-value=\"26174214\">0.029</td>\r\n              <td class=\"duration\" data-value=\"366439000\">0.366</td>\r\n              <td class=\"passed\">100.00%</td>\r\n            </tr>\r\n            <tr>\r\n              <td class=\"location\">com.open_mrs.stepdef.LoginStepDef.userNavigatesToTheApplication()</td>\r\n              <td>14</td>\r\n              <td class=\"duration\" data-value=\"788417500\">0.788</td>\r\n              <td class=\"duration\" data-value=\"788417500\">1.038</td>\r\n              <td class=\"duration\" data-value=\"11037845000\">11.037</td>\r\n              <td class=\"passed\">100.00%</td>\r\n            </tr>\r\n            <tr>\r\n              <td class=\"location\">com.open_mrs.stepdef.LoginStepDef.userProvidesWrongCredentialsUserNamePassword(java.lang.String,java.lang.String)</td>\r\n              <td>6</td>\r\n              <td class=\"duration\" data-value=\"131369166\">0.131</td>\r\n              <td class=\"duration\" data-value=\"131369166\">0.144</td>\r\n              <td class=\"duration\" data-value=\"788215000\">0.788</td>\r\n              <td class=\"passed\">100.00%</td>\r\n            </tr>\r\n            <tr>\r\n              <td class=\"location\">com.open_mrs.stepdef.LoginStepDef.userValidatesTheLoginWasNotSuccessfullyInvalidUsernamePasswordPleaseTryAgain(java.lang.String)</td>\r\n              <td>6</td>\r\n              <td class=\"duration\" data-value=\"35525500\">0.035</td>\r\n              <td class=\"duration\" data-value=\"35525500\">0.071</td>\r\n              <td class=\"duration\" data-value=\"213153000\">0.213</td>\r\n              <td class=\"passed\">100.00%</td>\r\n            </tr>\r\n            <tr>\r\n              <td class=\"location\">com.open_mrs.stepdef.LoginStepDef.user_clicks_login()</td>\r\n              <td>14</td>\r\n              <td class=\"duration\" data-value=\"355783500\">0.355</td>\r\n              <td class=\"duration\" data-value=\"355783500\">0.515</td>\r\n              <td class=\"duration\" data-value=\"4980969000\">4.980</td>\r\n              <td class=\"passed\">100.00%</td>\r\n            </tr>\r\n            <tr>\r\n              <td class=\"location\">com.open_mrs.stepdef.LoginStepDef.user_provides_correct_credentials()</td>\r\n              <td>8</td>\r\n              <td class=\"duration\" data-value=\"145683125\">0.145</td>\r\n              <td class=\"duration\" data-value=\"145683125\">0.159</td>\r\n              <td class=\"duration\" data-value=\"1165465000\">1.165</td>\r\n              <td class=\"passed\">100.00%</td>\r\n            </tr>\r\n            <tr>\r\n              <td class=\"location\">com.open_mrs.stepdef.LoginStepDef.user_validates_login_was_successfully(java.lang.String)</td>\r\n              <td>6</td>\r\n              <td class=\"duration\" data-value=\"33554833\">0.033</td>\r\n              <td class=\"duration\" data-value=\"33554833\">0.036</td>\r\n              <td class=\"duration\" data-value=\"201329000\">0.201</td>\r\n              <td class=\"passed\">100.00%</td>\r\n            </tr>\r\n            <tr>\r\n              <td class=\"location\">com.open_mrs.stepdef.RegisterStepDef.userChoosesGenderMaleOrFemaleM(java.lang.String)</td>\r\n              <td>2</td>\r\n              <td class=\"duration\" data-value=\"524206000\">0.524</td>\r\n              <td class=\"duration\" data-value=\"524206000\">0.524</td>\r\n              <td class=\"duration\" data-value=\"1048412000\">1.048</td>\r\n              <td class=\"passed\">100.00%</td>\r\n            </tr>\r\n            <tr>\r\n              <td class=\"location\">com.open_mrs.stepdef.RegisterStepDef.userClicksConfirm()</td>\r\n              <td>2</td>\r\n              <td class=\"duration\" data-value=\"545381500\">0.545</td>\r\n              <td class=\"duration\" data-value=\"545381500\">0.557</td>\r\n              <td class=\"duration\" data-value=\"1090763000\">1.090</td>\r\n              <td class=\"passed\">100.00%</td>\r\n            </tr>\r\n            <tr>\r\n              <td class=\"location\">com.open_mrs.stepdef.RegisterStepDef.userClicksNext()</td>\r\n              <td>7</td>\r\n              <td class=\"duration\" data-value=\"36753428\">0.036</td>\r\n              <td class=\"duration\" data-value=\"36753428\">0.052</td>\r\n              <td class=\"duration\" data-value=\"257274000\">0.257</td>\r\n              <td class=\"passed\">100.00%</td>\r\n            </tr>\r\n            <tr>\r\n              <td class=\"location\">com.open_mrs.stepdef.RegisterStepDef.userProvidesAddressStreetAddressCityIlUsa(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)</td>\r\n              <td>1</td>\r\n              <td class=\"duration\" data-value=\"677521000\">0.677</td>\r\n              <td class=\"duration\" data-value=\"677521000\">0.677</td>\r\n              <td class=\"duration\" data-value=\"677521000\">0.677</td>\r\n              <td class=\"passed\">100.00%</td>\r\n            </tr>\r\n            <tr>\r\n              <td class=\"location\">com.open_mrs.stepdef.RegisterStepDef.userProvidesBirthDateMay(java.lang.String,java.lang.String,java.lang.String)</td>\r\n              <td>1</td>\r\n              <td class=\"duration\" data-value=\"599045000\">0.599</td>\r\n              <td class=\"duration\" data-value=\"599045000\">0.599</td>\r\n              <td class=\"duration\" data-value=\"599045000\">0.599</td>\r\n              <td class=\"passed\">100.00%</td>\r\n            </tr>\r\n            <tr>\r\n              <td class=\"location\">com.open_mrs.stepdef.RegisterStepDef.userProvidesCorrectInfoGivenNameFamilyName(java.lang.String,java.lang.String)</td>\r\n              <td>1</td>\r\n              <td class=\"duration\" data-value=\"60180000\">0.060</td>\r\n              <td class=\"duration\" data-value=\"60180000\">0.060</td>\r\n              <td class=\"duration\" data-value=\"60180000\">0.060</td>\r\n              <td class=\"passed\">100.00%</td>\r\n            </tr>\r\n            <tr>\r\n              <td class=\"location\">com.open_mrs.stepdef.RegisterStepDef.userProvidesPhoneNumber(java.lang.String)</td>\r\n              <td>1</td>\r\n              <td class=\"duration\" data-value=\"540811000\">0.540</td>\r\n              <td class=\"duration\" data-value=\"540811000\">0.540</td>\r\n              <td class=\"duration\" data-value=\"540811000\">0.540</td>\r\n              <td class=\"passed\">100.00%</td>\r\n            </tr>\r\n            <tr>\r\n              <td class=\"location\">com.open_mrs.stepdef.RegisterStepDef.userValidatesPatientsFirstNameAndLastNameAreBothUNKNOWNUNKNOWNUNKNOWN(java.lang.String,java.lang.String)</td>\r\n              <td>1</td>\r\n              <td class=\"duration\" data-value=\"1933740000\">1.933</td>\r\n              <td class=\"duration\" data-value=\"1933740000\">1.933</td>\r\n              <td class=\"duration\" data-value=\"1933740000\">1.933</td>\r\n              <td class=\"passed\">100.00%</td>\r\n            </tr>\r\n            <tr>\r\n              <td class=\"location\">com.open_mrs.stepdef.RegisterStepDef.user_checks_the_unidentified_patient_box()</td>\r\n              <td>1</td>\r\n              <td class=\"duration\" data-value=\"44732000\">0.044</td>\r\n              <td class=\"duration\" data-value=\"44732000\">0.044</td>\r\n              <td class=\"duration\" data-value=\"44732000\">0.044</td>\r\n              <td class=\"passed\">100.00%</td>\r\n            </tr>\r\n            <tr>\r\n              <td class=\"location\">com.open_mrs.stepdef.hookClass.setup()</td>\r\n              <td>14</td>\r\n              <td class=\"duration\" data-value=\"1275537857\">1.275</td>\r\n              <td class=\"duration\" data-value=\"1275537857\">1.805</td>\r\n              <td class=\"duration\" data-value=\"17857530000\">17.857</td>\r\n              <td class=\"passed\">100.00%</td>\r\n            </tr>\r\n            <tr>\r\n              <td class=\"location\">com.open_mrs.stepdef.hookClass.tearDown(io.cucumber.java.Scenario)</td>\r\n              <td>14</td>\r\n              <td class=\"duration\" data-value=\"109660785\">0.109</td>\r\n              <td class=\"duration\" data-value=\"109660785\">0.129</td>\r\n              <td class=\"duration\" data-value=\"1535251000\">1.535</td>\r\n              <td class=\"passed\">100.00%</td>\r\n            </tr>\r\n        </tbody>\r\n\r\n        <tfoot class=\"total\">\r\n          <tr>\r\n            <td>20</td>\r\n            <td>116</td>\r\n            <td class=\"duration\">0.434</td>\r\n            <td class=\"duration\">17.857</td>\r\n            <td class=\"duration\">50.393</td>\r\n            <td>Totals</td>\r\n          </tr>\r\n        </tfoot>\r\n\r\n      </table>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n<nav class=\"navbar navbar-default\" id=\"footer\">\r\n  <div class=\"container-fluid\">\r\n    <p class=\"navbar-text navbar-right\">\r\n        <small>generate Cucumber HTML reports via:&nbsp;</small>\r\n        <a class=\"navbar-link\" href=\"https://github.com/jenkinsci/cucumber-reports-plugin\">Jenkins Plugin</a> |\r\n        <a class=\"navbar-link\" href=\"https://github.com/damianszczepanik/cucumber-reporting\">Standalone</a> |\r\n        <a class=\"navbar-link\" href=\"https://github.com/damianszczepanik/cucumber-sandwich\">Sandwich</a> |\r\n        <a class=\"navbar-link\" href=\"https://github.com/damianszczepanik/maven-cucumber-reporting\">Maven</a>\r\n        &nbsp;&nbsp;\r\n    </p>\r\n  </div>\r\n</nav>\r\n\r\n</body>\r\n</html>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/reports/html-reports/cucumber-html-reports/overview-steps.html b/reports/html-reports/cucumber-html-reports/overview-steps.html
+--- a/reports/html-reports/cucumber-html-reports/overview-steps.html	
++++ b/reports/html-reports/cucumber-html-reports/overview-steps.html	
+@@ -76,7 +76,7 @@
+     <tr class="info">
+       <td>OPEN-MRS-Cucumber-Report</td>
+         <td>1</td>
+-      <td>21 Sep 2023, 20:40</td>
++      <td>26 Sep 2023, 14:51</td>
+     </tr>
+   </tbody>
+ </table>
+@@ -116,172 +116,180 @@
+             <tr>
+               <td class="location">com.open_mrs.stepdef.FindPatientStepDef.userClicksHomepageFindPatientSearchForIdAndValidatesTheIdIsUnique(java.lang.String)</td>
+               <td>1</td>
+-              <td class="duration" data-value="2910205000">2.910</td>
+-              <td class="duration" data-value="2910205000">2.910</td>
+-              <td class="duration" data-value="2910205000">2.910</td>
++              <td class="duration" data-value="2568417000">2.568</td>
++              <td class="duration" data-value="2568417000">2.568</td>
++              <td class="duration" data-value="2568417000">2.568</td>
+               <td class="passed">100.00%</td>
+             </tr>
+             <tr>
+               <td class="location">com.open_mrs.stepdef.HomePageStepDef.userChoosesFromHomeFeaturesRegisterAPatient(java.lang.String)</td>
+-              <td>2</td>
+-              <td class="duration" data-value="1542139000">1.542</td>
+-              <td class="duration" data-value="1542139000">1.582</td>
+-              <td class="duration" data-value="3084278000">3.084</td>
++              <td>4</td>
++              <td class="duration" data-value="608903250">0.608</td>
++              <td class="duration" data-value="608903250">0.737</td>
++              <td class="duration" data-value="2435613000">2.435</td>
+               <td class="passed">100.00%</td>
+             </tr>
+             <tr>
+               <td class="location">com.open_mrs.stepdef.LoginStepDef.userChoosesTheLocationLocation(java.lang.String)</td>
+-              <td>14</td>
+-              <td class="duration" data-value="26174214">0.026</td>
+-              <td class="duration" data-value="26174214">0.029</td>
+-              <td class="duration" data-value="366439000">0.366</td>
++              <td>16</td>
++              <td class="duration" data-value="24515187">0.024</td>
++              <td class="duration" data-value="24515187">0.026</td>
++              <td class="duration" data-value="392243000">0.392</td>
+               <td class="passed">100.00%</td>
+             </tr>
+             <tr>
+               <td class="location">com.open_mrs.stepdef.LoginStepDef.userNavigatesToTheApplication()</td>
+-              <td>14</td>
+-              <td class="duration" data-value="788417500">0.788</td>
+-              <td class="duration" data-value="788417500">1.038</td>
+-              <td class="duration" data-value="11037845000">11.037</td>
++              <td>16</td>
++              <td class="duration" data-value="429249312">0.429</td>
++              <td class="duration" data-value="429249312">0.596</td>
++              <td class="duration" data-value="6867989000">6.867</td>
+               <td class="passed">100.00%</td>
+             </tr>
+             <tr>
+               <td class="location">com.open_mrs.stepdef.LoginStepDef.userProvidesWrongCredentialsUserNamePassword(java.lang.String,java.lang.String)</td>
+               <td>6</td>
+-              <td class="duration" data-value="131369166">0.131</td>
+-              <td class="duration" data-value="131369166">0.144</td>
+-              <td class="duration" data-value="788215000">0.788</td>
++              <td class="duration" data-value="124325000">0.124</td>
++              <td class="duration" data-value="124325000">0.139</td>
++              <td class="duration" data-value="745950000">0.745</td>
+               <td class="passed">100.00%</td>
+             </tr>
+             <tr>
+               <td class="location">com.open_mrs.stepdef.LoginStepDef.userValidatesTheLoginWasNotSuccessfullyInvalidUsernamePasswordPleaseTryAgain(java.lang.String)</td>
+               <td>6</td>
+-              <td class="duration" data-value="35525500">0.035</td>
+-              <td class="duration" data-value="35525500">0.071</td>
+-              <td class="duration" data-value="213153000">0.213</td>
++              <td class="duration" data-value="24921500">0.024</td>
++              <td class="duration" data-value="24921500">0.025</td>
++              <td class="duration" data-value="149529000">0.149</td>
+               <td class="passed">100.00%</td>
+             </tr>
+             <tr>
+               <td class="location">com.open_mrs.stepdef.LoginStepDef.user_clicks_login()</td>
+-              <td>14</td>
+-              <td class="duration" data-value="355783500">0.355</td>
+-              <td class="duration" data-value="355783500">0.515</td>
+-              <td class="duration" data-value="4980969000">4.980</td>
++              <td>16</td>
++              <td class="duration" data-value="264022875">0.264</td>
++              <td class="duration" data-value="264022875">0.341</td>
++              <td class="duration" data-value="4224366000">4.224</td>
+               <td class="passed">100.00%</td>
+             </tr>
+             <tr>
+               <td class="location">com.open_mrs.stepdef.LoginStepDef.user_provides_correct_credentials()</td>
+-              <td>8</td>
+-              <td class="duration" data-value="145683125">0.145</td>
+-              <td class="duration" data-value="145683125">0.159</td>
+-              <td class="duration" data-value="1165465000">1.165</td>
++              <td>10</td>
++              <td class="duration" data-value="137853700">0.137</td>
++              <td class="duration" data-value="137853700">0.146</td>
++              <td class="duration" data-value="1378537000">1.378</td>
+               <td class="passed">100.00%</td>
+             </tr>
+             <tr>
+               <td class="location">com.open_mrs.stepdef.LoginStepDef.user_validates_login_was_successfully(java.lang.String)</td>
+               <td>6</td>
+-              <td class="duration" data-value="33554833">0.033</td>
+-              <td class="duration" data-value="33554833">0.036</td>
+-              <td class="duration" data-value="201329000">0.201</td>
++              <td class="duration" data-value="25587833">0.025</td>
++              <td class="duration" data-value="25587833">0.030</td>
++              <td class="duration" data-value="153527000">0.153</td>
+               <td class="passed">100.00%</td>
+             </tr>
+             <tr>
+               <td class="location">com.open_mrs.stepdef.RegisterStepDef.userChoosesGenderMaleOrFemaleM(java.lang.String)</td>
+               <td>2</td>
+-              <td class="duration" data-value="524206000">0.524</td>
+-              <td class="duration" data-value="524206000">0.524</td>
+-              <td class="duration" data-value="1048412000">1.048</td>
++              <td class="duration" data-value="524201500">0.524</td>
++              <td class="duration" data-value="524201500">0.524</td>
++              <td class="duration" data-value="1048403000">1.048</td>
+               <td class="passed">100.00%</td>
+             </tr>
+             <tr>
+               <td class="location">com.open_mrs.stepdef.RegisterStepDef.userClicksConfirm()</td>
+               <td>2</td>
+-              <td class="duration" data-value="545381500">0.545</td>
+-              <td class="duration" data-value="545381500">0.557</td>
+-              <td class="duration" data-value="1090763000">1.090</td>
++              <td class="duration" data-value="542653500">0.542</td>
++              <td class="duration" data-value="542653500">0.554</td>
++              <td class="duration" data-value="1085307000">1.085</td>
+               <td class="passed">100.00%</td>
+             </tr>
+             <tr>
+               <td class="location">com.open_mrs.stepdef.RegisterStepDef.userClicksNext()</td>
+-              <td>7</td>
+-              <td class="duration" data-value="36753428">0.036</td>
+-              <td class="duration" data-value="36753428">0.052</td>
+-              <td class="duration" data-value="257274000">0.257</td>
++              <td>8</td>
++              <td class="duration" data-value="33297500">0.033</td>
++              <td class="duration" data-value="33297500">0.044</td>
++              <td class="duration" data-value="266380000">0.266</td>
+               <td class="passed">100.00%</td>
+             </tr>
+             <tr>
+               <td class="location">com.open_mrs.stepdef.RegisterStepDef.userProvidesAddressStreetAddressCityIlUsa(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)</td>
+               <td>1</td>
+-              <td class="duration" data-value="677521000">0.677</td>
+-              <td class="duration" data-value="677521000">0.677</td>
+-              <td class="duration" data-value="677521000">0.677</td>
++              <td class="duration" data-value="645032000">0.645</td>
++              <td class="duration" data-value="645032000">0.645</td>
++              <td class="duration" data-value="645032000">0.645</td>
+               <td class="passed">100.00%</td>
+             </tr>
+             <tr>
+               <td class="location">com.open_mrs.stepdef.RegisterStepDef.userProvidesBirthDateMay(java.lang.String,java.lang.String,java.lang.String)</td>
+               <td>1</td>
+-              <td class="duration" data-value="599045000">0.599</td>
+-              <td class="duration" data-value="599045000">0.599</td>
+-              <td class="duration" data-value="599045000">0.599</td>
++              <td class="duration" data-value="592395000">0.592</td>
++              <td class="duration" data-value="592395000">0.592</td>
++              <td class="duration" data-value="592395000">0.592</td>
+               <td class="passed">100.00%</td>
+             </tr>
+             <tr>
+               <td class="location">com.open_mrs.stepdef.RegisterStepDef.userProvidesCorrectInfoGivenNameFamilyName(java.lang.String,java.lang.String)</td>
++              <td>2</td>
++              <td class="duration" data-value="49184000">0.049</td>
++              <td class="duration" data-value="49184000">0.051</td>
++              <td class="duration" data-value="98368000">0.098</td>
++              <td class="passed">100.00%</td>
++            </tr>
++            <tr>
++              <td class="location">com.open_mrs.stepdef.RegisterStepDef.userProvidesPhoneNumber(java.lang.String)</td>
+               <td>1</td>
+-              <td class="duration" data-value="60180000">0.060</td>
+-              <td class="duration" data-value="60180000">0.060</td>
+-              <td class="duration" data-value="60180000">0.060</td>
++              <td class="duration" data-value="536687000">0.536</td>
++              <td class="duration" data-value="536687000">0.536</td>
++              <td class="duration" data-value="536687000">0.536</td>
+               <td class="passed">100.00%</td>
+             </tr>
+             <tr>
+-              <td class="location">com.open_mrs.stepdef.RegisterStepDef.userProvidesPhoneNumber(java.lang.String)</td>
++              <td class="location">com.open_mrs.stepdef.RegisterStepDef.userValidateExpectedErrorMessage(java.lang.String,java.lang.String)</td>
+               <td>1</td>
+-              <td class="duration" data-value="540811000">0.540</td>
+-              <td class="duration" data-value="540811000">0.540</td>
+-              <td class="duration" data-value="540811000">0.540</td>
++              <td class="duration" data-value="22853000">0.022</td>
++              <td class="duration" data-value="22853000">0.022</td>
++              <td class="duration" data-value="22853000">0.022</td>
+               <td class="passed">100.00%</td>
+             </tr>
+             <tr>
+               <td class="location">com.open_mrs.stepdef.RegisterStepDef.userValidatesPatientsFirstNameAndLastNameAreBothUNKNOWNUNKNOWNUNKNOWN(java.lang.String,java.lang.String)</td>
+               <td>1</td>
+-              <td class="duration" data-value="1933740000">1.933</td>
+-              <td class="duration" data-value="1933740000">1.933</td>
+-              <td class="duration" data-value="1933740000">1.933</td>
++              <td class="duration" data-value="872262000">0.872</td>
++              <td class="duration" data-value="872262000">0.872</td>
++              <td class="duration" data-value="872262000">0.872</td>
+               <td class="passed">100.00%</td>
+             </tr>
+             <tr>
+               <td class="location">com.open_mrs.stepdef.RegisterStepDef.user_checks_the_unidentified_patient_box()</td>
+               <td>1</td>
+-              <td class="duration" data-value="44732000">0.044</td>
+-              <td class="duration" data-value="44732000">0.044</td>
+-              <td class="duration" data-value="44732000">0.044</td>
++              <td class="duration" data-value="39184000">0.039</td>
++              <td class="duration" data-value="39184000">0.039</td>
++              <td class="duration" data-value="39184000">0.039</td>
+               <td class="passed">100.00%</td>
+             </tr>
+             <tr>
+               <td class="location">com.open_mrs.stepdef.hookClass.setup()</td>
+-              <td>14</td>
+-              <td class="duration" data-value="1275537857">1.275</td>
+-              <td class="duration" data-value="1275537857">1.805</td>
+-              <td class="duration" data-value="17857530000">17.857</td>
++              <td>16</td>
++              <td class="duration" data-value="1235441875">1.235</td>
++              <td class="duration" data-value="1235441875">1.606</td>
++              <td class="duration" data-value="19767070000">19.767</td>
+               <td class="passed">100.00%</td>
+             </tr>
+             <tr>
+               <td class="location">com.open_mrs.stepdef.hookClass.tearDown(io.cucumber.java.Scenario)</td>
+-              <td>14</td>
+-              <td class="duration" data-value="109660785">0.109</td>
+-              <td class="duration" data-value="109660785">0.129</td>
+-              <td class="duration" data-value="1535251000">1.535</td>
++              <td>16</td>
++              <td class="duration" data-value="112095625">0.112</td>
++              <td class="duration" data-value="112095625">0.128</td>
++              <td class="duration" data-value="1793530000">1.793</td>
+               <td class="passed">100.00%</td>
+             </tr>
+         </tbody>
+ 
+         <tfoot class="total">
+           <tr>
+-            <td>20</td>
+-            <td>116</td>
+-            <td class="duration">0.434</td>
+-            <td class="duration">17.857</td>
+-            <td class="duration">50.393</td>
++            <td>21</td>
++            <td>133</td>
++            <td class="duration">0.343</td>
++            <td class="duration">19.767</td>
++            <td class="duration">45.683</td>
+             <td>Totals</td>
+           </tr>
+         </tfoot>
+Index: reports/html-reports/cucumber-html-reports/overview-features.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html>\r\n<head>\r\n\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\r\n\r\n<script src=\"js/jquery.min.js\"></script>\r\n<script src=\"js/jquery.tablesorter.min.js\"></script>\r\n<script src=\"js/Chart.min.js\"></script>\r\n<script src=\"js/moment.min.js\"></script>\r\n<script src=\"js/bootstrap.min.js\"></script>\r\n\r\n<link rel=\"stylesheet\" href=\"css/bootstrap.min.css\" type=\"text/css\"/>\r\n<link rel=\"stylesheet\" href=\"css/cucumber.css\" type=\"text/css\"/>\r\n<link rel=\"stylesheet\" href=\"css/font-awesome.min.css\"/>\r\n<link rel=\"shortcut icon\" href=\"images/favicon.png\"/>\r\n\r\n<script>\r\n$(document).ready(function() {\r\n    // this will tell tablesorter to try looking for the data-value attribute\r\n    // if present, it'll sort by that instead\r\n    // otherwise, it'll sort by the text content of the table cell\r\n    $(\"#tablesorter\").tablesorter({\r\n        textAttribute: 'data-value',\r\n        // ignores the first row of the header, the 'scenario', 'steps', since\r\n        // sorting those doesn't make sense\r\n        selectorHeaders: '> thead tr:not(.dont-sort) th',\r\n        // use a stable sort\r\n        sortStable: true\r\n    });\r\n});\r\n</script>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n<title>Cucumber Reports (no 1) - Features Overview</title>\r\n\r\n\r\n  <script>\r\n$(document).ready(function() {\r\n\r\n    var chartData = {\r\n        datasets: [{\r\n            data: [\r\n                88,\r\n                0,\r\n                0,\r\n                0,\r\n                0\r\n            ],\r\n            backgroundColor: [\r\n                \"#00B000\",\r\n                \"#FF3030\",\r\n                \"#88AAFF\",\r\n                \"#F5F28F\",\r\n                \"#F5B975\"\r\n            ]\r\n        }],\r\n        labels: [\r\n            \"Passed\",\r\n            \"Failed\",\r\n            \"Skipped\",\r\n            \"Pending\",\r\n            \"Undefined\"\r\n        ]\r\n    };\r\n\r\n    var context = document.getElementById(\"steps-chart\");\r\n    window.myBar = new Chart(context, {\r\n        type: \"doughnut\",\r\n        data: chartData,\r\n        options: {\r\n            title: {\r\n                display: true,\r\n                fontSize: 20,\r\n                text: \"Steps\"\r\n            },\r\n            responsive: true,\r\n            legend: {\r\n                display: false\r\n            },\r\n            tooltips: {\r\n                callbacks: {\r\n                    label: function(tooltipItem, data) {\r\n                        var allData = data.datasets[tooltipItem.datasetIndex].data;\r\n                        var tooltipLabel = data.labels[tooltipItem.index];\r\n                        var tooltipData = allData[tooltipItem.index];\r\n                        var tooltipPercentage = Math.round(10000 * tooltipData / 88) / 100;\r\n                        return tooltipLabel + \": \" + tooltipData + \" (\" + tooltipPercentage + \"%)\";\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    });\r\n\r\n});$(document).ready(function() {\r\n\r\n    var chartData = {\r\n        datasets: [{\r\n            data: [\r\n                14,\r\n                0\r\n            ],\r\n            backgroundColor: [\r\n                \"#00B000\",\r\n                \"#FF3030\"\r\n            ]\r\n        }],\r\n        labels: [\r\n            \"Passed\",\r\n            \"Failed\"\r\n        ]\r\n    };\r\n\r\n    var context = document.getElementById(\"scenarios-chart\");\r\n    window.myBar = new Chart(context, {\r\n        type: \"doughnut\",\r\n        data: chartData,\r\n        options: {\r\n            title: {\r\n                display: true,\r\n                fontSize: 20,\r\n                text: \"Scenarios\"\r\n            },\r\n            responsive: true,\r\n            legend: {\r\n                display: false\r\n            },\r\n            tooltips: {\r\n                callbacks: {\r\n                    label: function(tooltipItem, data) {\r\n                        var allData = data.datasets[tooltipItem.datasetIndex].data;\r\n                        var tooltipLabel = data.labels[tooltipItem.index];\r\n                        var tooltipData = allData[tooltipItem.index];\r\n                        var tooltipPercentage = Math.round(10000 * tooltipData / 14) / 100;\r\n                        return tooltipLabel + \": \" + tooltipData + \" (\" + tooltipPercentage + \"%)\";\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    });\r\n\r\n});$(document).ready(function() {\r\n\r\n    var chartData = {\r\n        datasets: [{\r\n            data: [\r\n                   2,\r\n                   0\r\n               ],\r\n               backgroundColor: [\r\n                \"#00B000\",\r\n                \"#FF3030\"\r\n            ]\r\n        }],\r\n        labels: [\r\n            \"Passed\",\r\n            \"Failed\"\r\n        ]\r\n    };\r\n\r\n    var context = document.getElementById(\"features-chart\");\r\n    window.myBar = new Chart(context, {\r\n        type: \"doughnut\",\r\n        data: chartData,\r\n        options: {\r\n            title: {\r\n                display: true,\r\n                fontSize: 20,\r\n                text: \"Features\"\r\n            },\r\n            responsive: true,\r\n            legend: {\r\n                display: false\r\n            },\r\n            tooltips: {\r\n                callbacks: {\r\n                    label: function(tooltipItem, data) {\r\n                        var allData = data.datasets[tooltipItem.datasetIndex].data;\r\n                        var tooltipLabel = data.labels[tooltipItem.index];\r\n                        var tooltipData = allData[tooltipItem.index];\r\n                        var tooltipPercentage = Math.round(10000 * tooltipData / 2) / 100;\r\n                        return tooltipLabel + \": \" + tooltipData + \" (\" + tooltipPercentage + \"%)\";\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    });\r\n\r\n});  </script>\r\n</head>\r\n\r\n<body>\r\n\r\n<nav class=\"navbar navbar-default navbar-fixed-top\" id=\"navigation\">\r\n  <div class=\"container-fluid\">\r\n    <div class=\"collapse navbar-collapse\">\r\n      <p class=\"navbar-text navbar-left\">Cucumber Report</p>\r\n      <ul class=\"nav navbar-nav navbar-right\">\r\n        <li role=\"presentation\"  class=\"active\" ><a href=\"overview-features.html\">Features</a></li>\r\n        <li role=\"presentation\" ><a href=\"overview-tags.html\">Tags</a></li>\r\n        <li role=\"presentation\" ><a href=\"overview-steps.html\">Steps</a></li>\r\n        <li role=\"presentation\" ><a href=\"overview-failures.html\">Failures</a></li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</nav>\r\n\r\n\r\n<div class=\"container-fluid\">\r\n  <div class=\"col-md-5 col-md-offset-1\">\r\n\r\n<table class=\"table table-bordered\" id=\"build-info\">\r\n  <thead>\r\n    <tr>\r\n      <th>Project</th>\r\n        <th>Number</th>\r\n      <th>Date</th>\r\n    </tr>\r\n  </thead>\r\n  <tbody>\r\n    <tr class=\"info\">\r\n      <td>OPEN-MRS-Cucumber-Report</td>\r\n        <td>1</td>\r\n      <td>21 Sep 2023, 20:40</td>\r\n    </tr>\r\n  </tbody>\r\n</table>\r\n\r\n  </div>\r\n  <div class=\"col-md-3 col-md-offset-2\">\r\n  </div>\r\n</div>\r\n\r\n\r\n<div id=\"report-lead\" class=\"container-fluid\">\r\n  <div class=\"col-md-10 col-md-offset-1\">\r\n    <h2>Features Statistics</h2>\r\n      <p>The following graphs show passing and failing statistics for features</p>\r\n  </div>\r\n</div>\r\n\r\n\r\n  <div class=\"container-fluid\" id=\"charts\">\r\n    <div class=\"row\">\r\n      <div class=\"col-md-6 col-md-offset-3\">\r\n        <div id=\"featureChartCarousel\" class=\"carousel slide\" data-ride=\"carousel\">\r\n          <!-- Indicators -->\r\n          <ol class=\"carousel-indicators\">\r\n            <li data-target=\"#featureChartCarousel\" data-slide-to=\"0\" class=\"active\"></li>\r\n            <li data-target=\"#featureChartCarousel\" data-slide-to=\"1\"></li>\r\n            <li data-target=\"#featureChartCarousel\" data-slide-to=\"2\"></li>\r\n          </ol>\r\n\r\n          <!-- Wrapper for slides -->\r\n          <div class=\"carousel-inner\" role=\"listbox\">\r\n            <div class=\"item active\">\r\n              <canvas id=\"features-chart\" height=\"120\"></canvas>\r\n            </div>\r\n\r\n            <div class=\"item\">\r\n              <canvas id=\"scenarios-chart\" height=\"120\"></canvas>\r\n            </div>\r\n\r\n            <div class=\"item\">\r\n              <canvas id=\"steps-chart\" height=\"120\"></canvas>\r\n            </div>\r\n          </div>\r\n\r\n          <!-- Left and right controls -->\r\n          <a class=\"left carousel-control\" href=\"#featureChartCarousel\" role=\"button\" data-slide=\"prev\">\r\n            <i class=\"fa fa-chevron-left\" aria-hidden=\"true\"></i>\r\n            <span class=\"sr-only\">Previous</span>\r\n          </a>\r\n          <a class=\"right carousel-control\" href=\"#featureChartCarousel\" role=\"button\" data-slide=\"next\">\r\n            <i class=\"fa fa-chevron-right\" aria-hidden=\"true\"></i>\r\n            <span class=\"sr-only\">Next</span>\r\n          </a>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <br/>\r\n\r\n\r\n<div class=\"container-fluid\" id=\"report\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-10 col-md-offset-1\">\r\n\r\n<table id=\"tablesorter\" class=\"stats-table table-hover\">\r\n\r\n<thead>\r\n  <tr class=\"header dont-sort\">\r\n      <th></th>\r\n    <th colspan=\"6\">Steps</th>\r\n    <th colspan=\"3\">Scenarios</th>\r\n    <th colspan=\"2\">Features</th>\r\n  </tr>\r\n  <tr>\r\n    <th>Feature</th>\r\n    <th class=\"passed\">Passed</th>\r\n    <th class=\"failed\">Failed</th>\r\n    <th class=\"skipped\">Skipped</th>\r\n    <th class=\"pending\">Pending</th>\r\n    <th class=\"undefined\">Undefined</th>\r\n    <th class=\"total\">Total</th>\r\n\r\n    <th class=\"passed\">Passed</th>\r\n    <th class=\"failed\">Failed</th>\r\n    <th class=\"total\">Total</th>\r\n\r\n    <th>Duration</th>\r\n    <th>Status</th>\r\n  </tr>\r\n</thead>\r\n\r\n\r\n  <tbody>\r\n      <tr>\r\n        <td class=\"tagname\"><a href=\"report-feature_771467585.html\">Testing Register a patient functionality and UNKNOWN patient</a></td>\r\n\r\n        <td      class=\"passed\"    >28</td>\r\n        <td >0</td>\r\n        <td >0</td>\r\n        <td >0</td>\r\n        <td >0</td>\r\n        <td class=\"total\">28</td>\r\n\r\n        <td  class=\"passed\"    >2</td>\r\n        <td >0</td>\r\n        <td class=\"total\">2</td>\r\n\r\n        <td class=\"duration\" data-value=\"15262318000\">15.262</td>\r\n        <td class=\"passed\">Passed</td>\r\n      </tr>\r\n      <tr>\r\n        <td class=\"tagname\"><a href=\"report-feature_1_2922737241.html\">TESTING LOGIN FUNCTIONALITY</a></td>\r\n\r\n        <td      class=\"passed\"    >60</td>\r\n        <td >0</td>\r\n        <td >0</td>\r\n        <td >0</td>\r\n        <td >0</td>\r\n        <td class=\"total\">60</td>\r\n\r\n        <td  class=\"passed\"    >12</td>\r\n        <td >0</td>\r\n        <td class=\"total\">12</td>\r\n\r\n        <td class=\"duration\" data-value=\"15738058000\">15.738</td>\r\n        <td class=\"passed\">Passed</td>\r\n      </tr>\r\n  </tbody>\r\n\r\n  <tfoot class=\"total\">\r\n    <tr>\r\n      <td></td>\r\n      <td>88</td>\r\n      <td>0</td>\r\n      <td>0</td>\r\n      <td>0</td>\r\n      <td>0</td>\r\n      <td>88</td>\r\n\r\n      <td>14</td>\r\n      <td>0</td>\r\n      <td>14</td>\r\n\r\n      <td class=\"duration\">31.000</td>\r\n      <td>2</td>\r\n    </tr>\r\n    <tr>\r\n      <td></td>\r\n      <td>100.00%</td>\r\n      <td>0.00%</td>\r\n      <td>0.00%</td>\r\n      <td>0.00%</td>\r\n      <td>0.00%</td>\r\n      <td></td>\r\n      <td>100.00%</td>\r\n      <td>0.00%</td>\r\n      <td></td>\r\n      <td></td>\r\n      <td>100.00%</td>\r\n    </tr>\r\n  </tfoot>\r\n</table>\r\n\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<nav class=\"navbar navbar-default\" id=\"footer\">\r\n  <div class=\"container-fluid\">\r\n    <p class=\"navbar-text navbar-right\">\r\n        <small>generate Cucumber HTML reports via:&nbsp;</small>\r\n        <a class=\"navbar-link\" href=\"https://github.com/jenkinsci/cucumber-reports-plugin\">Jenkins Plugin</a> |\r\n        <a class=\"navbar-link\" href=\"https://github.com/damianszczepanik/cucumber-reporting\">Standalone</a> |\r\n        <a class=\"navbar-link\" href=\"https://github.com/damianszczepanik/cucumber-sandwich\">Sandwich</a> |\r\n        <a class=\"navbar-link\" href=\"https://github.com/damianszczepanik/maven-cucumber-reporting\">Maven</a>\r\n        &nbsp;&nbsp;\r\n    </p>\r\n  </div>\r\n</nav>\r\n\r\n</body>\r\n</html>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/reports/html-reports/cucumber-html-reports/overview-features.html b/reports/html-reports/cucumber-html-reports/overview-features.html
+--- a/reports/html-reports/cucumber-html-reports/overview-features.html	
++++ b/reports/html-reports/cucumber-html-reports/overview-features.html	
+@@ -50,7 +50,7 @@
+     var chartData = {
+         datasets: [{
+             data: [
+-                88,
++                101,
+                 0,
+                 0,
+                 0,
+@@ -93,7 +93,7 @@
+                         var allData = data.datasets[tooltipItem.datasetIndex].data;
+                         var tooltipLabel = data.labels[tooltipItem.index];
+                         var tooltipData = allData[tooltipItem.index];
+-                        var tooltipPercentage = Math.round(10000 * tooltipData / 88) / 100;
++                        var tooltipPercentage = Math.round(10000 * tooltipData / 101) / 100;
+                         return tooltipLabel + ": " + tooltipData + " (" + tooltipPercentage + "%)";
+                     }
+                 }
+@@ -106,7 +106,7 @@
+     var chartData = {
+         datasets: [{
+             data: [
+-                14,
++                16,
+                 0
+             ],
+             backgroundColor: [
+@@ -140,7 +140,7 @@
+                         var allData = data.datasets[tooltipItem.datasetIndex].data;
+                         var tooltipLabel = data.labels[tooltipItem.index];
+                         var tooltipData = allData[tooltipItem.index];
+-                        var tooltipPercentage = Math.round(10000 * tooltipData / 14) / 100;
++                        var tooltipPercentage = Math.round(10000 * tooltipData / 16) / 100;
+                         return tooltipLabel + ": " + tooltipData + " (" + tooltipPercentage + "%)";
+                     }
+                 }
+@@ -153,7 +153,7 @@
+     var chartData = {
+         datasets: [{
+             data: [
+-                   2,
++                   3,
+                    0
+                ],
+                backgroundColor: [
+@@ -187,7 +187,7 @@
+                         var allData = data.datasets[tooltipItem.datasetIndex].data;
+                         var tooltipLabel = data.labels[tooltipItem.index];
+                         var tooltipData = allData[tooltipItem.index];
+-                        var tooltipPercentage = Math.round(10000 * tooltipData / 2) / 100;
++                        var tooltipPercentage = Math.round(10000 * tooltipData / 3) / 100;
+                         return tooltipLabel + ": " + tooltipData + " (" + tooltipPercentage + "%)";
+                     }
+                 }
+@@ -230,7 +230,7 @@
+     <tr class="info">
+       <td>OPEN-MRS-Cucumber-Report</td>
+         <td>1</td>
+-      <td>21 Sep 2023, 20:40</td>
++      <td>26 Sep 2023, 14:51</td>
+     </tr>
+   </tbody>
+ </table>
+@@ -327,22 +327,39 @@
+       <tr>
+         <td class="tagname"><a href="report-feature_771467585.html">Testing Register a patient functionality and UNKNOWN patient</a></td>
+ 
+-        <td      class="passed"    >28</td>
++        <td      class="passed"    >36</td>
++        <td >0</td>
++        <td >0</td>
++        <td >0</td>
++        <td >0</td>
++        <td class="total">36</td>
++
++        <td  class="passed"    >3</td>
++        <td >0</td>
++        <td class="total">3</td>
++
++        <td class="duration" data-value="12335412000">12.335</td>
++        <td class="passed">Passed</td>
++      </tr>
++      <tr>
++        <td class="tagname"><a href="report-feature_1_1964767771.html">Testing Visit functionality for Unidentified Patient</a></td>
++
++        <td      class="passed"    >5</td>
+         <td >0</td>
+         <td >0</td>
+         <td >0</td>
+         <td >0</td>
+-        <td class="total">28</td>
++        <td class="total">5</td>
+ 
+-        <td  class="passed"    >2</td>
++        <td  class="passed"    >1</td>
+         <td >0</td>
+-        <td class="total">2</td>
++        <td class="total">1</td>
+ 
+-        <td class="duration" data-value="15262318000">15.262</td>
++        <td class="duration" data-value="1616590000">1.616</td>
+         <td class="passed">Passed</td>
+       </tr>
+       <tr>
+-        <td class="tagname"><a href="report-feature_1_2922737241.html">TESTING LOGIN FUNCTIONALITY</a></td>
++        <td class="tagname"><a href="report-feature_2_2922737241.html">TESTING LOGIN FUNCTIONALITY</a></td>
+ 
+         <td      class="passed"    >60</td>
+         <td >0</td>
+@@ -355,7 +372,7 @@
+         <td >0</td>
+         <td class="total">12</td>
+ 
+-        <td class="duration" data-value="15738058000">15.738</td>
++        <td class="duration" data-value="10171040000">10.171</td>
+         <td class="passed">Passed</td>
+       </tr>
+   </tbody>
+@@ -363,19 +380,19 @@
+   <tfoot class="total">
+     <tr>
+       <td></td>
+-      <td>88</td>
++      <td>101</td>
+       <td>0</td>
+       <td>0</td>
+       <td>0</td>
+       <td>0</td>
+-      <td>88</td>
++      <td>101</td>
+ 
+-      <td>14</td>
++      <td>16</td>
+       <td>0</td>
+-      <td>14</td>
++      <td>16</td>
+ 
+-      <td class="duration">31.000</td>
+-      <td>2</td>
++      <td class="duration">24.123</td>
++      <td>3</td>
+     </tr>
+     <tr>
+       <td></td>
+Index: src/test/java/com/open_mrs/stepdef/hookClass.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.open_mrs.stepdef;\n\nimport com.utils.BrowsersUtils;\nimport com.utils.ConfigReader;\nimport com.utils.DriverHelper;\nimport io.cucumber.java.After;\nimport io.cucumber.java.Before;\nimport io.cucumber.java.Scenario;\nimport org.openqa.selenium.WebDriver;\n\npublic class hookClass {\n\n     WebDriver driver;\n\n      @Before\n      public void setup(){\n          driver= DriverHelper.getDriver();\n      }\n\n\n\n      @After\n    public void tearDown(Scenario scenario){\n         BrowsersUtils.getScreenShotWithCucumber(driver,scenario);\n         // driver.quit();\n      }\n\n\n\n\n\n\n\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/open_mrs/stepdef/hookClass.java b/src/test/java/com/open_mrs/stepdef/hookClass.java
+--- a/src/test/java/com/open_mrs/stepdef/hookClass.java	
++++ b/src/test/java/com/open_mrs/stepdef/hookClass.java	
+@@ -22,7 +22,7 @@
+       @After
+     public void tearDown(Scenario scenario){
+          BrowsersUtils.getScreenShotWithCucumber(driver,scenario);
+-         // driver.quit();
++         driver.quit();
+       }
+ 
+ 
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\n  <component name=\"MavenProjectsManager\">\n    <option name=\"originalFiles\">\n      <list>\n        <option value=\"$PROJECT_DIR$/pom.xml\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_X\" default=\"true\" project-jdk-name=\"11\" project-jdk-type=\"JavaSDK\">\n    <output url=\"file://$PROJECT_DIR$/out\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	
++++ b/.idea/misc.xml	
+@@ -8,7 +8,7 @@
+       </list>
+     </option>
+   </component>
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_19" default="true" project-jdk-name="19" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: src/test/java/com/open_mrs/page/FindPatientPage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.open_mrs.page;\n\nimport com.utils.BrowsersUtils;\nimport org.openqa.selenium.Keys;\nimport org.openqa.selenium.WebDriver;\nimport org.openqa.selenium.WebElement;\nimport org.openqa.selenium.support.FindBy;\nimport org.openqa.selenium.support.PageFactory;\nimport org.openqa.selenium.support.ui.ExpectedConditions;\nimport org.openqa.selenium.support.ui.WebDriverWait;\n\nimport java.time.Duration;\n\npublic class FindPatientPage {\n\n    // constructor\n    public FindPatientPage(WebDriver driver) {\n        PageFactory.initElements(driver,this);\n    }\n\n    // elements from Register page\n    @FindBy(xpath = \"//div[@class='float-sm-right']//span\")\n    WebElement customerID;\n\n    @FindBy(xpath = \"//div[@class='logo']\")\n    WebElement homePage;\n    @FindBy(xpath =\"//a[@type='button'][1]\")\n    WebElement  FindPatientRecord;\n\n    // elements for this page\n    @FindBy(xpath =\"//input[@id='patient-search']\")\n    WebElement patient_search;\n\n\n    @FindBy(xpath = \"//div[@class='dataTables_info']\")\n    WebElement idResult;\n\n\n\n\n\n\n\n    // METHOD TO VALIDATE THAT THE USER IS UNIQUE AFTER WE REGISTER SUCCESSFULLY\n\n    public String validateIdIsUnique(WebDriver driver) throws InterruptedException {\n        // storing id\n        String id= BrowsersUtils.getText(customerID);\n\n        homePage.click();     // going to home page\n        Thread.sleep(500);\n\n        FindPatientRecord.click();   // clicking this feature to look up our id we stored\n        Thread.sleep(500);\n\n\n         patient_search.sendKeys(id);   // used our stored id\n\n\n        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(20));  // waiting for result how many id\n        wait.until(ExpectedConditions.visibilityOf(idResult));\n\n\n\n       return      BrowsersUtils.getText(idResult);  // returning the actual message\n\n    }\n\n\n    // sabina's methods\n    public void searchForPatient(String id){\n        patient_search.sendKeys(id);\n    }\n\n\n    public String validateTheId() throws InterruptedException {\n        Thread.sleep(500);\n\n        return BrowsersUtils.getText(idResult);\n    }\n\n\n    // ulan method\n\n    public void searchForPatient(String nameOrId){\n       patient_search.sendKeys(nameOrId,Keys.ENTER);\n    }\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/open_mrs/page/FindPatientPage.java b/src/test/java/com/open_mrs/page/FindPatientPage.java
+--- a/src/test/java/com/open_mrs/page/FindPatientPage.java	
++++ b/src/test/java/com/open_mrs/page/FindPatientPage.java	
+@@ -68,22 +68,22 @@
+ 
+ 
+     // sabina's methods
+-    public void searchForPatient(String id){
+-        patient_search.sendKeys(id);
+-    }
+-
+-
+-    public String validateTheId() throws InterruptedException {
+-        Thread.sleep(500);
+-
+-        return BrowsersUtils.getText(idResult);
+-    }
+-
+-
+-    // ulan method
+-
+-    public void searchForPatient(String nameOrId){
+-       patient_search.sendKeys(nameOrId,Keys.ENTER);
+-    }
++//    public void searchForPatient(String id){
++//        patient_search.sendKeys(id);
++//    }
++//
++//
++//    public String validateTheId() throws InterruptedException {
++//        Thread.sleep(500);
++//
++//        return BrowsersUtils.getText(idResult);
++//    }
++//
++//
++//    // ulan method
++//
++//    public void searchForPatient(String nameOrId){
++//       patient_search.sendKeys(nameOrId,Keys.ENTER);
++//    }
+ 
+ }
+Index: reports/html-reports/cucumber-html-reports/overview-failures.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html>\r\n<head>\r\n\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\r\n\r\n<script src=\"js/jquery.min.js\"></script>\r\n<script src=\"js/jquery.tablesorter.min.js\"></script>\r\n<script src=\"js/Chart.min.js\"></script>\r\n<script src=\"js/moment.min.js\"></script>\r\n<script src=\"js/bootstrap.min.js\"></script>\r\n\r\n<link rel=\"stylesheet\" href=\"css/bootstrap.min.css\" type=\"text/css\"/>\r\n<link rel=\"stylesheet\" href=\"css/cucumber.css\" type=\"text/css\"/>\r\n<link rel=\"stylesheet\" href=\"css/font-awesome.min.css\"/>\r\n<link rel=\"shortcut icon\" href=\"images/favicon.png\"/>\r\n\r\n<script>\r\n$(document).ready(function() {\r\n    // this will tell tablesorter to try looking for the data-value attribute\r\n    // if present, it'll sort by that instead\r\n    // otherwise, it'll sort by the text content of the table cell\r\n    $(\"#tablesorter\").tablesorter({\r\n        textAttribute: 'data-value',\r\n        // ignores the first row of the header, the 'scenario', 'steps', since\r\n        // sorting those doesn't make sense\r\n        selectorHeaders: '> thead tr:not(.dont-sort) th',\r\n        // use a stable sort\r\n        sortStable: true\r\n    });\r\n});\r\n</script>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n<title>Cucumber Reports (no 1) - Failures Overview</title>\r\n\r\n</head>\r\n\r\n<body>\r\n\r\n<nav class=\"navbar navbar-default navbar-fixed-top\" id=\"navigation\">\r\n  <div class=\"container-fluid\">\r\n    <div class=\"collapse navbar-collapse\">\r\n      <p class=\"navbar-text navbar-left\">Cucumber Report</p>\r\n      <ul class=\"nav navbar-nav navbar-right\">\r\n        <li role=\"presentation\" ><a href=\"overview-features.html\">Features</a></li>\r\n        <li role=\"presentation\" ><a href=\"overview-tags.html\">Tags</a></li>\r\n        <li role=\"presentation\" ><a href=\"overview-steps.html\">Steps</a></li>\r\n        <li role=\"presentation\"  class=\"active\" ><a href=\"overview-failures.html\">Failures</a></li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</nav>\r\n\r\n\r\n<div class=\"container-fluid\">\r\n  <div class=\"col-md-5 col-md-offset-1\">\r\n\r\n<table class=\"table table-bordered\" id=\"build-info\">\r\n  <thead>\r\n    <tr>\r\n      <th>Project</th>\r\n        <th>Number</th>\r\n      <th>Date</th>\r\n    </tr>\r\n  </thead>\r\n  <tbody>\r\n    <tr class=\"info\">\r\n      <td>OPEN-MRS-Cucumber-Report</td>\r\n        <td>1</td>\r\n      <td>21 Sep 2023, 20:40</td>\r\n    </tr>\r\n  </tbody>\r\n</table>\r\n\r\n  </div>\r\n  <div class=\"col-md-3 col-md-offset-2\">\r\n  </div>\r\n</div>\r\n\r\n\r\n<div id=\"report-lead\" class=\"container-fluid\">\r\n  <div class=\"col-md-10 col-md-offset-1\">\r\n    <h2>Failures Overview</h2>\r\n      <p>The following summary displays scenarios that failed.</p>\r\n  </div>\r\n</div>\r\n\r\n\r\n<div class=\"container-fluid\" id=\"report\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-10 col-md-offset-1\">\r\n\r\n        <p>You have no failed scenarios in your Cucumber report</p>\r\n\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<br/>\r\n\r\n<nav class=\"navbar navbar-default\" id=\"footer\">\r\n  <div class=\"container-fluid\">\r\n    <p class=\"navbar-text navbar-right\">\r\n        <small>generate Cucumber HTML reports via:&nbsp;</small>\r\n        <a class=\"navbar-link\" href=\"https://github.com/jenkinsci/cucumber-reports-plugin\">Jenkins Plugin</a> |\r\n        <a class=\"navbar-link\" href=\"https://github.com/damianszczepanik/cucumber-reporting\">Standalone</a> |\r\n        <a class=\"navbar-link\" href=\"https://github.com/damianszczepanik/cucumber-sandwich\">Sandwich</a> |\r\n        <a class=\"navbar-link\" href=\"https://github.com/damianszczepanik/maven-cucumber-reporting\">Maven</a>\r\n        &nbsp;&nbsp;\r\n    </p>\r\n  </div>\r\n</nav>\r\n\r\n</body>\r\n</html>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/reports/html-reports/cucumber-html-reports/overview-failures.html b/reports/html-reports/cucumber-html-reports/overview-failures.html
+--- a/reports/html-reports/cucumber-html-reports/overview-failures.html	
++++ b/reports/html-reports/cucumber-html-reports/overview-failures.html	
+@@ -77,7 +77,7 @@
+     <tr class="info">
+       <td>OPEN-MRS-Cucumber-Report</td>
+         <td>1</td>
+-      <td>21 Sep 2023, 20:40</td>
++      <td>26 Sep 2023, 14:51</td>
+     </tr>
+   </tbody>
+ </table>
+Index: reports/html-reports/cucumber-html-reports/overview-tags.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html>\r\n<head>\r\n\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\r\n\r\n<script src=\"js/jquery.min.js\"></script>\r\n<script src=\"js/jquery.tablesorter.min.js\"></script>\r\n<script src=\"js/Chart.min.js\"></script>\r\n<script src=\"js/moment.min.js\"></script>\r\n<script src=\"js/bootstrap.min.js\"></script>\r\n\r\n<link rel=\"stylesheet\" href=\"css/bootstrap.min.css\" type=\"text/css\"/>\r\n<link rel=\"stylesheet\" href=\"css/cucumber.css\" type=\"text/css\"/>\r\n<link rel=\"stylesheet\" href=\"css/font-awesome.min.css\"/>\r\n<link rel=\"shortcut icon\" href=\"images/favicon.png\"/>\r\n\r\n<script>\r\n$(document).ready(function() {\r\n    // this will tell tablesorter to try looking for the data-value attribute\r\n    // if present, it'll sort by that instead\r\n    // otherwise, it'll sort by the text content of the table cell\r\n    $(\"#tablesorter\").tablesorter({\r\n        textAttribute: 'data-value',\r\n        // ignores the first row of the header, the 'scenario', 'steps', since\r\n        // sorting those doesn't make sense\r\n        selectorHeaders: '> thead tr:not(.dont-sort) th',\r\n        // use a stable sort\r\n        sortStable: true\r\n    });\r\n});\r\n</script>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n<title>Cucumber Reports (no 1) - Tags Overview</title>\r\n\r\n\r\n  <script>\r\n$(document).ready(function() {\r\n\r\n    var chartData = {\r\n        labels:  [] ,\r\n        datasets: [\r\n            {\r\n                label: \"Passed\",\r\n                backgroundColor: \"#92DD96\",\r\n                data:  [] \r\n            },\r\n            {\r\n                label: \"Failed\",\r\n                backgroundColor: \"#F2928C\",\r\n                data:  [] \r\n            },\r\n            {\r\n                label: \"Skipped\",\r\n                backgroundColor: \"#8AF\",\r\n                data:  [] \r\n            },\r\n            {\r\n                label: \"Pending\",\r\n                backgroundColor: \"#F5F28F\",\r\n                data:  [] \r\n            },\r\n            {\r\n                label: \"Undefined\",\r\n                backgroundColor: \"#F5B975\",\r\n                data:  [] \r\n            }\r\n        ]\r\n    };\r\n\r\n    var context = document.getElementById(\"tags-chart\");\r\n    window.myBar = new Chart(context, {\r\n        type: \"bar\",\r\n        data: chartData,\r\n        options: {\r\n            tooltips: {\r\n                mode: \"label\"\r\n            },\r\n            responsive: true,\r\n            legend: {\r\n                display: false\r\n            },\r\n            scales: {\r\n                xAxes: [{\r\n                    stacked: true\r\n                }],\r\n                yAxes: [{\r\n                    stacked: true\r\n                }]\r\n            }\r\n        }\r\n    });\r\n\r\n});  </script>\r\n</head>\r\n<body>\r\n\r\n<nav class=\"navbar navbar-default navbar-fixed-top\" id=\"navigation\">\r\n  <div class=\"container-fluid\">\r\n    <div class=\"collapse navbar-collapse\">\r\n      <p class=\"navbar-text navbar-left\">Cucumber Report</p>\r\n      <ul class=\"nav navbar-nav navbar-right\">\r\n        <li role=\"presentation\" ><a href=\"overview-features.html\">Features</a></li>\r\n        <li role=\"presentation\"      class=\"active\" ><a href=\"overview-tags.html\">Tags</a></li>\r\n        <li role=\"presentation\" ><a href=\"overview-steps.html\">Steps</a></li>\r\n        <li role=\"presentation\" ><a href=\"overview-failures.html\">Failures</a></li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</nav>\r\n\r\n\r\n<div class=\"container-fluid\">\r\n  <div class=\"col-md-5 col-md-offset-1\">\r\n\r\n<table class=\"table table-bordered\" id=\"build-info\">\r\n  <thead>\r\n    <tr>\r\n      <th>Project</th>\r\n        <th>Number</th>\r\n      <th>Date</th>\r\n    </tr>\r\n  </thead>\r\n  <tbody>\r\n    <tr class=\"info\">\r\n      <td>OPEN-MRS-Cucumber-Report</td>\r\n        <td>1</td>\r\n      <td>21 Sep 2023, 20:40</td>\r\n    </tr>\r\n  </tbody>\r\n</table>\r\n\r\n  </div>\r\n  <div class=\"col-md-3 col-md-offset-2\">\r\n  </div>\r\n</div>\r\n\r\n\r\n<div id=\"report-lead\" class=\"container-fluid\">\r\n  <div class=\"col-md-10 col-md-offset-1\">\r\n    <h2>Tags Statistics</h2>\r\n      <p>The following graph shows passing and failing statistics for tags</p>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n<br/>\r\n<div class=\"container-fluid\" id=\"report\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-10 col-md-offset-1\">\r\n        <p>You have no tags in your cucumber report</p>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<nav class=\"navbar navbar-default\" id=\"footer\">\r\n  <div class=\"container-fluid\">\r\n    <p class=\"navbar-text navbar-right\">\r\n        <small>generate Cucumber HTML reports via:&nbsp;</small>\r\n        <a class=\"navbar-link\" href=\"https://github.com/jenkinsci/cucumber-reports-plugin\">Jenkins Plugin</a> |\r\n        <a class=\"navbar-link\" href=\"https://github.com/damianszczepanik/cucumber-reporting\">Standalone</a> |\r\n        <a class=\"navbar-link\" href=\"https://github.com/damianszczepanik/cucumber-sandwich\">Sandwich</a> |\r\n        <a class=\"navbar-link\" href=\"https://github.com/damianszczepanik/maven-cucumber-reporting\">Maven</a>\r\n        &nbsp;&nbsp;\r\n    </p>\r\n  </div>\r\n</nav>\r\n\r\n</body>\r\n</html>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/reports/html-reports/cucumber-html-reports/overview-tags.html b/reports/html-reports/cucumber-html-reports/overview-tags.html
+--- a/reports/html-reports/cucumber-html-reports/overview-tags.html	
++++ b/reports/html-reports/cucumber-html-reports/overview-tags.html	
+@@ -135,7 +135,7 @@
+     <tr class="info">
+       <td>OPEN-MRS-Cucumber-Report</td>
+         <td>1</td>
+-      <td>21 Sep 2023, 20:40</td>
++      <td>26 Sep 2023, 14:51</td>
+     </tr>
+   </tbody>
+ </table>
+Index: src/test/java/com/open_mrs/runners/ReRunner.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.open_mrs.runners;\n\nimport io.cucumber.junit.Cucumber;\nimport io.cucumber.junit.CucumberOptions;\nimport org.junit.runner.RunWith;\n\n@RunWith(Cucumber.class)\n@CucumberOptions(\n                     // for windows users please use content root ..\n        features = \"/Users/htamoukraytt/IdeaProjects/OPEN-MRS/src/test/resources/Ui_festures\",\n        glue = \"com/open_mrs/stepdef\",\n        dryRun = false,\n        plugin = {\"pretty\",\"html:target/uiReport.html\",\"rerun:target/uiFailedTests.txt\",\"json:target/cucumber-reports/cucumber.json\"}\n\n)\n\n\n\npublic class ReRunner {\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/open_mrs/runners/ReRunner.java b/src/test/java/com/open_mrs/runners/ReRunner.java
+--- a/src/test/java/com/open_mrs/runners/ReRunner.java	
++++ b/src/test/java/com/open_mrs/runners/ReRunner.java	
+@@ -7,7 +7,7 @@
+ @RunWith(Cucumber.class)
+ @CucumberOptions(
+                      // for windows users please use content root ..
+-        features = "/Users/htamoukraytt/IdeaProjects/OPEN-MRS/src/test/resources/Ui_festures",
++        features ="/Users/htamoukraytt/IdeaProjects/OPEN-MRS/src/test/resources/Ui_festures",
+         glue = "com/open_mrs/stepdef",
+         dryRun = false,
+         plugin = {"pretty","html:target/uiReport.html","rerun:target/uiFailedTests.txt","json:target/cucumber-reports/cucumber.json"}
+Index: reports/html-reports/cucumber-html-reports/report-feature_771467585.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\n<html>\n<head>\n\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n\n<script src=\"js/jquery.min.js\"></script>\n<script src=\"js/jquery.tablesorter.min.js\"></script>\n<script src=\"js/Chart.min.js\"></script>\n<script src=\"js/moment.min.js\"></script>\n<script src=\"js/bootstrap.min.js\"></script>\n\n<link rel=\"stylesheet\" href=\"css/bootstrap.min.css\" type=\"text/css\"/>\n<link rel=\"stylesheet\" href=\"css/cucumber.css\" type=\"text/css\"/>\n<link rel=\"stylesheet\" href=\"css/font-awesome.min.css\"/>\n<link rel=\"shortcut icon\" href=\"images/favicon.png\"/>\n\n<script>\n$(document).ready(function() {\n    // this will tell tablesorter to try looking for the data-value attribute\n    // if present, it'll sort by that instead\n    // otherwise, it'll sort by the text content of the table cell\n    $(\"#tablesorter\").tablesorter({\n        textAttribute: 'data-value',\n        // ignores the first row of the header, the 'scenario', 'steps', since\n        // sorting those doesn't make sense\n        selectorHeaders: '> thead tr:not(.dont-sort) th',\n        // use a stable sort\n        sortStable: true\n    });\n});\n</script>\n\n\n\n\n\n\n\n\n\n\n\n<title>Cucumber Reports (no 1) - Feature: Testing Register a patient functionality and UNKNOWN patient</title>\n\n</head>\n<body>\n\n<nav class=\"navbar navbar-default navbar-fixed-top\" id=\"navigation\">\n  <div class=\"container-fluid\">\n    <div class=\"collapse navbar-collapse\">\n      <p class=\"navbar-text navbar-left\">Cucumber Report</p>\n      <ul class=\"nav navbar-nav navbar-right\">\n        <li role=\"presentation\" ><a href=\"overview-features.html\">Features</a></li>\n        <li role=\"presentation\" ><a href=\"overview-tags.html\">Tags</a></li>\n        <li role=\"presentation\" ><a href=\"overview-steps.html\">Steps</a></li>\n        <li role=\"presentation\" ><a href=\"overview-failures.html\">Failures</a></li>\n      </ul>\n    </div>\n  </div>\n</nav>\n\n\n<div class=\"container-fluid\">\n  <div class=\"col-md-5 col-md-offset-1\">\n\n<table class=\"table table-bordered\" id=\"build-info\">\n  <thead>\n    <tr>\n      <th>Project</th>\n        <th>Number</th>\n      <th>Date</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr class=\"info\">\n      <td>OPEN-MRS-Cucumber-Report</td>\n        <td>1</td>\n      <td>21 Sep 2023, 20:40</td>\n    </tr>\n  </tbody>\n</table>\n\n  </div>\n  <div class=\"col-md-3 col-md-offset-2\">\n  </div>\n</div>\n\n\n<div id=\"report-lead\" class=\"container-fluid\">\n  <div class=\"col-md-10 col-md-offset-1\">\n    <h2>Feature Report</h2>\n  </div>\n</div>\n\n\n<div class=\"container-fluid\" id=\"report\">\n  <div class=\"row\">\n    <div class=\"col-md-10 col-md-offset-1\">\n      <table class=\"stats-table\">\n\n\n<thead>\n  <tr class=\"header dont-sort\">\n      <th></th>\n    <th colspan=\"6\">Steps</th>\n    <th colspan=\"3\">Scenarios</th>\n    <th colspan=\"2\">Features</th>\n  </tr>\n  <tr>\n    <th>Feature</th>\n    <th class=\"passed\">Passed</th>\n    <th class=\"failed\">Failed</th>\n    <th class=\"skipped\">Skipped</th>\n    <th class=\"pending\">Pending</th>\n    <th class=\"undefined\">Undefined</th>\n    <th class=\"total\">Total</th>\n\n    <th class=\"passed\">Passed</th>\n    <th class=\"failed\">Failed</th>\n    <th class=\"total\">Total</th>\n\n    <th>Duration</th>\n    <th>Status</th>\n  </tr>\n</thead>\n\n\n        <tbody>\n        <tr>\n          <td class=\"tagname\">Testing Register a patient functionality and UNKNOWN patient</td>\n          <td      class=\"passed\"    >28</td>\n          <td >0</td>\n          <td >0</td>\n          <td >0</td>\n          <td >0</td>\n          <td class=\"total\">28</td>\n\n          <td  class=\"passed\"    >2</td>\n          <td >0</td>\n          <td class=\"total\">2</td>\n\n          <td class=\"duration\" data-value=\"15262318000\">15.262</td>\n          <td class=\"passed\">Passed</td>\n        </tr>\n        </tbody>\n\n      </table>\n    </div>\n  </div>\n</div>\n\n\n\n<div class=\"container-fluid\">\n  <div class=\"row\">\n    <div class=\"col-md-1 col-md-offset-10\">\n      <i class=\"fa fa-chevron-circle-down fa-2x collapsable-control\"\n        onClick=\"javascript:$('#report .collapsable-details').collapse('show')\"></i>\n      <i class=\"fa fa-chevron-circle-up fa-2x collapsable-control\"\n        onClick=\"javascript:$('#report .collapsable-details').collapse('hide')\"></i>\n    </div>\n  </div>\n</div>\n\n\n<div class=\"container-fluid\" id=\"report\">\n  <div class=\"row\">\n    <div class=\"col-md-10 col-md-offset-1\">\n      <div class=\"feature\">\n\n<div class=\"tags indention\">\n</div>\n\n\n<div class=\"brief passed\">\n  <span class=\"keyword indention\">Feature</span>\n  <span class=\"name\">Testing Register a patient functionality and UNKNOWN patient</span>\n\n\n</div>\n\n        <div class=\"description indention\"></div>\n\n        <div class=\"elements inner-level\">\n\n<div class=\"element\">\n\n\n<div class=\"tags indention\">\n</div>\n\n\n  <span class=\"lead-duration duration\">2.888</span>\n\n\n  <span data-toggle=\"collapse\" class=\" collapsed  collapsable-control\" data-target=\"#element-1\">\n\n<div class=\"brief passed\">\n  <span class=\"keyword indention\">Background</span>\n  <span class=\"name\">navigates register patient</span>\n\n\n     <i class=\"chevron fa fa-fw\"></i>\n</div>\n\n  </span>\n  <div class=\"description indention\"></div>\n\n  <div id=\"element-1\" class=\"collapse collapsable-details \">\n\n\n\n\n\n<div class=\"steps inner-level\">\n  <div data-toggle=\"collapse\" class=\" collapsed  collapsable-control\" data-target=\"#steps-2\">\n\n<div class=\"brief passed\">\n  <span class=\"keyword indention\">Steps</span>\n  <span class=\"name\"></span>\n\n\n     <i class=\"chevron fa fa-fw\"></i>\n</div>\n\n  </div>\n\n  <div id=\"steps-2\" class=\"inner-level collapse collapsable-details \">\n      <div class=\"step\">\n\n\n<div class=\"brief step-name-Given passed\">\n  <span class=\"keyword indention\">Given</span>\n  <span class=\"name\">user navigates to the application</span>\n\n  <span class=\"lead-duration duration\">0.610</span>\n\n</div>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n      </div>\n      <div class=\"step\">\n\n\n<div class=\"brief step-name-When passed\">\n  <span class=\"keyword indention\">When</span>\n  <span class=\"name\">user provides correct credentials</span>\n\n  <span class=\"lead-duration duration\">0.159</span>\n\n</div>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n      </div>\n      <div class=\"step\">\n\n\n<div class=\"brief step-name-And passed\">\n  <span class=\"keyword indention\">And</span>\n  <span class=\"name\">user chooses the location <span class=\"argument\">'Laboratory'</span></span>\n\n  <span class=\"lead-duration duration\">0.027</span>\n\n</div>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n      </div>\n      <div class=\"step\">\n\n\n<div class=\"brief step-name-And passed\">\n  <span class=\"keyword indention\">And</span>\n  <span class=\"name\">user clicks Login</span>\n\n  <span class=\"lead-duration duration\">0.509</span>\n\n</div>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n      </div>\n      <div class=\"step\">\n\n\n<div class=\"brief step-name-And passed\">\n  <span class=\"keyword indention\">And</span>\n  <span class=\"name\">user chooses from home features <span class=\"argument\">'Register a patient'</span></span>\n\n  <span class=\"lead-duration duration\">1.582</span>\n\n</div>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n      </div>\n  </div>\n</div>\n\n\n\n\n\n  </div>\n</div>\n\n\n<div class=\"element\">\n\n\n<div class=\"tags indention\">\n</div>\n\n\n  <span class=\"lead-duration duration\">6.084</span>\n\n\n  <span data-toggle=\"collapse\" class=\" collapsed  collapsable-control\" data-target=\"#element-3\">\n\n<div class=\"brief passed\">\n  <span class=\"keyword indention\">Scenario</span>\n  <span class=\"name\">positive Scenario , providing correct data</span>\n\n\n     <i class=\"chevron fa fa-fw\"></i>\n</div>\n\n  </span>\n  <div class=\"description indention\"></div>\n\n  <div id=\"element-3\" class=\"collapse collapsable-details \">\n\n\n  <div class=\"inner-level hooks-element-before\">\n    <div data-toggle=\"collapse\" class=\" collapsed  collapsable-control\" data-target=\"#before-4\">\n\n<div class=\"brief passed\">\n  <span class=\"keyword indention\">Hooks</span>\n  <span class=\"name\"></span>\n\n\n     <i class=\"chevron fa fa-fw\"></i>\n</div>\n\n    </div>\n\n    <div id=\"before-4\" class=\"inner-level collapse collapsable-details \">\n        <div class=\"hook\">\n          <div class=\"brief passed\">\n            <span class=\"keyword indention\">Before</span>\n              <span class=\"location name\">com.open_mrs.stepdef.hookClass.setup()</span>\n\n  <span class=\"lead-duration duration\">1.805</span>\n\n          </div>\n\n\n\n\n\n\n\n        </div>\n    </div>\n  </div>\n\n\n\n<div class=\"steps inner-level\">\n  <div data-toggle=\"collapse\" class=\" collapsed  collapsable-control\" data-target=\"#steps-5\">\n\n<div class=\"brief passed\">\n  <span class=\"keyword indention\">Steps</span>\n  <span class=\"name\"></span>\n\n\n     <i class=\"chevron fa fa-fw\"></i>\n</div>\n\n  </div>\n\n  <div id=\"steps-5\" class=\"inner-level collapse collapsable-details \">\n      <div class=\"step\">\n\n\n<div class=\"brief step-name-And passed\">\n  <span class=\"keyword indention\">And</span>\n  <span class=\"name\">user provides correct info   givenName, <span class=\"argument\">'said'</span>, FamilyName  , <span class=\"argument\">'souma'</span>,</span>\n\n  <span class=\"lead-duration duration\">0.060</span>\n\n</div>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n      </div>\n      <div class=\"step\">\n\n\n<div class=\"brief step-name-And passed\">\n  <span class=\"keyword indention\">And</span>\n  <span class=\"name\">user clicks next</span>\n\n  <span class=\"lead-duration duration\">0.029</span>\n\n</div>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n      </div>\n      <div class=\"step\">\n\n\n<div class=\"brief step-name-And passed\">\n  <span class=\"keyword indention\">And</span>\n  <span class=\"name\">user chooses gender , Male or Female <span class=\"argument\">'M'</span></span>\n\n  <span class=\"lead-duration duration\">0.524</span>\n\n</div>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n      </div>\n      <div class=\"step\">\n\n\n<div class=\"brief step-name-And passed\">\n  <span class=\"keyword indention\">And</span>\n  <span class=\"name\">user clicks next</span>\n\n  <span class=\"lead-duration duration\">0.037</span>\n\n</div>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n      </div>\n      <div class=\"step\">\n\n\n<div class=\"brief step-name-And passed\">\n  <span class=\"keyword indention\">And</span>\n  <span class=\"name\">user provides birth date , <span class=\"argument\">'10'</span> , <span class=\"argument\">'May'</span> , <span class=\"argument\">'2001'</span></span>\n\n  <span class=\"lead-duration duration\">0.599</span>\n\n</div>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n      </div>\n      <div class=\"step\">\n\n\n<div class=\"brief step-name-And passed\">\n  <span class=\"keyword indention\">And</span>\n  <span class=\"name\">user clicks next</span>\n\n  <span class=\"lead-duration duration\">0.052</span>\n\n</div>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n      </div>\n      <div class=\"step\">\n\n\n<div class=\"brief step-name-And passed\">\n  <span class=\"keyword indention\">And</span>\n  <span class=\"name\">user provides address , <span class=\"argument\">'streetAddress'</span> , <span class=\"argument\">'city'</span> , <span class=\"argument\">'il'</span> , <span class=\"argument\">'usa'</span>  , <span class=\"argument\">'34234'</span></span>\n\n  <span class=\"lead-duration duration\">0.677</span>\n\n</div>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n      </div>\n      <div class=\"step\">\n\n\n<div class=\"brief step-name-And passed\">\n  <span class=\"keyword indention\">And</span>\n  <span class=\"name\">user clicks next</span>\n\n  <span class=\"lead-duration duration\">0.034</span>\n\n</div>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n      </div>\n      <div class=\"step\">\n\n\n<div class=\"brief step-name-And passed\">\n  <span class=\"keyword indention\">And</span>\n  <span class=\"name\">user provides phone number <span class=\"argument\">'35235233523'</span></span>\n\n  <span class=\"lead-duration duration\">0.540</span>\n\n</div>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n      </div>\n      <div class=\"step\">\n\n\n<div class=\"brief step-name-And passed\">\n  <span class=\"keyword indention\">And</span>\n  <span class=\"name\">user clicks next</span>\n\n  <span class=\"lead-duration duration\">0.034</span>\n\n</div>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n      </div>\n      <div class=\"step\">\n\n\n<div class=\"brief step-name-And passed\">\n  <span class=\"keyword indention\">And</span>\n  <span class=\"name\">user clicks next</span>\n\n  <span class=\"lead-duration duration\">0.025</span>\n\n</div>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n      </div>\n      <div class=\"step\">\n\n\n<div class=\"brief step-name-And passed\">\n  <span class=\"keyword indention\">And</span>\n  <span class=\"name\">user clicks confirm</span>\n\n  <span class=\"lead-duration duration\">0.557</span>\n\n</div>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n      </div>\n      <div class=\"step\">\n\n\n<div class=\"brief step-name-Then passed\">\n  <span class=\"keyword indention\">Then</span>\n  <span class=\"name\">user clicks homepage , find patient , search for id and validates the id is unique , <span class=\"argument\">'Showing 1 to 1'</span></span>\n\n  <span class=\"lead-duration duration\">2.910</span>\n\n</div>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n      </div>\n  </div>\n</div>\n\n\n\n\n  <div class=\"inner-level hooks-element-after\">\n    <div data-toggle=\"collapse\" class=\" collapsed  collapsable-control\" data-target=\"#after-6\">\n\n<div class=\"brief passed\">\n  <span class=\"keyword indention\">Hooks</span>\n  <span class=\"name\"></span>\n\n\n     <i class=\"chevron fa fa-fw\"></i>\n</div>\n\n    </div>\n\n    <div id=\"after-6\" class=\"inner-level collapse collapsable-details \">\n        <div class=\"hook\">\n          <div class=\"brief passed\">\n            <span class=\"keyword indention\">After</span>\n              <span class=\"location name\">com.open_mrs.stepdef.hookClass.tearDown(io.cucumber.java.Scenario)</span>\n\n  <span class=\"lead-duration duration\">0.110</span>\n\n          </div>\n\n\n\n\n\n\n\n        </div>\n    </div>\n  </div>\n\n  </div>\n</div>\n\n\n<div class=\"element\">\n\n\n<div class=\"tags indention\">\n</div>\n\n\n  <span class=\"lead-duration duration\">3.210</span>\n\n\n  <span data-toggle=\"collapse\" class=\" collapsed  collapsable-control\" data-target=\"#element-7\">\n\n<div class=\"brief passed\">\n  <span class=\"keyword indention\">Background</span>\n  <span class=\"name\">navigates register patient</span>\n\n\n     <i class=\"chevron fa fa-fw\"></i>\n</div>\n\n  </span>\n  <div class=\"description indention\"></div>\n\n  <div id=\"element-7\" class=\"collapse collapsable-details \">\n\n\n\n\n\n<div class=\"steps inner-level\">\n  <div data-toggle=\"collapse\" class=\" collapsed  collapsable-control\" data-target=\"#steps-8\">\n\n<div class=\"brief passed\">\n  <span class=\"keyword indention\">Steps</span>\n  <span class=\"name\"></span>\n\n\n     <i class=\"chevron fa fa-fw\"></i>\n</div>\n\n  </div>\n\n  <div id=\"steps-8\" class=\"inner-level collapse collapsable-details \">\n      <div class=\"step\">\n\n\n<div class=\"brief step-name-Given passed\">\n  <span class=\"keyword indention\">Given</span>\n  <span class=\"name\">user navigates to the application</span>\n\n  <span class=\"lead-duration duration\">1.038</span>\n\n</div>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n      </div>\n      <div class=\"step\">\n\n\n<div class=\"brief step-name-When passed\">\n  <span class=\"keyword indention\">When</span>\n  <span class=\"name\">user provides correct credentials</span>\n\n  <span class=\"lead-duration duration\">0.142</span>\n\n</div>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n      </div>\n      <div class=\"step\">\n\n\n<div class=\"brief step-name-And passed\">\n  <span class=\"keyword indention\">And</span>\n  <span class=\"name\">user chooses the location <span class=\"argument\">'Laboratory'</span></span>\n\n  <span class=\"lead-duration duration\">0.026</span>\n\n</div>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n      </div>\n      <div class=\"step\">\n\n\n<div class=\"brief step-name-And passed\">\n  <span class=\"keyword indention\">And</span>\n  <span class=\"name\">user clicks Login</span>\n\n  <span class=\"lead-duration duration\">0.501</span>\n\n</div>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n      </div>\n      <div class=\"step\">\n\n\n<div class=\"brief step-name-And passed\">\n  <span class=\"keyword indention\">And</span>\n  <span class=\"name\">user chooses from home features <span class=\"argument\">'Register a patient'</span></span>\n\n  <span class=\"lead-duration duration\">1.501</span>\n\n</div>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n      </div>\n  </div>\n</div>\n\n\n\n\n\n  </div>\n</div>\n\n\n<div class=\"element\">\n\n\n<div class=\"tags indention\">\n</div>\n\n\n  <span class=\"lead-duration duration\">3.078</span>\n\n\n  <span data-toggle=\"collapse\" class=\" collapsed  collapsable-control\" data-target=\"#element-9\">\n\n<div class=\"brief passed\">\n  <span class=\"keyword indention\">Scenario</span>\n  <span class=\"name\">Testing functionality of registering UNKNOWN patient on Open_mrs application</span>\n\n\n     <i class=\"chevron fa fa-fw\"></i>\n</div>\n\n  </span>\n  <div class=\"description indention\"></div>\n\n  <div id=\"element-9\" class=\"collapse collapsable-details \">\n\n\n  <div class=\"inner-level hooks-element-before\">\n    <div data-toggle=\"collapse\" class=\" collapsed  collapsable-control\" data-target=\"#before-10\">\n\n<div class=\"brief passed\">\n  <span class=\"keyword indention\">Hooks</span>\n  <span class=\"name\"></span>\n\n\n     <i class=\"chevron fa fa-fw\"></i>\n</div>\n\n    </div>\n\n    <div id=\"before-10\" class=\"inner-level collapse collapsable-details \">\n        <div class=\"hook\">\n          <div class=\"brief passed\">\n            <span class=\"keyword indention\">Before</span>\n              <span class=\"location name\">com.open_mrs.stepdef.hookClass.setup()</span>\n\n  <span class=\"lead-duration duration\">1.356</span>\n\n          </div>\n\n\n\n\n\n\n\n        </div>\n    </div>\n  </div>\n\n\n\n<div class=\"steps inner-level\">\n  <div data-toggle=\"collapse\" class=\" collapsed  collapsable-control\" data-target=\"#steps-11\">\n\n<div class=\"brief passed\">\n  <span class=\"keyword indention\">Steps</span>\n  <span class=\"name\"></span>\n\n\n     <i class=\"chevron fa fa-fw\"></i>\n</div>\n\n  </div>\n\n  <div id=\"steps-11\" class=\"inner-level collapse collapsable-details \">\n      <div class=\"step\">\n\n\n<div class=\"brief step-name-When passed\">\n  <span class=\"keyword indention\">When</span>\n  <span class=\"name\">user checks the Unidentified patient box</span>\n\n  <span class=\"lead-duration duration\">0.044</span>\n\n</div>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n      </div>\n      <div class=\"step\">\n\n\n<div class=\"brief step-name-And passed\">\n  <span class=\"keyword indention\">And</span>\n  <span class=\"name\">user chooses gender , Male or Female <span class=\"argument\">'F'</span></span>\n\n  <span class=\"lead-duration duration\">0.523</span>\n\n</div>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n      </div>\n      <div class=\"step\">\n\n\n<div class=\"brief step-name-And passed\">\n  <span class=\"keyword indention\">And</span>\n  <span class=\"name\">user clicks next</span>\n\n  <span class=\"lead-duration duration\">0.043</span>\n\n</div>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n      </div>\n      <div class=\"step\">\n\n\n<div class=\"brief step-name-And passed\">\n  <span class=\"keyword indention\">And</span>\n  <span class=\"name\">user clicks confirm</span>\n\n  <span class=\"lead-duration duration\">0.533</span>\n\n</div>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n      </div>\n      <div class=\"step\">\n\n\n<div class=\"brief step-name-Then passed\">\n  <span class=\"keyword indention\">Then</span>\n  <span class=\"name\">user validates patients firstName and lastName are both UNKNOWN , <span class=\"argument\">'UNKNOWN'</span> , <span class=\"argument\">'UNKNOWN'</span></span>\n\n  <span class=\"lead-duration duration\">1.933</span>\n\n</div>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n      </div>\n  </div>\n</div>\n\n\n\n\n  <div class=\"inner-level hooks-element-after\">\n    <div data-toggle=\"collapse\" class=\" collapsed  collapsable-control\" data-target=\"#after-12\">\n\n<div class=\"brief passed\">\n  <span class=\"keyword indention\">Hooks</span>\n  <span class=\"name\"></span>\n\n\n     <i class=\"chevron fa fa-fw\"></i>\n</div>\n\n    </div>\n\n    <div id=\"after-12\" class=\"inner-level collapse collapsable-details \">\n        <div class=\"hook\">\n          <div class=\"brief passed\">\n            <span class=\"keyword indention\">After</span>\n              <span class=\"location name\">com.open_mrs.stepdef.hookClass.tearDown(io.cucumber.java.Scenario)</span>\n\n  <span class=\"lead-duration duration\">0.129</span>\n\n          </div>\n\n\n\n\n\n\n\n        </div>\n    </div>\n  </div>\n\n  </div>\n</div>\n\n        </div>\n\n      </div>\n    </div>\n  </div>\n</div>\n\n\n<div class=\"container-fluid\">\n  <div class=\"row\">\n    <div class=\"col-md-1 col-md-offset-10\">\n      <i class=\"fa fa-chevron-circle-down fa-2x collapsable-control\"\n        onClick=\"javascript:$('#report .collapsable-details').collapse('show')\"></i>\n      <i class=\"fa fa-chevron-circle-up fa-2x collapsable-control\"\n        onClick=\"javascript:$('#report .collapsable-details').collapse('hide')\"></i>\n    </div>\n  </div>\n</div>\n\n<br/>\n\n<nav class=\"navbar navbar-default\" id=\"footer\">\n  <div class=\"container-fluid\">\n    <p class=\"navbar-text navbar-right\">\n        <small>generate Cucumber HTML reports via:&nbsp;</small>\n        <a class=\"navbar-link\" href=\"https://github.com/jenkinsci/cucumber-reports-plugin\">Jenkins Plugin</a> |\n        <a class=\"navbar-link\" href=\"https://github.com/damianszczepanik/cucumber-reporting\">Standalone</a> |\n        <a class=\"navbar-link\" href=\"https://github.com/damianszczepanik/cucumber-sandwich\">Sandwich</a> |\n        <a class=\"navbar-link\" href=\"https://github.com/damianszczepanik/maven-cucumber-reporting\">Maven</a>\n        &nbsp;&nbsp;\n    </p>\n  </div>\n</nav>\n\n</body>\n</html>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/reports/html-reports/cucumber-html-reports/report-feature_771467585.html b/reports/html-reports/cucumber-html-reports/report-feature_771467585.html
+--- a/reports/html-reports/cucumber-html-reports/report-feature_771467585.html	
++++ b/reports/html-reports/cucumber-html-reports/report-feature_771467585.html	
+@@ -76,7 +76,7 @@
+     <tr class="info">
+       <td>OPEN-MRS-Cucumber-Report</td>
+         <td>1</td>
+-      <td>21 Sep 2023, 20:40</td>
++      <td>26 Sep 2023, 14:51</td>
+     </tr>
+   </tbody>
+ </table>
+@@ -129,18 +129,18 @@
+         <tbody>
+         <tr>
+           <td class="tagname">Testing Register a patient functionality and UNKNOWN patient</td>
+-          <td      class="passed"    >28</td>
++          <td      class="passed"    >36</td>
+           <td >0</td>
+           <td >0</td>
+           <td >0</td>
+           <td >0</td>
+-          <td class="total">28</td>
++          <td class="total">36</td>
+ 
+-          <td  class="passed"    >2</td>
++          <td  class="passed"    >3</td>
+           <td >0</td>
+-          <td class="total">2</td>
++          <td class="total">3</td>
+ 
+-          <td class="duration" data-value="15262318000">15.262</td>
++          <td class="duration" data-value="12335412000">12.335</td>
+           <td class="passed">Passed</td>
+         </tr>
+         </tbody>
+@@ -191,7 +191,7 @@
+ </div>
+ 
+ 
+-  <span class="lead-duration duration">2.888</span>
++  <span class="lead-duration duration">1.496</span>
+ 
+ 
+   <span data-toggle="collapse" class=" collapsed  collapsable-control" data-target="#element-1">
+@@ -234,7 +234,7 @@
+   <span class="keyword indention">Given</span>
+   <span class="name">user navigates to the application</span>
+ 
+-  <span class="lead-duration duration">0.610</span>
++  <span class="lead-duration duration">0.453</span>
+ 
+ </div>
+ 
+@@ -261,7 +261,7 @@
+   <span class="keyword indention">When</span>
+   <span class="name">user provides correct credentials</span>
+ 
+-  <span class="lead-duration duration">0.159</span>
++  <span class="lead-duration duration">0.146</span>
+ 
+ </div>
+ 
+@@ -288,7 +288,7 @@
+   <span class="keyword indention">And</span>
+   <span class="name">user chooses the location <span class="argument">'Laboratory'</span></span>
+ 
+-  <span class="lead-duration duration">0.027</span>
++  <span class="lead-duration duration">0.026</span>
+ 
+ </div>
+ 
+@@ -315,7 +315,7 @@
+   <span class="keyword indention">And</span>
+   <span class="name">user clicks Login</span>
+ 
+-  <span class="lead-duration duration">0.509</span>
++  <span class="lead-duration duration">0.273</span>
+ 
+ </div>
+ 
+@@ -342,7 +342,7 @@
+   <span class="keyword indention">And</span>
+   <span class="name">user chooses from home features <span class="argument">'Register a patient'</span></span>
+ 
+-  <span class="lead-duration duration">1.582</span>
++  <span class="lead-duration duration">0.595</span>
+ 
+ </div>
+ 
+@@ -380,7 +380,7 @@
+ </div>
+ 
+ 
+-  <span class="lead-duration duration">6.084</span>
++  <span class="lead-duration duration">5.677</span>
+ 
+ 
+   <span data-toggle="collapse" class=" collapsed  collapsable-control" data-target="#element-3">
+@@ -418,7 +418,7 @@
+             <span class="keyword indention">Before</span>
+               <span class="location name">com.open_mrs.stepdef.hookClass.setup()</span>
+ 
+-  <span class="lead-duration duration">1.805</span>
++  <span class="lead-duration duration">1.606</span>
+ 
+           </div>
+ 
+@@ -455,7 +455,7 @@
+   <span class="keyword indention">And</span>
+   <span class="name">user provides correct info   givenName, <span class="argument">'said'</span>, FamilyName  , <span class="argument">'souma'</span>,</span>
+ 
+-  <span class="lead-duration duration">0.060</span>
++  <span class="lead-duration duration">0.051</span>
+ 
+ </div>
+ 
+@@ -482,7 +482,7 @@
+   <span class="keyword indention">And</span>
+   <span class="name">user clicks next</span>
+ 
+-  <span class="lead-duration duration">0.029</span>
++  <span class="lead-duration duration">0.027</span>
+ 
+ </div>
+ 
+@@ -536,7 +536,7 @@
+   <span class="keyword indention">And</span>
+   <span class="name">user clicks next</span>
+ 
+-  <span class="lead-duration duration">0.037</span>
++  <span class="lead-duration duration">0.041</span>
+ 
+ </div>
+ 
+@@ -563,7 +563,7 @@
+   <span class="keyword indention">And</span>
+   <span class="name">user provides birth date , <span class="argument">'10'</span> , <span class="argument">'May'</span> , <span class="argument">'2001'</span></span>
+ 
+-  <span class="lead-duration duration">0.599</span>
++  <span class="lead-duration duration">0.592</span>
+ 
+ </div>
+ 
+@@ -590,7 +590,7 @@
+   <span class="keyword indention">And</span>
+   <span class="name">user clicks next</span>
+ 
+-  <span class="lead-duration duration">0.052</span>
++  <span class="lead-duration duration">0.044</span>
+ 
+ </div>
+ 
+@@ -617,7 +617,7 @@
+   <span class="keyword indention">And</span>
+   <span class="name">user provides address , <span class="argument">'streetAddress'</span> , <span class="argument">'city'</span> , <span class="argument">'il'</span> , <span class="argument">'usa'</span>  , <span class="argument">'34234'</span></span>
+ 
+-  <span class="lead-duration duration">0.677</span>
++  <span class="lead-duration duration">0.645</span>
+ 
+ </div>
+ 
+@@ -644,7 +644,7 @@
+   <span class="keyword indention">And</span>
+   <span class="name">user clicks next</span>
+ 
+-  <span class="lead-duration duration">0.034</span>
++  <span class="lead-duration duration">0.026</span>
+ 
+ </div>
+ 
+@@ -671,7 +671,7 @@
+   <span class="keyword indention">And</span>
+   <span class="name">user provides phone number <span class="argument">'35235233523'</span></span>
+ 
+-  <span class="lead-duration duration">0.540</span>
++  <span class="lead-duration duration">0.536</span>
+ 
+ </div>
+ 
+@@ -698,7 +698,7 @@
+   <span class="keyword indention">And</span>
+   <span class="name">user clicks next</span>
+ 
+-  <span class="lead-duration duration">0.034</span>
++  <span class="lead-duration duration">0.041</span>
+ 
+ </div>
+ 
+@@ -725,7 +725,7 @@
+   <span class="keyword indention">And</span>
+   <span class="name">user clicks next</span>
+ 
+-  <span class="lead-duration duration">0.025</span>
++  <span class="lead-duration duration">0.022</span>
+ 
+ </div>
+ 
+@@ -752,7 +752,7 @@
+   <span class="keyword indention">And</span>
+   <span class="name">user clicks confirm</span>
+ 
+-  <span class="lead-duration duration">0.557</span>
++  <span class="lead-duration duration">0.554</span>
+ 
+ </div>
+ 
+@@ -779,7 +779,7 @@
+   <span class="keyword indention">Then</span>
+   <span class="name">user clicks homepage , find patient , search for id and validates the id is unique , <span class="argument">'Showing 1 to 1'</span></span>
+ 
+-  <span class="lead-duration duration">2.910</span>
++  <span class="lead-duration duration">2.568</span>
+ 
+ </div>
+ 
+@@ -824,7 +824,7 @@
+             <span class="keyword indention">After</span>
+               <span class="location name">com.open_mrs.stepdef.hookClass.tearDown(io.cucumber.java.Scenario)</span>
+ 
+-  <span class="lead-duration duration">0.110</span>
++  <span class="lead-duration duration">0.107</span>
+ 
+           </div>
+ 
+@@ -849,7 +849,7 @@
+ </div>
+ 
+ 
+-  <span class="lead-duration duration">3.210</span>
++  <span class="lead-duration duration">1.611</span>
+ 
+ 
+   <span data-toggle="collapse" class=" collapsed  collapsable-control" data-target="#element-7">
+@@ -892,7 +892,7 @@
+   <span class="keyword indention">Given</span>
+   <span class="name">user navigates to the application</span>
+ 
+-  <span class="lead-duration duration">1.038</span>
++  <span class="lead-duration duration">0.569</span>
+ 
+ </div>
+ 
+@@ -946,7 +946,7 @@
+   <span class="keyword indention">And</span>
+   <span class="name">user chooses the location <span class="argument">'Laboratory'</span></span>
+ 
+-  <span class="lead-duration duration">0.026</span>
++  <span class="lead-duration duration">0.025</span>
+ 
+ </div>
+ 
+@@ -973,7 +973,7 @@
+   <span class="keyword indention">And</span>
+   <span class="name">user clicks Login</span>
+ 
+-  <span class="lead-duration duration">0.501</span>
++  <span class="lead-duration duration">0.302</span>
+ 
+ </div>
+ 
+@@ -1000,7 +1000,7 @@
+   <span class="keyword indention">And</span>
+   <span class="name">user chooses from home features <span class="argument">'Register a patient'</span></span>
+ 
+-  <span class="lead-duration duration">1.501</span>
++  <span class="lead-duration duration">0.571</span>
+ 
+ </div>
+ 
+@@ -1038,7 +1038,7 @@
+ </div>
+ 
+ 
+-  <span class="lead-duration duration">3.078</span>
++  <span class="lead-duration duration">2.004</span>
+ 
+ 
+   <span data-toggle="collapse" class=" collapsed  collapsable-control" data-target="#element-9">
+@@ -1076,7 +1076,7 @@
+             <span class="keyword indention">Before</span>
+               <span class="location name">com.open_mrs.stepdef.hookClass.setup()</span>
+ 
+-  <span class="lead-duration duration">1.356</span>
++  <span class="lead-duration duration">1.207</span>
+ 
+           </div>
+ 
+@@ -1113,7 +1113,7 @@
+   <span class="keyword indention">When</span>
+   <span class="name">user checks the Unidentified patient box</span>
+ 
+-  <span class="lead-duration duration">0.044</span>
++  <span class="lead-duration duration">0.039</span>
+ 
+ </div>
+ 
+@@ -1167,7 +1167,7 @@
+   <span class="keyword indention">And</span>
+   <span class="name">user clicks next</span>
+ 
+-  <span class="lead-duration duration">0.043</span>
++  <span class="lead-duration duration">0.038</span>
+ 
+ </div>
+ 
+@@ -1194,7 +1194,7 @@
+   <span class="keyword indention">And</span>
+   <span class="name">user clicks confirm</span>
+ 
+-  <span class="lead-duration duration">0.533</span>
++  <span class="lead-duration duration">0.531</span>
+ 
+ </div>
+ 
+@@ -1221,7 +1221,7 @@
+   <span class="keyword indention">Then</span>
+   <span class="name">user validates patients firstName and lastName are both UNKNOWN , <span class="argument">'UNKNOWN'</span> , <span class="argument">'UNKNOWN'</span></span>
+ 
+-  <span class="lead-duration duration">1.933</span>
++  <span class="lead-duration duration">0.872</span>
+ 
+ </div>
+ 
+@@ -1266,7 +1266,395 @@
+             <span class="keyword indention">After</span>
+               <span class="location name">com.open_mrs.stepdef.hookClass.tearDown(io.cucumber.java.Scenario)</span>
+ 
+-  <span class="lead-duration duration">0.129</span>
++  <span class="lead-duration duration">0.121</span>
++
++          </div>
++
++
++
++
++
++
++
++        </div>
++    </div>
++  </div>
++
++  </div>
++</div>
++
++
++<div class="element">
++
++
++<div class="tags indention">
++</div>
++
++
++  <span class="lead-duration duration">1.452</span>
++
++
++  <span data-toggle="collapse" class=" collapsed  collapsable-control" data-target="#element-13">
++
++<div class="brief passed">
++  <span class="keyword indention">Background</span>
++  <span class="name">navigates register patient</span>
++
++
++     <i class="chevron fa fa-fw"></i>
++</div>
++
++  </span>
++  <div class="description indention"></div>
++
++  <div id="element-13" class="collapse collapsable-details ">
++
++
++
++
++
++<div class="steps inner-level">
++  <div data-toggle="collapse" class=" collapsed  collapsable-control" data-target="#steps-14">
++
++<div class="brief passed">
++  <span class="keyword indention">Steps</span>
++  <span class="name"></span>
++
++
++     <i class="chevron fa fa-fw"></i>
++</div>
++
++  </div>
++
++  <div id="steps-14" class="inner-level collapse collapsable-details ">
++      <div class="step">
++
++
++<div class="brief step-name-Given passed">
++  <span class="keyword indention">Given</span>
++  <span class="name">user navigates to the application</span>
++
++  <span class="lead-duration duration">0.433</span>
++
++</div>
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++      </div>
++      <div class="step">
++
++
++<div class="brief step-name-When passed">
++  <span class="keyword indention">When</span>
++  <span class="name">user provides correct credentials</span>
++
++  <span class="lead-duration duration">0.134</span>
++
++</div>
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++      </div>
++      <div class="step">
++
++
++<div class="brief step-name-And passed">
++  <span class="keyword indention">And</span>
++  <span class="name">user chooses the location <span class="argument">'Laboratory'</span></span>
++
++  <span class="lead-duration duration">0.023</span>
++
++</div>
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++      </div>
++      <div class="step">
++
++
++<div class="brief step-name-And passed">
++  <span class="keyword indention">And</span>
++  <span class="name">user clicks Login</span>
++
++  <span class="lead-duration duration">0.330</span>
++
++</div>
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++      </div>
++      <div class="step">
++
++
++<div class="brief step-name-And passed">
++  <span class="keyword indention">And</span>
++  <span class="name">user chooses from home features <span class="argument">'Register a patient'</span></span>
++
++  <span class="lead-duration duration">0.530</span>
++
++</div>
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++      </div>
++  </div>
++</div>
++
++
++
++
++
++  </div>
++</div>
++
++
++<div class="element">
++
++
++<div class="tags indention">
++</div>
++
++
++  <span class="lead-duration duration">0.093</span>
++
++
++  <span data-toggle="collapse" class=" collapsed  collapsable-control" data-target="#element-15">
++
++<div class="brief passed">
++  <span class="keyword indention">Scenario</span>
++  <span class="name">negative Testing of  registering a patient with missing required info</span>
++
++
++     <i class="chevron fa fa-fw"></i>
++</div>
++
++  </span>
++  <div class="description indention"></div>
++
++  <div id="element-15" class="collapse collapsable-details ">
++
++
++  <div class="inner-level hooks-element-before">
++    <div data-toggle="collapse" class=" collapsed  collapsable-control" data-target="#before-16">
++
++<div class="brief passed">
++  <span class="keyword indention">Hooks</span>
++  <span class="name"></span>
++
++
++     <i class="chevron fa fa-fw"></i>
++</div>
++
++    </div>
++
++    <div id="before-16" class="inner-level collapse collapsable-details ">
++        <div class="hook">
++          <div class="brief passed">
++            <span class="keyword indention">Before</span>
++              <span class="location name">com.open_mrs.stepdef.hookClass.setup()</span>
++
++  <span class="lead-duration duration">1.163</span>
++
++          </div>
++
++
++
++
++
++
++
++        </div>
++    </div>
++  </div>
++
++
++
++<div class="steps inner-level">
++  <div data-toggle="collapse" class=" collapsed  collapsable-control" data-target="#steps-17">
++
++<div class="brief passed">
++  <span class="keyword indention">Steps</span>
++  <span class="name"></span>
++
++
++     <i class="chevron fa fa-fw"></i>
++</div>
++
++  </div>
++
++  <div id="steps-17" class="inner-level collapse collapsable-details ">
++      <div class="step">
++
++
++<div class="brief step-name-And passed">
++  <span class="keyword indention">And</span>
++  <span class="name">user provides correct info   givenName, <span class="argument">'       '</span>, FamilyName  , <span class="argument">'       '</span>,</span>
++
++  <span class="lead-duration duration">0.046</span>
++
++</div>
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++      </div>
++      <div class="step">
++
++
++<div class="brief step-name-And passed">
++  <span class="keyword indention">And</span>
++  <span class="name">user clicks next</span>
++
++  <span class="lead-duration duration">0.023</span>
++
++</div>
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++      </div>
++      <div class="step">
++
++
++<div class="brief step-name-Then passed">
++  <span class="keyword indention">Then</span>
++  <span class="name">user validate expected error message , <span class="argument">'Required'</span> , <span class="argument">'Required'</span></span>
++
++  <span class="lead-duration duration">0.022</span>
++
++</div>
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++      </div>
++  </div>
++</div>
++
++
++
++
++  <div class="inner-level hooks-element-after">
++    <div data-toggle="collapse" class=" collapsed  collapsable-control" data-target="#after-18">
++
++<div class="brief passed">
++  <span class="keyword indention">Hooks</span>
++  <span class="name"></span>
++
++
++     <i class="chevron fa fa-fw"></i>
++</div>
++
++    </div>
++
++    <div id="after-18" class="inner-level collapse collapsable-details ">
++        <div class="hook">
++          <div class="brief passed">
++            <span class="keyword indention">After</span>
++              <span class="location name">com.open_mrs.stepdef.hookClass.tearDown(io.cucumber.java.Scenario)</span>
++
++  <span class="lead-duration duration">0.105</span>
+ 
+           </div>
+ 

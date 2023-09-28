@@ -1,0 +1,73 @@
+Index: src/test/resources/Ui_festures/Visit.feature
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\n\n\nFeature:  Testing Visit functionality for Unidentified Patient\n\n#  Background: navigates register patient\n\n\n    Scenario: Validation of Start visit and add Past visit functionalities\n\n      Given user navigates to the application\n\n      When  user provides correct credentials\n\n      And   user chooses the location 'Laboratory'\n\n      And   user clicks Login\n\n      And  user chooses from home features 'Find Patient Record'\n\n      And  user searches for '100MMW'\n\n      Then user validates 'show contact info' button is visible and available\n\n      And user validates 'Merge to another patient' button is visible and available\n\n      And user validates 'Actions' button is visible and available\n\n      And user validates 'End visit' button is visible and available\n\n      And user validates 'Visit notes' button is visible and available\n\n      And user validates 'Admit patient' button is visible and available\n\n      And user validates 'Capture vitals' button is visible and available\n\n      And user validates 'Attachments' button is visible and available\n\n      Then user navigates to 'Actions' and clicks 'Add past visit'\n\n      And user picks date and Confirms\n\n      Then user clicks on Given name of patient\n\n      And user clicks 'End Visit' button\n\n\n\n\n
+===================================================================
+diff --git a/src/test/resources/Ui_festures/Visit.feature b/src/test/resources/Ui_festures/Visit.feature
+--- a/src/test/resources/Ui_festures/Visit.feature	
++++ b/src/test/resources/Ui_festures/Visit.feature	
+@@ -1,6 +1,5 @@
+ 
+-
+-
++@Regression
+ Feature:  Testing Visit functionality for Unidentified Patient
+ 
+ #  Background: navigates register patient
+@@ -18,31 +17,31 @@
+ 
+       And  user chooses from home features 'Find Patient Record'
+ 
+-      And  user searches for '100MMW'
+-
+-      Then user validates 'show contact info' button is visible and available
+-
+-      And user validates 'Merge to another patient' button is visible and available
+-
+-      And user validates 'Actions' button is visible and available
+-
+-      And user validates 'End visit' button is visible and available
+-
+-      And user validates 'Visit notes' button is visible and available
+-
+-      And user validates 'Admit patient' button is visible and available
+-
+-      And user validates 'Capture vitals' button is visible and available
+-
+-      And user validates 'Attachments' button is visible and available
+-
+-      Then user navigates to 'Actions' and clicks 'Add past visit'
+-
+-      And user picks date and Confirms
+-
+-      Then user clicks on Given name of patient
+-
+-      And user clicks 'End Visit' button
++#      And  user searches for '100MMW'
++#
++#      Then user validates 'show contact info' button is visible and available
++#
++#      And user validates 'Merge to another patient' button is visible and available
++#
++#      And user validates 'Actions' button is visible and available
++#
++#      And user validates 'End visit' button is visible and available
++#
++#      And user validates 'Visit notes' button is visible and available
++#
++#      And user validates 'Admit patient' button is visible and available
++#
++#      And user validates 'Capture vitals' button is visible and available
++#
++#      And user validates 'Attachments' button is visible and available
++#
++#      Then user navigates to 'Actions' and clicks 'Add past visit'
++#
++#      And user picks date and Confirms
++#
++#      Then user clicks on Given name of patient
++#
++#      And user clicks 'End Visit' button
+ 
+ 
+ 

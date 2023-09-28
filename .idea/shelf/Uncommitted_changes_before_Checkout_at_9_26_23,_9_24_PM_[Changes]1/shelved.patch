@@ -1,0 +1,68 @@
+Index: src/test/java/com/open_mrs/page/HomePage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.open_mrs.page;\n\nimport org.junit.Assert;\nimport org.openqa.selenium.WebDriver;\nimport org.openqa.selenium.WebElement;\nimport org.openqa.selenium.support.FindBy;\nimport org.openqa.selenium.support.PageFactory;\n\npublic class HomePage {\n\n\n    public HomePage(WebDriver driver) {\n        PageFactory.initElements(driver,this);\n    }\n\n\n    @FindBy(xpath =\"//i[@class='icon-search']\")\n    WebElement  FindPatientRecord;\n\n    @FindBy(xpath =\"//a[@type='button'][2]\")\n    WebElement     ActiveVisits;\n\n    @FindBy(xpath =\"//a[@type='button'][3]\")\n    WebElement  CaptureVitals;\n\n    @FindBy(xpath =\"//a[@type='button'][4]\")\n    WebElement  Register_a_patient;\n\n    @FindBy(xpath =\"//a[@type='button'][5]\")\n    WebElement  AppointmentScheduling;\n\n    @FindBy(xpath =\"(//a[@type='button'][6]\")\n    WebElement  Reports;\n\n    @FindBy(xpath =\"//a[@type='button'][7]\")\n    WebElement  DataManagement;\n\n    @FindBy(xpath =\"//a[@type='button'][8]\")\n    WebElement   ConfigureMetadata;\n\n\n    @FindBy(xpath =\"//a[@type='button'][9]\")\n    WebElement   SystemAdministration;\n\n\n\n\n\n    public void chooseHomeFeature(String option){\n\n        switch (option){\n\n            case \"Find Patient Record\" :  FindPatientRecord.click();     ;break;\n\n            case \"ActiveVisits\" : ActiveVisits.click(); break;\n\n            case \"Capture Vitals\" :  CaptureVitals.click(); break;\n\n            case \"Register a patient\" : Register_a_patient.click(); break;\n\n            case \"Appointment Scheduling\" :  AppointmentScheduling.click(); break;\n\n            case \"Reports\" :  Reports.click(); break;\n\n            case \"Data Management\" :  DataManagement.click(); break;\n\n            case \"Configure Metadata\" :  ConfigureMetadata.click(); break;\n\n\n            case \"System Administration\" : SystemAdministration.click(); break;\n\n\n            default:\n                System.out.println(\"WRONG HOME FEATURE!\");\n                Assert.assertTrue(false); break;\n\n\n        }\n\n\n\n    }\n\n\n\n\n\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/open_mrs/page/HomePage.java b/src/test/java/com/open_mrs/page/HomePage.java
+--- a/src/test/java/com/open_mrs/page/HomePage.java	
++++ b/src/test/java/com/open_mrs/page/HomePage.java	
+@@ -43,9 +43,8 @@
+     WebElement   SystemAdministration;
+ 
+ 
+-
++    
+ 
+-
+     public void chooseHomeFeature(String option){
+ 
+         switch (option){
+Index: src/test/java/com/open_mrs/stepdef/FindPatientStepDef.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.open_mrs.stepdef;\n\nimport com.open_mrs.page.FindPatientPage;\nimport com.open_mrs.page.HomePage;\nimport com.open_mrs.page.LoginPage;\nimport com.open_mrs.page.RegisterPatientPage;\nimport com.utils.DriverHelper;\nimport io.cucumber.java.en.And;\nimport io.cucumber.java.en.Then;\nimport org.junit.Assert;\nimport org.openqa.selenium.WebDriver;\n\npublic class FindPatientStepDef {\n\n    WebDriver driver = DriverHelper.getDriver();\n    LoginPage loginpage = new LoginPage(driver);\n    HomePage homePage = new HomePage(driver);\n    RegisterPatientPage register = new RegisterPatientPage(driver);\n\n    FindPatientPage find=new FindPatientPage(driver);\n\n\n    @Then(\"user clicks homepage , find patient , search for id and validates the id is unique , {string}\")\n    public void userClicksHomepageFindPatientSearchForIdAndValidatesTheIdIsUnique(String expectedMessage) throws InterruptedException {\n        Assert.assertTrue(find.validateIdIsUnique(driver).contains(expectedMessage));\n    }\n\n    // sabina's step\n    @And(\"user provides the id {string}\")\n    public void userProvidesTheId(String id ) {\n        find.searchForPatient(id);\n\n    @And(\"user searches for {string}\")\n    public void userSearchesForUNKNOWN(String idOrName) {\n        find.searchForPatient(idOrName);\n\n    }\n\n    @Then(\"user validates the id is unique , {string}\")\n    public void userValidatesTheIdIsUniqueShowingTo(String expectedMessage) throws InterruptedException {\n        Assert.assertTrue(find.validateTheId().contains(expectedMessage));\n\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/open_mrs/stepdef/FindPatientStepDef.java b/src/test/java/com/open_mrs/stepdef/FindPatientStepDef.java
+--- a/src/test/java/com/open_mrs/stepdef/FindPatientStepDef.java	
++++ b/src/test/java/com/open_mrs/stepdef/FindPatientStepDef.java	
+@@ -25,20 +25,20 @@
+         Assert.assertTrue(find.validateIdIsUnique(driver).contains(expectedMessage));
+     }
+ 
+-    // sabina's step
+-    @And("user provides the id {string}")
+-    public void userProvidesTheId(String id ) {
+-        find.searchForPatient(id);
+-
+-    @And("user searches for {string}")
+-    public void userSearchesForUNKNOWN(String idOrName) {
+-        find.searchForPatient(idOrName);
+-
+-    }
+-
+-    @Then("user validates the id is unique , {string}")
+-    public void userValidatesTheIdIsUniqueShowingTo(String expectedMessage) throws InterruptedException {
+-        Assert.assertTrue(find.validateTheId().contains(expectedMessage));
+-
+-    }
++//    // sabina's step
++//    @And("user provides the id {string}")
++//    public void userProvidesTheId(String id ) {
++//        find.searchForPatient(id);}
++//
++//    @And("user searches for {string}")
++//    public void userSearchesForUNKNOWN(String idOrName) {
++//        find.searchForPatient(idOrName);
++//
++//    }
++//
++//    @Then("user validates the id is unique , {string}")
++//    public void userValidatesTheIdIsUniqueShowingTo(String expectedMessage) throws InterruptedException {
++//        Assert.assertTrue(find.validateTheId().contains(expectedMessage));
++//
++//    }
+ }

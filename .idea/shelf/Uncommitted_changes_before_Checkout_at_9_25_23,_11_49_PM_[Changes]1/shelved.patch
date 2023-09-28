@@ -1,0 +1,176 @@
+Index: src/test/java/com/open_mrs/stepdef/HomePageStepDef.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.open_mrs.stepdef;\n\nimport com.open_mrs.page.HomePage;\nimport com.open_mrs.page.LoginPage;\nimport com.utils.DriverHelper;\nimport io.cucumber.java.en.And;\nimport org.openqa.selenium.WebDriver;\n\npublic class HomePageStepDef {\n\n\n\n    WebDriver driver = DriverHelper.getDriver();\n    LoginPage loginpage = new LoginPage(driver);\n    HomePage homePage=new HomePage(driver);\n\n\n\n\n\n    @And(\"user chooses from home features {string}\")\n    public void userChoosesFromHomeFeaturesRegisterAPatient(String option) {\n         homePage.chooseHomeFeature(option);\n    }\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/open_mrs/stepdef/HomePageStepDef.java b/src/test/java/com/open_mrs/stepdef/HomePageStepDef.java
+--- a/src/test/java/com/open_mrs/stepdef/HomePageStepDef.java	
++++ b/src/test/java/com/open_mrs/stepdef/HomePageStepDef.java	
+@@ -17,7 +17,7 @@
+ 
+ 
+ 
+-
++    // homePage
+     @And("user chooses from home features {string}")
+     public void userChoosesFromHomeFeaturesRegisterAPatient(String option) {
+          homePage.chooseHomeFeature(option);
+Index: src/test/java/com/open_mrs/runners/ReRunner.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.open_mrs.runners;\n\nimport io.cucumber.junit.Cucumber;\nimport io.cucumber.junit.CucumberOptions;\nimport org.junit.runner.RunWith;\n\n@RunWith(Cucumber.class)\n@CucumberOptions(\n                     // for windows users please use content root ..\n        features = \"/Users/htamoukraytt/IdeaProjects/OPEN-MRS/src/test/resources/Ui_festures\",\n        glue = \"com/open_mrs/stepdef\",\n        dryRun = false,\n        plugin = {\"pretty\",\"html:target/uiReport.html\",\"rerun:target/uiFailedTests.txt\",\"json:target/cucumber-reports/cucumber.json\"}\n\n)\n\n\n\npublic class ReRunner {\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/open_mrs/runners/ReRunner.java b/src/test/java/com/open_mrs/runners/ReRunner.java
+--- a/src/test/java/com/open_mrs/runners/ReRunner.java	
++++ b/src/test/java/com/open_mrs/runners/ReRunner.java	
+@@ -7,16 +7,17 @@
+ @RunWith(Cucumber.class)
+ @CucumberOptions(
+                      // for windows users please use content root ..
+-        features = "/Users/htamoukraytt/IdeaProjects/OPEN-MRS/src/test/resources/Ui_festures",
++        features ="/Users/htamoukraytt/IdeaProjects/OPEN-MRS/src/test/resources/Ui_festures",
+         glue = "com/open_mrs/stepdef",
+         dryRun = false,
++        tags = "@Regression",
+         plugin = {"pretty","html:target/uiReport.html","rerun:target/uiFailedTests.txt","json:target/cucumber-reports/cucumber.json"}
+ 
+ )
+ 
+-
+-
+ public class ReRunner {
+ 
+ 
++
++
+ }
+Index: src/test/resources/Ui_festures/Register.feature
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>Feature:  Testing Register a patient functionality and UNKNOWN patient\n\n  Background: navigates register patient\n\n    Given user navigates to the application\n\n    When  user provides correct credentials\n\n    And   user chooses the location 'Laboratory'\n\n    And   user clicks Login\n\n    And  user chooses from home features 'Register a patient'\n\n\n\n  Scenario:  positive Scenario , providing correct data\n\n    And  user provides correct info   givenName, 'said', FamilyName  , 'souma',\n\n    And  user clicks next\n\n    And  user chooses gender , Male or Female 'M'\n\n    And  user clicks next\n\n    And  user provides birth date , '10' , 'May' , '2001'\n\n    And  user clicks next\n\n    And  user provides address , 'streetAddress' , 'city' , 'il' , 'usa'  , '34234'\n     #bug wrong date\n    And  user clicks next\n\n    And user provides phone number '35235233523'\n      #bug no limit in digits\n    And  user clicks next\n\n    And  user clicks next\n\n    And user clicks confirm\n\n    Then user clicks homepage , find patient , search for id and validates the id is unique , 'Showing 1 to 1'\n\n\n\n\n  Scenario: Testing functionality of registering UNKNOWN patient on Open_mrs application\n\n    When user checks the Unidentified patient box\n\n    And  user chooses gender , Male or Female 'F'\n\n    And  user clicks next\n\n    And user clicks confirm\n\n    Then user validates patients firstName and lastName are both UNKNOWN , 'UNKNOWN' , 'UNKNOWN'\n\n\n\n\n\n    Scenario: negative Testing of  registering a patient with missing required info\n\n      And  user provides correct info   givenName, '       ', FamilyName  , '       ',\n   # bug fields for given name and family  can take anything as input (numbers symbols )\n      And  user clicks next\n\n      Then user validate expected error message , 'Required' , 'Required'
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/resources/Ui_festures/Register.feature b/src/test/resources/Ui_festures/Register.feature
+--- a/src/test/resources/Ui_festures/Register.feature	
++++ b/src/test/resources/Ui_festures/Register.feature	
+@@ -1,3 +1,4 @@
++@Regression
+ Feature:  Testing Register a patient functionality and UNKNOWN patient
+ 
+   Background: navigates register patient
+@@ -34,6 +35,7 @@
+ 
+     And user provides phone number '35235233523'
+       #bug no limit in digits
++
+     And  user clicks next
+ 
+     And  user clicks next
+Index: src/test/java/com/open_mrs/runners/Runner.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.open_mrs.runners;\n\nimport io.cucumber.junit.Cucumber;\nimport io.cucumber.junit.CucumberOptions;\nimport org.junit.runner.RunWith;\n\n@RunWith(Cucumber.class)\n@CucumberOptions(\n        features =\"src/test/resources/Ui_festures\",\n        glue = \"com/open_mrs/stepdef\",\n        dryRun = false,\n        tags =\"Regression\",\n        plugin = {\"pretty\",\"html:target/uiReport.html\",\"rerun:target/uiFailedTests.txt\",\"json:target/cucumber-reports/cucumber.json\"}\n)\n\n\npublic class Runner {\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/open_mrs/runners/Runner.java b/src/test/java/com/open_mrs/runners/Runner.java
+--- a/src/test/java/com/open_mrs/runners/Runner.java	
++++ b/src/test/java/com/open_mrs/runners/Runner.java	
+@@ -6,14 +6,15 @@
+ 
+ @RunWith(Cucumber.class)
+ @CucumberOptions(
+-        features ="src/test/resources/Ui_festures",
++
++        features ="/Users/htamoukraytt/IdeaProjects/OPEN-MRS/src/test/resources/Ui_festures",
+         glue = "com/open_mrs/stepdef",
+         dryRun = false,
+-        tags ="Regression",
++        //tags ="Regression",
++       // plugin = {"pretty","html:target/uiReport.html","rerun:target/uiFailedTests.txt","json:target/cucumber-reports/cucumber.json"}
+         plugin = {"pretty","html:target/uiReport.html","rerun:target/uiFailedTests.txt","json:target/cucumber-reports/cucumber.json"}
+ )
+ 
+-
+ public class Runner {
+ 
+ }
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\n  <component name=\"MavenProjectsManager\">\n    <option name=\"originalFiles\">\n      <list>\n        <option value=\"$PROJECT_DIR$/pom.xml\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_X\" default=\"true\" project-jdk-name=\"11\" project-jdk-type=\"JavaSDK\">\n    <output url=\"file://$PROJECT_DIR$/out\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	
++++ b/.idea/misc.xml	
+@@ -8,7 +8,7 @@
+       </list>
+     </option>
+   </component>
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_19" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: src/test/resources/Ui_festures/login.feature
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\nFeature: TESTING LOGIN FUNCTIONALITY\n\n\n  Scenario Outline: Testing happy path login with all locations feature\n    Given user navigates to the application\n\n    When  user provides correct credentials\n\n    And   user chooses the location '<LOCATION>'\n\n    And   user clicks Login\n\n    Then  user validates login was successfully '<LoggedIn_Location>'\n\n    Examples:\n      | LOCATION          | LoggedIn_Location                                     |\n      | Laboratory        | Logged in as Super User (admin) at Laboratory.        |\n      | Inpatient Ward    | Logged in as Super User (admin) at Inpatient Ward.    |\n      | Isolation Ward    | Logged in as Super User (admin) at Isolation Ward.    |\n      | Outpatient Clinic | Logged in as Super User (admin) at Outpatient Clinic. |\n      | Pharmacy          | Logged in as Super User (admin) at Pharmacy.          |\n      | Registration Desk | Logged in as Super User (admin) at Registration Desk. |\n\n\n  Scenario Outline:  Testing negative login scenario\n\n    Given user navigates to the application\n\n    When user provides wrong credentials '<userName>' , '<password>'\n\n    And  user chooses the location '<LOCATION>'\n\n    And  user clicks Login\n\n    Then  user validates the login was not successfully 'Invalid username/password. Please try again.'\n    Examples:\n      | userName | password | LOCATION          |\n      | wrong    | 42343423 | Laboratory        |\n      |          | Admin123 | Inpatient Ward    |\n      | admin    |          | Isolation Ward    |\n      |          |          | Outpatient Clinic |\n      | admin    | Admin12  | Pharmacy          |\n      | 12476    | %&%&^^   | Registration Desk |
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/resources/Ui_festures/login.feature b/src/test/resources/Ui_festures/login.feature
+--- a/src/test/resources/Ui_festures/login.feature	
++++ b/src/test/resources/Ui_festures/login.feature	
+@@ -1,4 +1,4 @@
+-
++@Regression
+ Feature: TESTING LOGIN FUNCTIONALITY
+ 
+ 
+Index: Configuration.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>browser=chrome\nQA_OPEN-MRS_URL=http://18.118.139.162/openmrs/login.htm\nQA_userName=admin\nQA_password=Admin123\nQA_Patient_ID=100HM1\n\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/Configuration.properties b/Configuration.properties
+--- a/Configuration.properties	
++++ b/Configuration.properties	
+@@ -2,7 +2,5 @@
+ QA_OPEN-MRS_URL=http://18.118.139.162/openmrs/login.htm
+ QA_userName=admin
+ QA_password=Admin123
+-QA_Patient_ID=100HM1
+-
+-
++Test:test
+ 
+Index: src/test/java/com/open_mrs/stepdef/hookClass.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.open_mrs.stepdef;\n\nimport com.utils.BrowsersUtils;\nimport com.utils.ConfigReader;\nimport com.utils.DriverHelper;\nimport io.cucumber.java.After;\nimport io.cucumber.java.Before;\nimport io.cucumber.java.Scenario;\nimport org.openqa.selenium.WebDriver;\n\npublic class hookClass {\n\n     WebDriver driver;\n\n      @Before\n      public void setup(){\n          driver= DriverHelper.getDriver();\n      }\n\n\n\n      @After\n    public void tearDown(Scenario scenario){\n         BrowsersUtils.getScreenShotWithCucumber(driver,scenario);\n         // driver.quit();\n      }\n\n\n\n\n\n\n\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/open_mrs/stepdef/hookClass.java b/src/test/java/com/open_mrs/stepdef/hookClass.java
+--- a/src/test/java/com/open_mrs/stepdef/hookClass.java	
++++ b/src/test/java/com/open_mrs/stepdef/hookClass.java	
+@@ -22,7 +22,7 @@
+       @After
+     public void tearDown(Scenario scenario){
+          BrowsersUtils.getScreenShotWithCucumber(driver,scenario);
+-         // driver.quit();
++          driver.quit();
+       }
+ 
+ 

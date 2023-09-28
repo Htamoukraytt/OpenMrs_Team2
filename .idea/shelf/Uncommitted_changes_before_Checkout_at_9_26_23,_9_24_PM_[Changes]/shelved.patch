@@ -1,0 +1,146 @@
+Index: src/test/java/com/open_mrs/page/FindPatientPage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.open_mrs.page;\n\nimport com.utils.BrowsersUtils;\nimport org.openqa.selenium.Keys;\nimport org.openqa.selenium.WebDriver;\nimport org.openqa.selenium.WebElement;\nimport org.openqa.selenium.support.FindBy;\nimport org.openqa.selenium.support.PageFactory;\nimport org.openqa.selenium.support.ui.ExpectedConditions;\nimport org.openqa.selenium.support.ui.WebDriverWait;\n\nimport java.time.Duration;\n\npublic class FindPatientPage {\n\n    // constructor\n    public FindPatientPage(WebDriver driver) {\n        PageFactory.initElements(driver,this);\n    }\n\n    // elements from Register page\n    @FindBy(xpath = \"//div[@class='float-sm-right']//span\")\n    WebElement customerID;\n\n    @FindBy(xpath = \"//div[@class='logo']\")\n    WebElement homePage;\n    @FindBy(xpath =\"//a[@type='button'][1]\")\n    WebElement  FindPatientRecord;\n\n    // elements for this page\n    @FindBy(xpath =\"//input[@id='patient-search']\")\n    WebElement patient_search;\n\n\n    @FindBy(xpath = \"//div[@class='dataTables_info']\")\n    WebElement idResult;\n\n\n\n\n\n\n\n    // METHOD TO VALIDATE THAT THE USER IS UNIQUE AFTER WE REGISTER SUCCESSFULLY\n\n    public String validateIdIsUnique(WebDriver driver) throws InterruptedException {\n        // storing id\n        String id= BrowsersUtils.getText(customerID);\n\n        homePage.click();     // going to home page\n        Thread.sleep(500);\n\n        FindPatientRecord.click();   // clicking this feature to look up our id we stored\n        Thread.sleep(500);\n\n\n         patient_search.sendKeys(id);   // used our stored id\n\n\n        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(20));  // waiting for result how many id\n        wait.until(ExpectedConditions.visibilityOf(idResult));\n\n\n\n       return      BrowsersUtils.getText(idResult);  // returning the actual message\n\n    }\n\n\n    // sabina's methods\n    public void searchForPatient(String id){\n        patient_search.sendKeys(id);\n    }\n\n\n    public String validateTheId() throws InterruptedException {\n        Thread.sleep(500);\n\n        return BrowsersUtils.getText(idResult);\n    }\n\n\n    // ulan method\n\n    public void searchForPatient(String nameOrId){\n       patient_search.sendKeys(nameOrId,Keys.ENTER);\n    }\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/open_mrs/page/FindPatientPage.java b/src/test/java/com/open_mrs/page/FindPatientPage.java
+--- a/src/test/java/com/open_mrs/page/FindPatientPage.java	
++++ b/src/test/java/com/open_mrs/page/FindPatientPage.java	
+@@ -37,10 +37,6 @@
+ 
+ 
+ 
+-
+-
+-
+-
+     // METHOD TO VALIDATE THAT THE USER IS UNIQUE AFTER WE REGISTER SUCCESSFULLY
+ 
+     public String validateIdIsUnique(WebDriver driver) throws InterruptedException {
+@@ -68,22 +64,22 @@
+ 
+ 
+     // sabina's methods
+-    public void searchForPatient(String id){
+-        patient_search.sendKeys(id);
+-    }
+-
+-
+-    public String validateTheId() throws InterruptedException {
+-        Thread.sleep(500);
+-
+-        return BrowsersUtils.getText(idResult);
+-    }
+-
+-
+-    // ulan method
+-
+-    public void searchForPatient(String nameOrId){
+-       patient_search.sendKeys(nameOrId,Keys.ENTER);
+-    }
++//    public void searchForPatient(String id){
++//        patient_search.sendKeys(id);
++//    }
++//
++//
++//    public String validateTheId() throws InterruptedException {
++//        Thread.sleep(500);
++//
++//        return BrowsersUtils.getText(idResult);
++//    }
++//
++//
++//    // ulan method
++//
++//    public void searchForPatient(String nameOrId){
++//       patient_search.sendKeys(nameOrId,Keys.ENTER);
++//    }
+ 
+ }
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\n  <component name=\"MavenProjectsManager\">\n    <option name=\"originalFiles\">\n      <list>\n        <option value=\"$PROJECT_DIR$/pom.xml\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_X\" default=\"true\" project-jdk-name=\"11\" project-jdk-type=\"JavaSDK\">\n    <output url=\"file://$PROJECT_DIR$/out\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	
++++ b/.idea/misc.xml	
+@@ -8,7 +8,7 @@
+       </list>
+     </option>
+   </component>
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_19" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: src/test/resources/Ui_festures/Visit.feature
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\n\n\nFeature:  Testing Visit functionality for Unidentified Patient\n\n#  Background: navigates register patient\n\n\n    Scenario: Validation of Start visit and add Past visit functionalities\n\n      Given user navigates to the application\n\n      When  user provides correct credentials\n\n      And   user chooses the location 'Laboratory'\n\n      And   user clicks Login\n\n      And  user chooses from home features 'Find Patient Record'\n\n      And  user searches for '100MMW'\n\n      Then user validates 'show contact info' button is visible and available\n\n      And user validates 'Merge to another patient' button is visible and available\n\n      And user validates 'Actions' button is visible and available\n\n      And user validates 'End visit' button is visible and available\n\n      And user validates 'Visit notes' button is visible and available\n\n      And user validates 'Admit patient' button is visible and available\n\n      And user validates 'Capture vitals' button is visible and available\n\n      And user validates 'Attachments' button is visible and available\n\n      Then user navigates to 'Actions' and clicks 'Add past visit'\n\n      And user picks date and Confirms\n\n      Then user clicks on Given name of patient\n\n      And user clicks 'End Visit' button\n\n\n\n\n
+===================================================================
+diff --git a/src/test/resources/Ui_festures/Visit.feature b/src/test/resources/Ui_festures/Visit.feature
+--- a/src/test/resources/Ui_festures/Visit.feature	
++++ b/src/test/resources/Ui_festures/Visit.feature	
+@@ -18,31 +18,31 @@
+ 
+       And  user chooses from home features 'Find Patient Record'
+ 
+-      And  user searches for '100MMW'
+-
+-      Then user validates 'show contact info' button is visible and available
+-
+-      And user validates 'Merge to another patient' button is visible and available
+-
+-      And user validates 'Actions' button is visible and available
+-
+-      And user validates 'End visit' button is visible and available
+-
+-      And user validates 'Visit notes' button is visible and available
+-
+-      And user validates 'Admit patient' button is visible and available
+-
+-      And user validates 'Capture vitals' button is visible and available
+-
+-      And user validates 'Attachments' button is visible and available
+-
+-      Then user navigates to 'Actions' and clicks 'Add past visit'
+-
+-      And user picks date and Confirms
+-
+-      Then user clicks on Given name of patient
+-
+-      And user clicks 'End Visit' button
++#      And  user searches for '100MMW'
++#
++#      Then user validates 'show contact info' button is visible and available
++#
++#      And user validates 'Merge to another patient' button is visible and available
++#
++#      And user validates 'Actions' button is visible and available
++#
++#      And user validates 'End visit' button is visible and available
++#
++#      And user validates 'Visit notes' button is visible and available
++#
++#      And user validates 'Admit patient' button is visible and available
++#
++#      And user validates 'Capture vitals' button is visible and available
++#
++#      And user validates 'Attachments' button is visible and available
++#
++#      Then user navigates to 'Actions' and clicks 'Add past visit'
++#
++#      And user picks date and Confirms
++#
++#      Then user clicks on Given name of patient
++#
++#      And user clicks 'End Visit' button
+ 
+ 
+ 

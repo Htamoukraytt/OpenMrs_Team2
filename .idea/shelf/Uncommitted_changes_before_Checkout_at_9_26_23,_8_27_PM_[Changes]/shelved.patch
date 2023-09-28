@@ -1,0 +1,219 @@
+Index: src/test/java/com/open_mrs/stepdef/FindPatientStepDef.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.open_mrs.stepdef;\n\nimport com.open_mrs.page.FindPatientPage;\nimport com.open_mrs.page.HomePage;\nimport com.open_mrs.page.LoginPage;\nimport com.open_mrs.page.RegisterPatientPage;\nimport com.utils.DriverHelper;\nimport io.cucumber.java.en.Then;\nimport org.junit.Assert;\nimport org.openqa.selenium.WebDriver;\n\npublic class FindPatientStepDef {\n\n    WebDriver driver = DriverHelper.getDriver();\n    LoginPage loginpage = new LoginPage(driver);\n    HomePage homePage = new HomePage(driver);\n    RegisterPatientPage register = new RegisterPatientPage(driver);\n\n    FindPatientPage find=new FindPatientPage(driver);\n\n\n    @Then(\"user clicks homepage , find patient , search for id and validates the id is unique , {string}\")\n    public void userClicksHomepageFindPatientSearchForIdAndValidatesTheIdIsUnique(String expectedMessage) throws InterruptedException {\n        Assert.assertTrue(find.validateIdIsUnique(driver).contains(expectedMessage));\n    }\n\n\n\n\n\n\n\n\n\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/open_mrs/stepdef/FindPatientStepDef.java b/src/test/java/com/open_mrs/stepdef/FindPatientStepDef.java
+--- a/src/test/java/com/open_mrs/stepdef/FindPatientStepDef.java	(revision 8e1f65785c2e88a8a8a343f34f82963bddcb74c3)
++++ b/src/test/java/com/open_mrs/stepdef/FindPatientStepDef.java	(date 1695778013125)
+@@ -5,6 +5,7 @@
+ import com.open_mrs.page.LoginPage;
+ import com.open_mrs.page.RegisterPatientPage;
+ import com.utils.DriverHelper;
++import io.cucumber.java.en.And;
+ import io.cucumber.java.en.Then;
+ import org.junit.Assert;
+ import org.openqa.selenium.WebDriver;
+@@ -14,7 +15,7 @@
+     WebDriver driver = DriverHelper.getDriver();
+     LoginPage loginpage = new LoginPage(driver);
+     HomePage homePage = new HomePage(driver);
+-    RegisterPatientPage register = new RegisterPatientPage(driver);
++    RegisterPatientPage register= new RegisterPatientPage(driver);
+ 
+     FindPatientPage find=new FindPatientPage(driver);
+ 
+@@ -24,14 +25,22 @@
+         Assert.assertTrue(find.validateIdIsUnique(driver).contains(expectedMessage));
+     }
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
++   //  sabina's step
++//    @And("user provides the id {string}")
++//    public void userProvidesTheId(String id ) {
++//        find.searchForPatient(id);
++//    }
++//
++//    @And("user searches for {string}")
++//    public void userSearchesForUNKNOWN(String idOrName) {
++//        find.searchForPatient(idOrName);
++//
++//    }
++//
++//    @Then("user validates the id is unique , {string}")
++//    public void userValidatesTheIdIsUniqueShowingTo(String expectedMessage) throws InterruptedException {
++//        Assert.assertTrue(find.validateTheId().contains(expectedMessage));
++//
++//    }
+ 
+ }
+Index: src/test/java/com/open_mrs/page/FindPatientPage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.open_mrs.page;\n\nimport com.utils.BrowsersUtils;\nimport org.openqa.selenium.Keys;\nimport org.openqa.selenium.WebDriver;\nimport org.openqa.selenium.WebElement;\nimport org.openqa.selenium.support.FindBy;\nimport org.openqa.selenium.support.PageFactory;\nimport org.openqa.selenium.support.ui.ExpectedConditions;\nimport org.openqa.selenium.support.ui.WebDriverWait;\n\nimport java.time.Duration;\n\npublic class FindPatientPage {\n\n    // constructor\n    public FindPatientPage(WebDriver driver) {\n        PageFactory.initElements(driver,this);\n    }\n\n    // elements from Register page\n    @FindBy(xpath = \"//div[@class='float-sm-right']//span\")\n    WebElement customerID;\n\n    @FindBy(xpath = \"//div[@class='logo']\")\n    WebElement homePage;\n    @FindBy(xpath =\"//a[@type='button'][1]\")\n    WebElement  FindPatientRecord;\n\n    // elements for this page\n    @FindBy(xpath =\"//input[@id='patient-search']\")\n    WebElement patient_search;\n\n\n\n    @FindBy(xpath = \"//div[@class='dataTables_info']\")\n    WebElement idResult;\n\n\n\n\n\n\n\n    // METHOD TO VALIDATE THAT THE USER IS UNIQUE AFTER WE REGISTER SUCCESSFULLY\n\n    public String validateIdIsUnique(WebDriver driver) throws InterruptedException {\n        // storing id\n        String id= BrowsersUtils.getText(customerID);\n\n        homePage.click();     // going to home page\n        Thread.sleep(500);\n\n        FindPatientRecord.click();   // clicking this feature to look up our id we stored\n        Thread.sleep(500);\n\n\n         patient_search.sendKeys(id);   // used our stored id\n\n\n        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(20));  // waiting for result how many id\n        wait.until(ExpectedConditions.visibilityOf(idResult));\n\n\n\n\n\n       return      BrowsersUtils.getText(idResult);  // returning the actual message\n\n\n    }\n\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/open_mrs/page/FindPatientPage.java b/src/test/java/com/open_mrs/page/FindPatientPage.java
+--- a/src/test/java/com/open_mrs/page/FindPatientPage.java	(revision 8e1f65785c2e88a8a8a343f34f82963bddcb74c3)
++++ b/src/test/java/com/open_mrs/page/FindPatientPage.java	(date 1695778029373)
+@@ -1,7 +1,5 @@
+ package com.open_mrs.page;
+-
+ import com.utils.BrowsersUtils;
+-import org.openqa.selenium.Keys;
+ import org.openqa.selenium.WebDriver;
+ import org.openqa.selenium.WebElement;
+ import org.openqa.selenium.support.FindBy;
+@@ -72,4 +70,7 @@
+ 
+ 
+ 
++    
++
++
+ }
+Index: src/test/java/com/open_mrs/stepdef/HomePageStepDef.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.open_mrs.stepdef;\n\nimport com.open_mrs.page.HomePage;\nimport com.open_mrs.page.LoginPage;\nimport com.utils.DriverHelper;\nimport io.cucumber.java.en.And;\nimport org.openqa.selenium.WebDriver;\n\npublic class HomePageStepDef {\n\n\n\n    WebDriver driver = DriverHelper.getDriver();\n    LoginPage loginpage = new LoginPage(driver);\n    HomePage homePage=new HomePage(driver);\n\n\n\n\n\n    @And(\"user chooses from home features {string}\")\n    public void userChoosesFromHomeFeaturesRegisterAPatient(String option) {\n         homePage.chooseHomeFeature(option);\n    }\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/open_mrs/stepdef/HomePageStepDef.java b/src/test/java/com/open_mrs/stepdef/HomePageStepDef.java
+--- a/src/test/java/com/open_mrs/stepdef/HomePageStepDef.java	(revision 8e1f65785c2e88a8a8a343f34f82963bddcb74c3)
++++ b/src/test/java/com/open_mrs/stepdef/HomePageStepDef.java	(date 1695766052695)
+@@ -3,7 +3,7 @@
+ import com.open_mrs.page.HomePage;
+ import com.open_mrs.page.LoginPage;
+ import com.utils.DriverHelper;
+-import io.cucumber.java.en.And;
++import io.cucumber.java.en.*;
+ import org.openqa.selenium.WebDriver;
+ 
+ public class HomePageStepDef {
+Index: src/test/java/com/open_mrs/stepdef/RegisterStepDef.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.open_mrs.stepdef;\n\nimport com.open_mrs.page.HomePage;\nimport com.open_mrs.page.LoginPage;\nimport com.open_mrs.page.RegisterPatientPage;\nimport com.utils.DriverHelper;\nimport io.cucumber.java.en.And;\nimport io.cucumber.java.en.Then;\nimport io.cucumber.java.en.When;\nimport org.openqa.selenium.WebDriver;\n\npublic class RegisterStepDef {\n\n\n    WebDriver driver = DriverHelper.getDriver();\n    LoginPage loginpage = new LoginPage(driver);\n    HomePage homePage = new HomePage(driver);\n\n    RegisterPatientPage register = new RegisterPatientPage(driver);\n\n    @And(\"user provides correct info   givenName, {string}, FamilyName  , {string},\")\n    public void userProvidesCorrectInfoGivenNameFamilyName(String givenName, String familyName) {\n        register.insertFullName(givenName, familyName);\n    }\n\n    @And(\"user clicks next\")\n    public void userClicksNext() {\n        register.clickNext();\n    }\n\n    @And(\"user chooses gender , Male or Female {string}\")\n    public void userChoosesGenderMaleOrFemaleM(String gender) throws InterruptedException {\n        register.insertGender(gender);\n    }\n\n    @And(\"user provides birth date , {string} , {string} , {string}\")\n    public void userProvidesBirthDateMay(String day, String month, String year) throws InterruptedException {\n\n        register.insertBirthDate(day, month, year);\n\n    }\n\n\n    @And(\"user provides address , {string} , {string} , {string} , {string}  , {string}\")\n    public void userProvidesAddressStreetAddressCityIlUsa(String address, String city, String state, String country, String postCode) throws InterruptedException {\n    register.insertAddressInfo(address,city,state,country,postCode);\n    }\n\n    @And(\"user provides phone number {string}\")\n    public void userProvidesPhoneNumber(String phoneNumber) throws InterruptedException {\n      register.insertPhoneNumber(phoneNumber);\n    }\n\n    @And(\"user clicks confirm\")\n    public void userClicksConfirm() throws InterruptedException {\n        register.clickConfirm();\n    }\n\n\n    // vivian's Snippets\n\n    @When(\"user checks the Unidentified patient box\")\n    public void user_checks_the_unidentified_patient_box() {\n        register.checkUndefinedPatientBox();\n    }\n\n    // updated\n    @Then(\"user validates patients firstName and lastName are both UNKNOWN , {string} , {string}\")\n    public void userValidatesPatientsFirstNameAndLastNameAreBothUNKNOWNUNKNOWNUNKNOWN(String expectedName , String expectedLastName) {\n       register.validatePatientName(expectedName,expectedLastName);\n    }\n\n    @Then(\"user validate expected error message , {string} , {string}\")\n    public void userValidateExpectedErrorMessage(String expectedErrorForGivenName , String expectedErrorForFamilyName) {\n        register.validateErrorMessage(expectedErrorForGivenName,expectedErrorForFamilyName);\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/open_mrs/stepdef/RegisterStepDef.java b/src/test/java/com/open_mrs/stepdef/RegisterStepDef.java
+--- a/src/test/java/com/open_mrs/stepdef/RegisterStepDef.java	(revision 8e1f65785c2e88a8a8a343f34f82963bddcb74c3)
++++ b/src/test/java/com/open_mrs/stepdef/RegisterStepDef.java	(date 1695766052699)
+@@ -1,7 +1,4 @@
+ package com.open_mrs.stepdef;
+-
+-import com.open_mrs.page.HomePage;
+-import com.open_mrs.page.LoginPage;
+ import com.open_mrs.page.RegisterPatientPage;
+ import com.utils.DriverHelper;
+ import io.cucumber.java.en.And;
+@@ -13,9 +10,6 @@
+ 
+ 
+     WebDriver driver = DriverHelper.getDriver();
+-    LoginPage loginpage = new LoginPage(driver);
+-    HomePage homePage = new HomePage(driver);
+-
+     RegisterPatientPage register = new RegisterPatientPage(driver);
+ 
+     @And("user provides correct info   givenName, {string}, FamilyName  , {string},")
+Index: src/test/java/com/open_mrs/stepdef/hookClass.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.open_mrs.stepdef;\n\nimport com.utils.BrowsersUtils;\nimport com.utils.ConfigReader;\nimport com.utils.DriverHelper;\nimport io.cucumber.java.After;\nimport io.cucumber.java.Before;\nimport io.cucumber.java.Scenario;\nimport org.openqa.selenium.WebDriver;\n\npublic class hookClass {\n\n     WebDriver driver;\n\n      @Before\n      public void setup(){\n          driver= DriverHelper.getDriver();\n      }\n\n\n\n      @After\n    public void tearDown(Scenario scenario){\n         BrowsersUtils.getScreenShotWithCucumber(driver,scenario);\n         // driver.quit();\n      }\n\n\n\n\n\n\n\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/open_mrs/stepdef/hookClass.java b/src/test/java/com/open_mrs/stepdef/hookClass.java
+--- a/src/test/java/com/open_mrs/stepdef/hookClass.java	(revision 8e1f65785c2e88a8a8a343f34f82963bddcb74c3)
++++ b/src/test/java/com/open_mrs/stepdef/hookClass.java	(date 1695766052702)
+@@ -1,7 +1,5 @@
+ package com.open_mrs.stepdef;
+-
+ import com.utils.BrowsersUtils;
+-import com.utils.ConfigReader;
+ import com.utils.DriverHelper;
+ import io.cucumber.java.After;
+ import io.cucumber.java.Before;
+@@ -18,11 +16,10 @@
+       }
+ 
+ 
+-
+       @After
+     public void tearDown(Scenario scenario){
+          BrowsersUtils.getScreenShotWithCucumber(driver,scenario);
+-         // driver.quit();
++          driver.quit();
+       }
+ 
+ 
+Index: src/test/java/com/utils/ConfigReader.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.utils;\n\nimport java.io.File;\nimport java.io.FileInputStream;\nimport java.io.IOException;\nimport java.util.Properties;\n\npublic class ConfigReader {\n\n    // this logic to be able to read data from the files  ( we will have userName\n    public static String readProperty(String key){\n\n        File file=new File(\"configuration.properties\");\n        Properties properties=new Properties();\n\n        // this property object will read the properties from file(Conf...properties)\n        try {\n            properties.load(new FileInputStream(file));\n        } catch (IOException e) {\n            throw new RuntimeException(e);\n        }\n        return properties.getProperty(key);\n    }\n\n\n\n\n\n\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/utils/ConfigReader.java b/src/test/java/com/utils/ConfigReader.java
+--- a/src/test/java/com/utils/ConfigReader.java	(revision 8e1f65785c2e88a8a8a343f34f82963bddcb74c3)
++++ b/src/test/java/com/utils/ConfigReader.java	(date 1695766052704)
+@@ -1,5 +1,4 @@
+ package com.utils;
+-
+ import java.io.File;
+ import java.io.FileInputStream;
+ import java.io.IOException;
+Index: src/test/java/com/open_mrs/page/LoginPage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.open_mrs.page;\n\nimport com.utils.BrowsersUtils;\nimport org.junit.Assert;\nimport org.openqa.selenium.WebDriver;\nimport org.openqa.selenium.WebElement;\nimport org.openqa.selenium.support.FindBy;\nimport org.openqa.selenium.support.PageFactory;\nimport org.openqa.selenium.support.ui.ExpectedConditions;\nimport org.openqa.selenium.support.ui.WebDriverWait;\n\nimport java.time.Duration;\n\npublic class LoginPage {\n\n\n    // HICHAM BRANCH\n /*\n     THIS IS MY BRANCH PLEAS DO NOT TOUCH\n     THANK YOU!\n  hihcam's branch\n\n\n  */\n\n\n  // Cons\n    public LoginPage(WebDriver driver) {\n        PageFactory.initElements(driver,this);\n    }\n\n\n    // elements\n    @FindBy(xpath = \"//input[@id='username']\")\n    WebElement  userNameInput;\n    @FindBy(xpath = \"//input[@id='password']\")\n    WebElement  passWordInput;\n\n   // locations\n    @FindBy(xpath = \"//li[@id='Inpatient Ward']\")\n    WebElement  InpatientWardOption;\n    @FindBy(xpath = \"//li[@id='Isolation Ward']\")\n    WebElement IsolationWardOption;\n    @FindBy(xpath = \"//li[@id='Laboratory']\")\n    WebElement  LaboratoryOption;\n    @FindBy(xpath = \"//li[@id='Outpatient Clinic']\")\n    WebElement  OutpatientClinicOption;\n    @FindBy(xpath = \"//li[@id='Pharmacy']\")\n    WebElement  PharmacyOption;\n    @FindBy(xpath = \"//li[@id='Registration Desk']\")\n    WebElement  RegistrationDeskOption;\n\n    // LogIn\n    @FindBy(xpath = \"//input[@id='loginButton']\")\n    WebElement LogInButton;\n\n    @FindBy(xpath = \"//h4\")\n    WebElement actualLoginMessage;\n\n     // error Message (negative)\n     @FindBy(xpath = \"//div[@id='error-message']\")\n     WebElement actualErrorMessage;\n\n\n\n\n\n    // Method For happyPath LogIn\n     public void positiveCredentials(String userName , String password){\n         userNameInput.clear();\n         userNameInput.sendKeys(userName);\n         passWordInput.clear();\n         passWordInput.sendKeys(password);\n     }\n\n   public void loginLocation(String location){\n       switch (location){\n           case \"Inpatient Ward\": InpatientWardOption.click();break;\n           case \"Laboratory\": LaboratoryOption.click();break;\n           case \"Isolation Ward\": IsolationWardOption.click();break;\n           case \"Outpatient Clinic\": OutpatientClinicOption.click();break;\n           case \"Pharmacy\": PharmacyOption.click();break;\n           case \"Registration Desk\": RegistrationDeskOption.click();break;\n\n           default:\n               System.out.println(\"WRONG LOCATION!\");\n               Assert.assertTrue(false); break;\n       }\n   }\n\n   public void clickLogin(){\n       LogInButton.click();\n   }\n\n   public String ValidatePositiveLogin(WebDriver driver){\n       WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(20));\n       wait.until(ExpectedConditions.visibilityOf(actualLoginMessage));\n\n       return BrowsersUtils.getText(actualLoginMessage);\n   }\n\n\n\n\n    // negative login\n    public void negativeCredentials(String userName , String password){\n        userNameInput.clear();\n        userNameInput.sendKeys(userName);\n        passWordInput.clear();\n        passWordInput.sendKeys(password);\n    }\n\n   public String validateNegativeLogin(WebDriver driver){\n       WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(20));\n       wait.until(ExpectedConditions.visibilityOf(actualErrorMessage));\n\n       return BrowsersUtils.getText(actualErrorMessage);\n\n   }\n\n\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/open_mrs/page/LoginPage.java b/src/test/java/com/open_mrs/page/LoginPage.java
+--- a/src/test/java/com/open_mrs/page/LoginPage.java	(revision 8e1f65785c2e88a8a8a343f34f82963bddcb74c3)
++++ b/src/test/java/com/open_mrs/page/LoginPage.java	(date 1695766052706)
+@@ -1,5 +1,4 @@
+ package com.open_mrs.page;
+-
+ import com.utils.BrowsersUtils;
+ import org.junit.Assert;
+ import org.openqa.selenium.WebDriver;
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><project version=\"4\">\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\n  <component name=\"MavenProjectsManager\">\n    <option name=\"originalFiles\">\n      <list>\n        <option value=\"$PROJECT_DIR$/pom.xml\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_19\" default=\"true\" project-jdk-name=\"11\" project-jdk-type=\"JavaSDK\">\n    <output url=\"file://$PROJECT_DIR$/out\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 8e1f65785c2e88a8a8a343f34f82963bddcb74c3)
++++ b/.idea/misc.xml	(date 1695777917597)
+@@ -1,3 +1,4 @@
++<?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ExternalStorageConfigurationManager" enabled="true" />
+   <component name="MavenProjectsManager">
+@@ -8,6 +9,6 @@
+     </option>
+   </component>
+   <component name="ProjectRootManager" version="2" languageLevel="JDK_19" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+-    <output url="file://$PROJECT_DIR$/out" />
++    <output url="file://$PROJECT_DIR$/target" />
+   </component>
+ </project>
+\ No newline at end of file

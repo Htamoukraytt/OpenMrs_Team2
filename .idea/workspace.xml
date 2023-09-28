@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="aed7d7d6-1a83-4282-9127-f46f5b113d90" name="Changes" comment="Hicham ---&gt; add negative scenario for Register feature">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reports/html-reports/cucumber-html-reports/overview-failures.html" beforeDir="false" afterPath="$PROJECT_DIR$/reports/html-reports/cucumber-html-reports/overview-failures.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reports/html-reports/cucumber-html-reports/overview-features.html" beforeDir="false" afterPath="$PROJECT_DIR$/reports/html-reports/cucumber-html-reports/overview-features.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reports/html-reports/cucumber-html-reports/overview-steps.html" beforeDir="false" afterPath="$PROJECT_DIR$/reports/html-reports/cucumber-html-reports/overview-steps.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reports/html-reports/cucumber-html-reports/overview-tags.html" beforeDir="false" afterPath="$PROJECT_DIR$/reports/html-reports/cucumber-html-reports/overview-tags.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reports/html-reports/cucumber-html-reports/report-feature_771467585.html" beforeDir="false" afterPath="$PROJECT_DIR$/reports/html-reports/cucumber-html-reports/report-feature_771467585.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/open_mrs/page/FindPatientPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/open_mrs/page/FindPatientPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/open_mrs/runners/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/open_mrs/runners/Runner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/open_mrs/stepdef/FindPatientStepDef.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/open_mrs/stepdef/FindPatientStepDef.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/open_mrs/stepdef/hookClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/open_mrs/stepdef/hookClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/utils/DriverHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/utils/DriverHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/Ui_festures/Visit.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/Ui_festures/Visit.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/Ui_festures/findPatient2.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/Ui_festures/findPatient2.feature" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="HICHAM'S-BRANCH" />
+              </list>
+            </value>
+          </entry>
+          <entry type="REMOTE">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="master/master" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
+    <option name="PUSH_AUTO_UPDATE" value="true" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="HICHAM'S-BRANCH" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Htamoukraytt&quot;
+  }
+}</component>
+  <component name="GitToolBoxStore">
+    <option name="branchesCleanupHistory">
+      <BranchesCleanupHistory>
+        <option name="history">
+          <list>
+            <BranchCleanupEntry>
+              <option name="deletions">
+                <list>
+                  <BranchDeletion>
+                    <option name="hash" value="8e1f65785c2e88a8a8a343f34f82963bddcb74c3" />
+                    <option name="name" value="HICHAM'S-BRANCH" />
+                  </BranchDeletion>
+                </list>
+              </option>
+              <option name="timestamp" value="1695591144522" />
+            </BranchCleanupEntry>
+          </list>
+        </option>
+      </BranchesCleanupHistory>
+    </option>
+    <option name="projectConfigVersion" value="5" />
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="master" />
+                    <option name="lastUsedInstant" value="1695848524" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="HICHAM'S-BRANCH" />
+                    <option name="lastUsedInstant" value="1695839322" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="Sabina's_branch" />
+                    <option name="lastUsedInstant" value="1695781486" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="36f2c3cd-81a7-4e7e-b1a3-f8391ea9b406" />
+        <option name="url" value="https://github.com/Htamoukraytt/OpenMrs_Team2.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/test/java/com/open_mrs/page/LoginPage.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/test/java/com/open_mrs/runners/Runner.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2VaLZlEWmDd6lMVe8tioNX1MUky" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/htamoukraytt/IdeaProjects/OPEN-MRS&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.Confirmation&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;ChangesTree.GroupingKeys&quot;: [
+      &quot;module&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src/test/java" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/test" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Cucumber Java.Scenario: Validation of Start visit and add Past visit functionalities">
+    <configuration name="Scenario: Search Bar Functionality for Open MRS website" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+      <option name="CUCUMBER_CORE_VERSION" value="5" />
+      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/Ui_festures/findPatient2.feature" />
+      <option name="GLUE" value="com.open_mrs.stepdef" />
+      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
+      <module name="OPEN-MRS" />
+      <option name="NAME_FILTER" value="^Search Bar Functionality for Open MRS website$" />
+      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Search Bar Functionality for Open MRS website$&quot;" />
+      <option name="SUGGESTED_NAME" value="Scenario: Search Bar Functionality for Open MRS website" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.cucumber.core.cli.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Scenario: Testing happy path login with all locations feature" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+      <option name="CUCUMBER_CORE_VERSION" value="5" />
+      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/Ui_festures/login.feature" />
+      <option name="GLUE" value="com.open_mrs.stepdef" />
+      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
+      <module name="OPEN-MRS" />
+      <option name="NAME_FILTER" value="^Testing happy path login with all locations feature$" />
+      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Testing happy path login with all locations feature$&quot;" />
+      <option name="SUGGESTED_NAME" value="Scenario: Testing happy path login with all locations feature" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.cucumber.core.cli.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Scenario: Testing negative login scenario" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+      <option name="CUCUMBER_CORE_VERSION" value="5" />
+      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/Ui_festures/login.feature" />
+      <option name="GLUE" value="com.open_mrs.stepdef" />
+      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
+      <module name="OPEN-MRS" />
+      <option name="NAME_FILTER" value="^Testing negative login scenario$" />
+      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Testing negative login scenario$&quot;" />
+      <option name="SUGGESTED_NAME" value="Scenario: Testing negative login scenario" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.cucumber.core.cli.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Scenario: Validation of Start visit and add Past visit functionalities" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+      <option name="CUCUMBER_CORE_VERSION" value="5" />
+      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/Ui_festures/Visit.feature" />
+      <option name="GLUE" value="com.open_mrs.stepdef" />
+      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
+      <module name="OPEN-MRS" />
+      <option name="NAME_FILTER" value="^Validation of Start visit and add Past visit functionalities$" />
+      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Validation of Start visit and add Past visit functionalities$&quot;" />
+      <option name="SUGGESTED_NAME" value="Scenario: Validation of Start visit and add Past visit functionalities" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.cucumber.core.cli.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Runner" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="OPEN-MRS" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.open_mrs.runners.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.open_mrs.runners" />
+      <option name="MAIN_CLASS_NAME" value="com.open_mrs.runners.Runner" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.Runner" />
+        <item itemvalue="Cucumber Java.Scenario: Validation of Start visit and add Past visit functionalities" />
+        <item itemvalue="Cucumber Java.Scenario: Testing negative login scenario" />
+        <item itemvalue="Cucumber Java.Scenario: Testing happy path login with all locations feature" />
+        <item itemvalue="Cucumber Java.Scenario: Search Bar Functionality for Open MRS website" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="aed7d7d6-1a83-4282-9127-f46f5b113d90" name="Changes" comment="" />
+      <created>1695069302202</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1695069302202</updated>
+    </task>
+    <task id="LOCAL-00001" summary="// MY BRANCH">
+      <option name="closed" value="true" />
+      <created>1695137182452</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1695137182452</updated>
+    </task>
+    <task id="LOCAL-00002" summary="// MY BRANCH">
+      <option name="closed" value="true" />
+      <created>1695137200588</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1695137200588</updated>
+    </task>
+    <task id="LOCAL-00003" summary="// MY BRANCH">
+      <option name="closed" value="true" />
+      <created>1695137222551</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1695137222551</updated>
+    </task>
+    <task id="LOCAL-00004" summary="// MY BRANCH">
+      <option name="closed" value="true" />
+      <created>1695137281421</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1695137281421</updated>
+    </task>
+    <task id="LOCAL-00005" summary=" &quot;&quot;HICHAM&quot;">
+      <option name="closed" value="true" />
+      <created>1695137403366</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1695137403366</updated>
+    </task>
+    <task id="LOCAL-00006" summary=" &quot;&quot;HICHAM&quot;">
+      <option name="closed" value="true" />
+      <created>1695137438485</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1695137438485</updated>
+    </task>
+    <task id="LOCAL-00007" summary="ADDED MY BRANCH">
+      <option name="closed" value="true" />
+      <created>1695137843867</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1695137843867</updated>
+    </task>
+    <task id="LOCAL-00008" summary="ADDED MY BRANCH HICHAM">
+      <option name="closed" value="true" />
+      <created>1695138122396</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1695138122396</updated>
+    </task>
+    <task id="LOCAL-00009" summary="ADDED MY BRANCH HICHAM">
+      <option name="closed" value="true" />
+      <created>1695138205603</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1695138205603</updated>
+    </task>
+    <task id="LOCAL-00010" summary="commit">
+      <option name="closed" value="true" />
+      <created>1695141247690</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1695141247690</updated>
+    </task>
+    <task id="LOCAL-00011" summary="commit">
+      <option name="closed" value="true" />
+      <created>1695141265577</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1695141265577</updated>
+    </task>
+    <task id="LOCAL-00012" summary="commit hicham branch">
+      <option name="closed" value="true" />
+      <created>1695141541749</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1695141541749</updated>
+    </task>
+    <task id="LOCAL-00013" summary="add positive Register. Feature (happy path scenario )">
+      <option name="closed" value="true" />
+      <created>1695186932964</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1695186932964</updated>
+    </task>
+    <task id="LOCAL-00014" summary="updated Register Feature (vivian / hicham )">
+      <option name="closed" value="true" />
+      <created>1695347033527</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1695347033527</updated>
+    </task>
+    <task id="LOCAL-00015" summary="updated Register Feature (vivian / hicham )">
+      <option name="closed" value="true" />
+      <created>1695354465429</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1695354465429</updated>
+    </task>
+    <task id="LOCAL-00016" summary=" git ignore">
+      <option name="closed" value="true" />
+      <created>1695401019235</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1695401019235</updated>
+    </task>
+    <task id="LOCAL-00017" summary=" git ignore">
+      <option name="closed" value="true" />
+      <created>1695402365606</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1695402365606</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Hicham ---&gt; add negative scenario for Register feature">
+      <option name="closed" value="true" />
+      <created>1695499777619</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1695499777619</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="// MY BRANCH" />
+    <MESSAGE value=" &quot;&quot;HICHAM&quot;" />
+    <MESSAGE value="ADDED MY BRANCH" />
+    <MESSAGE value="ADDED MY BRANCH HICHAM" />
+    <MESSAGE value="commit" />
+    <MESSAGE value="commit hicham branch" />
+    <MESSAGE value="add positive Register. Feature (happy path scenario )" />
+    <MESSAGE value="updated Register Feature (vivian / hicham )" />
+    <MESSAGE value=" git ignore" />
+    <MESSAGE value="Hicham ---&gt; add negative scenario for Register feature" />
+    <option name="LAST_COMMIT_MESSAGE" value="Hicham ---&gt; add negative scenario for Register feature" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/open_mrs/runners/ReRunner.java</url>
+          <line>18</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

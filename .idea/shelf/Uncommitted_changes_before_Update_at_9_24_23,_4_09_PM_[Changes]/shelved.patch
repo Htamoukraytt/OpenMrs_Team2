@@ -1,0 +1,55 @@
+Index: src/test/resources/Ui_festures/login.feature
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\nFeature: TESTING LOGIN FUNCTIONALITY\n\n\n  Scenario Outline: Testing happy path login with all locations feature\n    Given user navigates to the application\n\n    When  user provides correct credentials\n\n    And   user chooses the location '<LOCATION>'\n\n    And   user clicks Login\n\n    Then  user validates login was successfully '<LoggedIn_Location>'\n\n    Examples:\n      | LOCATION          | LoggedIn_Location                                     |\n      | Laboratory        | Logged in as Super User (admin) at Laboratory.        |\n      | Inpatient Ward    | Logged in as Super User (admin) at Inpatient Ward.    |\n      | Isolation Ward    | Logged in as Super User (admin) at Isolation Ward.    |\n      | Outpatient Clinic | Logged in as Super User (admin) at Outpatient Clinic. |\n      | Pharmacy          | Logged in as Super User (admin) at Pharmacy.          |\n      | Registration Desk | Logged in as Super User (admin) at Registration Desk. |\n\n\n  Scenario Outline:  Testing negative login scenario\n\n    Given user navigates to the application\n\n    When user provides wrong credentials '<userName>' , '<password>'\n\n    And  user chooses the location '<LOCATION>'\n\n    And  user clicks Login\n\n    Then  user validates the login was not successfully 'Invalid username/password. Please try again.'\n    Examples:\n      | userName | password | LOCATION          |\n      | wrong    | 42343423 | Laboratory        |\n      |          | Admin123 | Inpatient Ward    |\n      | admin    |          | Isolation Ward    |\n      |          |          | Outpatient Clinic |\n      | admin    | Admin12  | Pharmacy          |\n      | 12476    | %&%&^^   | Registration Desk |
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/resources/Ui_festures/login.feature b/src/test/resources/Ui_festures/login.feature
+--- a/src/test/resources/Ui_festures/login.feature	(revision 65258c1336ebc3fd249329fff6921153cc6b6574)
++++ b/src/test/resources/Ui_festures/login.feature	(date 1695589769864)
+@@ -1,4 +1,4 @@
+-
++@Regression
+ Feature: TESTING LOGIN FUNCTIONALITY
+ 
+ 
+Index: src/test/resources/Ui_festures/Register.feature
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>Feature:  Testing Register a patient functionality and UNKNOWN patient\n\n  Background: navigates register patient\n\n    Given user navigates to the application\n\n    When  user provides correct credentials\n\n    And   user chooses the location 'Laboratory'\n\n    And   user clicks Login\n\n    And  user chooses from home features 'Register a patient'\n\n\n\n  Scenario:  positive Scenario , providing correct data\n\n    And  user provides correct info   givenName, 'said', FamilyName  , 'souma',\n\n    And  user clicks next\n\n    And  user chooses gender , Male or Female 'M'\n\n    And  user clicks next\n\n    And  user provides birth date , '10' , 'May' , '2001'\n\n    And  user clicks next\n\n    And  user provides address , 'streetAddress' , 'city' , 'il' , 'usa'  , '34234'\n     #bug wrong date\n    And  user clicks next\n\n    And user provides phone number '35235233523'\n      #bug no limit in digits\n    And  user clicks next\n\n    And  user clicks next\n\n    And user clicks confirm\n\n    Then user clicks homepage , find patient , search for id and validates the id is unique , 'Showing 1 to 1'\n\n\n\n\n  Scenario: Testing functionality of registering UNKNOWN patient on Open_mrs application\n\n    When user checks the Unidentified patient box\n\n    And  user chooses gender , Male or Female 'F'\n\n    And  user clicks next\n\n    And user clicks confirm\n\n    Then user validates patients firstName and lastName are both UNKNOWN , 'UNKNOWN' , 'UNKNOWN'\n\n\n\n\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/resources/Ui_festures/Register.feature b/src/test/resources/Ui_festures/Register.feature
+--- a/src/test/resources/Ui_festures/Register.feature	(revision 65258c1336ebc3fd249329fff6921153cc6b6574)
++++ b/src/test/resources/Ui_festures/Register.feature	(date 1695589769867)
+@@ -1,3 +1,4 @@
++@Regression
+ Feature:  Testing Register a patient functionality and UNKNOWN patient
+ 
+   Background: navigates register patient
+Index: src/test/java/com/open_mrs/runners/Runner.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.open_mrs.runners;\n\nimport io.cucumber.junit.Cucumber;\nimport io.cucumber.junit.CucumberOptions;\nimport org.junit.runner.RunWith;\n\n@RunWith(Cucumber.class)\n@CucumberOptions(\n        features =\"/Users/htamoukraytt/IdeaProjects/OPEN-MRS/src/test/resources/Ui_festures\",\n        glue = \"com/open_mrs/stepdef\",\n        dryRun = false,\n        //tags =\"Regression\",\n\n        plugin = {\"pretty\",\"html:target/uiReport.html\",\"rerun:target/uiFailedTests.txt\",\"json:target/cucumber-reports/cucumber.json\"}\n)\n\npublic class Runner {\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/open_mrs/runners/Runner.java b/src/test/java/com/open_mrs/runners/Runner.java
+--- a/src/test/java/com/open_mrs/runners/Runner.java	(revision 65258c1336ebc3fd249329fff6921153cc6b6574)
++++ b/src/test/java/com/open_mrs/runners/Runner.java	(date 1695589783115)
+@@ -6,11 +6,12 @@
+ 
+ @RunWith(Cucumber.class)
+ @CucumberOptions(
++
+         features ="/Users/htamoukraytt/IdeaProjects/OPEN-MRS/src/test/resources/Ui_festures",
+         glue = "com/open_mrs/stepdef",
+         dryRun = false,
+         //tags ="Regression",
+-
++       // plugin = {"pretty","html:target/uiReport.html","rerun:target/uiFailedTests.txt","json:target/cucumber-reports/cucumber.json"}
+         plugin = {"pretty","html:target/uiReport.html","rerun:target/uiFailedTests.txt","json:target/cucumber-reports/cucumber.json"}
+ )
+ 
